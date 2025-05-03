@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "ffdb41914a18d27bbce6",
-    "url": "/Portfolio/static/js/main.ffdb4191.chunk.js"
+    "revision": "1c312b65a6c327bedd7a",
+    "url": "/Portfolio/static/js/main.1c312b65.chunk.js"
   },
   {
     "revision": "bc72e8f080f7defe511c",
@@ -56,20 +56,20 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/artistic.037e36b7.jpg"
   },
   {
-    "revision": "67c2e5e2c5009f6da0ef6b64731731e4",
-    "url": "/Portfolio/static/media/open-sans-cyrillic-ext-400-normal.67c2e5e2.woff2"
+    "revision": "41564e9a132ed7abf8bb3d3071f8ef18",
+    "url": "/Portfolio/static/media/open-sans-greek-ext-400-normal.41564e9a.woff2"
   },
   {
     "revision": "7e05f5267bba1aa9fb260096f923bdb7",
     "url": "/Portfolio/static/media/open-sans-cyrillic-400-normal.7e05f526.woff2"
   },
   {
-    "revision": "41564e9a132ed7abf8bb3d3071f8ef18",
-    "url": "/Portfolio/static/media/open-sans-greek-ext-400-normal.41564e9a.woff2"
+    "revision": "f4c48b1d32e658eae7d5c27feaee58b6",
+    "url": "/Portfolio/static/media/open-sans-greek-ext-400-normal.f4c48b1d.woff"
   },
   {
-    "revision": "7e04c84799bb1bd87444ee7436aae9d3",
-    "url": "/Portfolio/static/media/open-sans-cyrillic-400-normal.7e04c847.woff"
+    "revision": "67c2e5e2c5009f6da0ef6b64731731e4",
+    "url": "/Portfolio/static/media/open-sans-cyrillic-ext-400-normal.67c2e5e2.woff2"
   },
   {
     "revision": "a68519222b370fef3e6da827dfdb311b",
@@ -80,16 +80,20 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/open-sans-greek-400-normal.cbca61f2.woff2"
   },
   {
-    "revision": "3d0cb57cde2b7d871cc5cd3eb38a6228",
-    "url": "/Portfolio/static/media/open-sans-greek-400-normal.3d0cb57c.woff"
-  },
-  {
     "revision": "80210d1ff4de56c6704607f3831e8f6c",
     "url": "/Portfolio/static/media/open-sans-hebrew-400-normal.80210d1f.woff2"
   },
   {
-    "revision": "f4c48b1d32e658eae7d5c27feaee58b6",
-    "url": "/Portfolio/static/media/open-sans-greek-ext-400-normal.f4c48b1d.woff"
+    "revision": "7e04c84799bb1bd87444ee7436aae9d3",
+    "url": "/Portfolio/static/media/open-sans-cyrillic-400-normal.7e04c847.woff"
+  },
+  {
+    "revision": "3d0cb57cde2b7d871cc5cd3eb38a6228",
+    "url": "/Portfolio/static/media/open-sans-greek-400-normal.3d0cb57c.woff"
+  },
+  {
+    "revision": "01209eacad09a3dae36099edcb8e3790",
+    "url": "/Portfolio/static/media/open-sans-vietnamese-400-normal.01209eac.woff"
   },
   {
     "revision": "acf2ace2126d9409bc8b48dcb3e5fc16",
@@ -108,24 +112,20 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/open-sans-math-400-normal.efb3f284.woff2"
   },
   {
-    "revision": "7d0448945bef4ea0a8e2beda8445a337",
-    "url": "/Portfolio/static/media/open-sans-symbols-400-normal.7d044894.woff"
+    "revision": "776fdc253d54124dd63f274bf5ea35f0",
+    "url": "/Portfolio/static/media/open-sans-vietnamese-400-normal.776fdc25.woff2"
   },
   {
-    "revision": "c59233b2655bf8e3f3b7756081961fbc",
-    "url": "/Portfolio/static/media/open-sans-latin-ext-400-normal.c59233b2.woff"
+    "revision": "7d0448945bef4ea0a8e2beda8445a337",
+    "url": "/Portfolio/static/media/open-sans-symbols-400-normal.7d044894.woff"
   },
   {
     "revision": "be7b70ab1265b1047bd93422397c655e",
     "url": "/Portfolio/static/media/open-sans-latin-ext-400-normal.be7b70ab.woff2"
   },
   {
-    "revision": "01209eacad09a3dae36099edcb8e3790",
-    "url": "/Portfolio/static/media/open-sans-vietnamese-400-normal.01209eac.woff"
-  },
-  {
-    "revision": "776fdc253d54124dd63f274bf5ea35f0",
-    "url": "/Portfolio/static/media/open-sans-vietnamese-400-normal.776fdc25.woff2"
+    "revision": "c59233b2655bf8e3f3b7756081961fbc",
+    "url": "/Portfolio/static/media/open-sans-latin-ext-400-normal.c59233b2.woff"
   },
   {
     "revision": "8655d20bbcc8cdbfab17b6be6cf55df3",
@@ -144,15 +144,15 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/poppins-latin-400-normal.9212f6f9.woff2"
   },
   {
-    "revision": "42d8a788393ad890b3bc30a5a2bdfd6a",
-    "url": "/Portfolio/static/media/poppins-latin-400-normal.42d8a788.woff"
-  },
-  {
     "revision": "74cfaf5cbbc865ffd2c2ac84dbc85681",
     "url": "/Portfolio/static/media/poppins-latin-ext-400-normal.74cfaf5c.woff"
   },
   {
-    "revision": "768f8f1b448a331c825e242123d4b029",
+    "revision": "42d8a788393ad890b3bc30a5a2bdfd6a",
+    "url": "/Portfolio/static/media/poppins-latin-400-normal.42d8a788.woff"
+  },
+  {
+    "revision": "da83f4e8f2287ba234523e618b554d8a",
     "url": "/Portfolio/index.html"
   }
 ];

@@ -1,6 +1,6 @@
 {
-  "main.js": "/Portfolio/static/js/main.ffdb4191.chunk.js",
-  "main.js.map": "/Portfolio/static/js/main.ffdb4191.chunk.js.map",
+  "main.js": "/Portfolio/static/js/main.1c312b65.chunk.js",
+  "main.js.map": "/Portfolio/static/js/main.1c312b65.chunk.js.map",
   "static/css/1.b03cf69c.chunk.css": "/Portfolio/static/css/1.b03cf69c.chunk.css",
   "static/js/1.bc72e8f0.chunk.js": "/Portfolio/static/js/1.bc72e8f0.chunk.js",
   "static/js/1.bc72e8f0.chunk.js.map": "/Portfolio/static/js/1.bc72e8f0.chunk.js.map",
@@ -16,9 +16,9 @@
   "static/media/gcodes.jpg": "/Portfolio/static/media/gcodes.c57f1365.jpg",
   "static/media/zombie.jpg": "/Portfolio/static/media/zombie.f8cd3252.jpg",
   "static/media/artistic.jpg": "/Portfolio/static/media/artistic.037e36b7.jpg",
-  "static/media/index.css": "/Portfolio/static/media/poppins-latin-ext-400-normal.74cfaf5c.woff",
+  "static/media/index.css": "/Portfolio/static/media/poppins-latin-400-normal.42d8a788.woff",
   "static/css/1.b03cf69c.chunk.css.map": "/Portfolio/static/css/1.b03cf69c.chunk.css.map",
   "index.html": "/Portfolio/index.html",
-  "precache-manifest.71e5c5f8431d119e0e689415803cff45.js": "/Portfolio/precache-manifest.71e5c5f8431d119e0e689415803cff45.js",
+  "precache-manifest.0d5ba1e1be2f78dbb4091c3896197c41.js": "/Portfolio/precache-manifest.0d5ba1e1be2f78dbb4091c3896197c41.js",
   "service-worker.js": "/Portfolio/service-worker.js"
 }
