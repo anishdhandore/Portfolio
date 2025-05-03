@@ -25,7 +25,7 @@ const Home = () => {
             Download CV
           </DownloadButton> */}
           <OpenButton
-            href={`${process.env.PUBLIC_URL}/AnishDhandoreResume.pdf`}
+            href="https://anishdhandore.github.io/Portfolio/AnishDhandoreResume.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
