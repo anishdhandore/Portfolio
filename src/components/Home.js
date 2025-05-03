@@ -24,9 +24,14 @@ const Home = () => {
           {/* <DownloadButton href="/AnishDhandoreResume.pdf" target="_blank" download>
             Download CV
           </DownloadButton> */}
-          <OpenButton href="/AnishDhandoreResume.pdf" target="_blank" rel="noopener noreferrer">
+          <OpenButton
+            href={`${process.env.PUBLIC_URL}/AnishDhandoreResume.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             View CV
           </OpenButton>
+
           <AboutButton id="about" onClick={scrollToAbout}>
             About Me
           </AboutButton >
