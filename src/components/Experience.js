@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Swift from '../swift.jpg';
 import GDSC from '../gdsc.jpg';
 import CSUSM from '../csusm.jpg';
+import SGS from '../sgs.jpg';
 
 const Experience = () => {
   return (
@@ -12,6 +13,16 @@ const Experience = () => {
       <h2>My Experience</h2>
       <br></br>
       <ExperienceContainer>
+      <ExperienceItem>
+          <Logo src={SGS} alt="Company Logo" />
+          <ExperienceDetails>
+            <h3>Wireless Engineer</h3>
+            <CompanyName>SGS North America</CompanyName>
+            <Duration>02/2025 - Present</Duration>
+            <Description>
+            Conducted RF testing and compliance verification on various electronic devices, ensuring adherence to regulatory standards such as FCC, CE, and industry-specific requirements. Operated and calibrated advanced RF test equipment including spectrum analyzers, signal generators, and network analyzers. Performed EMI/EMC tests, analyzed results, and supported documentation for technical reports. Collaborated with engineering teams to troubleshoot performance issues, optimize test procedures, and assist in device certification processes.            </Description>
+          </ExperienceDetails>
+        </ExperienceItem>
         <ExperienceItem>
           <Logo src={Swift} alt="Company Logo" />
           <ExperienceDetails>

@@ -15,7 +15,7 @@ const Home = () => {
       <HeroContent>
         <text>Hello, I am</text>
         <h1>Anish Dhandore</h1>
-        <text>Software Engineer, Wireless Engineer & Entrepreneur</text>
+        <text>Software Engineer</text>
         <br></br>
         <Image src={NarutoImage} alt="Naruto" />
 
