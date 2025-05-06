@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "6a30ad81a785c75069ce",
-    "url": "/Portfolio/static/js/main.6a30ad81.chunk.js"
+    "revision": "1dcbb661bff8b3adc144",
+    "url": "/Portfolio/static/js/main.1dcbb661.chunk.js"
   },
   {
     "revision": "abee2ce84a1a3327a85f",
@@ -60,6 +60,10 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/artistic.037e36b7.jpg"
   },
   {
+    "revision": "67c2e5e2c5009f6da0ef6b64731731e4",
+    "url": "/Portfolio/static/media/open-sans-cyrillic-ext-400-normal.67c2e5e2.woff2"
+  },
+  {
     "revision": "7e05f5267bba1aa9fb260096f923bdb7",
     "url": "/Portfolio/static/media/open-sans-cyrillic-400-normal.7e05f526.woff2"
   },
@@ -68,56 +72,56 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/open-sans-cyrillic-400-normal.7e04c847.woff"
   },
   {
-    "revision": "f4c48b1d32e658eae7d5c27feaee58b6",
-    "url": "/Portfolio/static/media/open-sans-greek-ext-400-normal.f4c48b1d.woff"
+    "revision": "a68519222b370fef3e6da827dfdb311b",
+    "url": "/Portfolio/static/media/open-sans-cyrillic-ext-400-normal.a6851922.woff"
   },
   {
     "revision": "41564e9a132ed7abf8bb3d3071f8ef18",
     "url": "/Portfolio/static/media/open-sans-greek-ext-400-normal.41564e9a.woff2"
   },
   {
-    "revision": "67c2e5e2c5009f6da0ef6b64731731e4",
-    "url": "/Portfolio/static/media/open-sans-cyrillic-ext-400-normal.67c2e5e2.woff2"
+    "revision": "f4c48b1d32e658eae7d5c27feaee58b6",
+    "url": "/Portfolio/static/media/open-sans-greek-ext-400-normal.f4c48b1d.woff"
   },
   {
     "revision": "cbca61f27f93fd71171fe8d314c66ab9",
     "url": "/Portfolio/static/media/open-sans-greek-400-normal.cbca61f2.woff2"
   },
   {
-    "revision": "a68519222b370fef3e6da827dfdb311b",
-    "url": "/Portfolio/static/media/open-sans-cyrillic-ext-400-normal.a6851922.woff"
+    "revision": "3d0cb57cde2b7d871cc5cd3eb38a6228",
+    "url": "/Portfolio/static/media/open-sans-greek-400-normal.3d0cb57c.woff"
   },
   {
     "revision": "80210d1ff4de56c6704607f3831e8f6c",
     "url": "/Portfolio/static/media/open-sans-hebrew-400-normal.80210d1f.woff2"
   },
   {
-    "revision": "3d0cb57cde2b7d871cc5cd3eb38a6228",
-    "url": "/Portfolio/static/media/open-sans-greek-400-normal.3d0cb57c.woff"
-  },
-  {
-    "revision": "efb3f28447c9ef35fd5882fb763b37c3",
-    "url": "/Portfolio/static/media/open-sans-math-400-normal.efb3f284.woff2"
-  },
-  {
     "revision": "acf2ace2126d9409bc8b48dcb3e5fc16",
     "url": "/Portfolio/static/media/open-sans-hebrew-400-normal.acf2ace2.woff"
   },
   {
-    "revision": "31c3253c6146d2a15cedfcfbc975ef7d",
-    "url": "/Portfolio/static/media/open-sans-symbols-400-normal.31c3253c.woff2"
+    "revision": "68a005605ca4a121fb3dc41ec25c5138",
+    "url": "/Portfolio/static/media/open-sans-math-400-normal.68a00560.woff"
   },
   {
     "revision": "01209eacad09a3dae36099edcb8e3790",
     "url": "/Portfolio/static/media/open-sans-vietnamese-400-normal.01209eac.woff"
   },
   {
+    "revision": "31c3253c6146d2a15cedfcfbc975ef7d",
+    "url": "/Portfolio/static/media/open-sans-symbols-400-normal.31c3253c.woff2"
+  },
+  {
+    "revision": "776fdc253d54124dd63f274bf5ea35f0",
+    "url": "/Portfolio/static/media/open-sans-vietnamese-400-normal.776fdc25.woff2"
+  },
+  {
     "revision": "7d0448945bef4ea0a8e2beda8445a337",
     "url": "/Portfolio/static/media/open-sans-symbols-400-normal.7d044894.woff"
   },
   {
-    "revision": "68a005605ca4a121fb3dc41ec25c5138",
-    "url": "/Portfolio/static/media/open-sans-math-400-normal.68a00560.woff"
+    "revision": "efb3f28447c9ef35fd5882fb763b37c3",
+    "url": "/Portfolio/static/media/open-sans-math-400-normal.efb3f284.woff2"
   },
   {
     "revision": "be7b70ab1265b1047bd93422397c655e",
@@ -132,16 +136,16 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/open-sans-latin-400-normal.8655d20b.woff2"
   },
   {
-    "revision": "776fdc253d54124dd63f274bf5ea35f0",
-    "url": "/Portfolio/static/media/open-sans-vietnamese-400-normal.776fdc25.woff2"
-  },
-  {
     "revision": "e922d0164692bbf15dfa42c3c4427697",
     "url": "/Portfolio/static/media/open-sans-latin-400-normal.e922d016.woff"
   },
   {
     "revision": "aa42a9a3d4fc9951ed37945ff1af85dc",
     "url": "/Portfolio/static/media/poppins-latin-ext-400-normal.aa42a9a3.woff2"
+  },
+  {
+    "revision": "74cfaf5cbbc865ffd2c2ac84dbc85681",
+    "url": "/Portfolio/static/media/poppins-latin-ext-400-normal.74cfaf5c.woff"
   },
   {
     "revision": "9212f6f9860f9fc6c69b02fedf6db8c3",
@@ -152,11 +156,7 @@ self.__precacheManifest = [
     "url": "/Portfolio/static/media/poppins-latin-400-normal.42d8a788.woff"
   },
   {
-    "revision": "74cfaf5cbbc865ffd2c2ac84dbc85681",
-    "url": "/Portfolio/static/media/poppins-latin-ext-400-normal.74cfaf5c.woff"
-  },
-  {
-    "revision": "5b1acb0d4b20aefb171cf283b1805745",
+    "revision": "80876cba07cc37ed0c77d2fdf09e68dd",
     "url": "/Portfolio/index.html"
   }
 ];
