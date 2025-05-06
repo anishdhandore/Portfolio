@@ -51,8 +51,6 @@ const About = () => {
   );
 };
 
-// ========== Styled Components ==========
-
 const AboutSection = styled.section`
   padding: 2rem;
   background-color: #040a1c;

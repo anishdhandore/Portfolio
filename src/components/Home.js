@@ -26,7 +26,7 @@ const Home = () => {
             Download CV
           </DownloadButton> */}
           <OpenButton
-            href="https://anishdhandore.github.io/Portfolio/AnishDhandoreResume.pdf"
+            href="https://anishdhandore.github.io/Portfolio/AnishDhandoreResumeCopy.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
