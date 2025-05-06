@@ -11,6 +11,7 @@ const Home = () => {
         }
     };
   return (
+    <div className='responsive-container'>
     <HeroSection id="home">
       <HeroContent>
         <text>Hello, I am</text>
@@ -39,12 +40,14 @@ const Home = () => {
 
       </HeroContent>
     </HeroSection>
+    </div>
   );
 };
 
 const HeroSection = styled.section`
   height: 100vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -52,6 +55,7 @@ const HeroSection = styled.section`
 `;
 
 const HeroContent = styled.div`
+  
   h1 {
     font-size: 3.0rem;  /* Reduced font size */
     color: #c4babb;  /* Light and skinny font color */

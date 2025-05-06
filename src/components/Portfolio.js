@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaYoutube } from 'react-icons/fa'; // Import GitHub and YouTube icons
+import { FaGithub, FaYoutube } from 'react-icons/fa';
 import Soccer from '../soccer.jpg';
 import Dogs from '../dogs.jpg';
-import Safespace from '../safespace.jpg'
-import Gcodes from '../gcodes.jpg'
-import Zombie from '../zombie.jpg'
-import Artistic from '../artistic.jpg'
+import Safespace from '../safespace.jpg';
+import Gcodes from '../gcodes.jpg';
+import Zombie from '../zombie.jpg';
+import Artistic from '../artistic.jpg';
 
 const Portfolio = () => {
   const projects = [
@@ -14,52 +14,51 @@ const Portfolio = () => {
       title: "Soccer Match Predictions",
       image: Soccer,
       link: "https://colab.research.google.com/drive/1xT5S3eeZPcjfPexal9m9Z2PjLedSJ0wA?usp=sharing",
-      type: "colab", // Additional property to differentiate
+      type: "colab",
     },
     {
       title: "Preserving Paws",
       image: Dogs,
       github: "https://github.com/anishdhandore/ST-Hacks-2021",
-      youtube: "https://www.youtube.com/watch?v=HzcST4-HYKE", // YouTube link
-      type: "githubYoutube", // New type for both GitHub and YouTube
+      youtube: "https://www.youtube.com/watch?v=HzcST4-HYKE",
+      type: "githubYoutube",
     },
     {
       title: "Safe Space",
       image: Safespace,
-      link: "https://github.com/kylejava/CatHacks-Winter-Edition-2020", // Link to GitHub
-      type: "github", // Property to indicate GitHub type
+      link: "https://github.com/kylejava/CatHacks-Winter-Edition-2020",
+      type: "github",
     },
     {
       title: "Fighting Projectiles",
       image: Gcodes,
       link: "https://github.com/anishdhandore/G-CODES",
-      type: "github"
+      type: "github",
     },
     {
       title: "Zombie Attack",
       image: Zombie,
       link: "https://github.com/anishdhandore/The-Goblin-Game",
-      type: "github"
+      type: "github",
     },
     {
       title: "Our Artistic Space",
       image: Artistic,
       link: "https://github.com/anishdhandore/HacksAndCrafts2020",
-      type: "github"
+      type: "github",
     },
   ];
 
   return (
     <PortfolioSection id="portfolio">
-      <text>My Portfolio</text>
-      <h2>My Projects</h2>
-      <br />
-      <br />
+      <Subtitle>My Portfolio</Subtitle>
+      <Heading>My Projects</Heading>
       <ProjectGrid>
         {projects.map((project, index) => (
           <ProjectCard key={index}>
             <ProjectImageStyled src={project.image} alt={`Project ${index + 1}`} />
             <ProjectTitle>{project.title}</ProjectTitle>
+
             {project.type === "colab" ? (
               <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
                 <span role="img" aria-label="Link">🔗</span> Google Colab
@@ -69,17 +68,14 @@ const Portfolio = () => {
                 <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer">
                   <FaGithub /> GitHub
                 </ProjectLink>
-                <ProjectLink href={project.youtube} target="_blank" rel="noopener noreferrer" youtube>
-                  <FaYoutube style={{ color: '#FF0000' }} /> YouTube
+                <ProjectLink href={project.youtube} target="_blank" rel="noopener noreferrer">
+                  <YouTubeIcon /> YouTube
                 </ProjectLink>
+
               </div>
-            ) : project.type === "github" ? (
-              <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
-                <FaGithub /> GitHub
-              </ProjectLink>
             ) : (
               <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
-                View Project
+                <FaGithub /> GitHub
               </ProjectLink>
             )}
           </ProjectCard>
@@ -89,74 +85,110 @@ const Portfolio = () => {
   );
 };
 
-const PortfolioSection = styled.section`
-  padding: 3rem 0; /* Reduced space from top */
-  text-align: center;
+// Styled Components
 
-  h2 {
-    font-size: 2.5rem;
-    color: #484691; /* Same as About Me */
-    margin-bottom: 1.5rem; /* Reduce space below heading */
-  }
-  
-  text{
-    color: #c4babb;
-    font-size: 1rem;
-  }
+const PortfolioSection = styled.section`
+  padding: 3rem 1rem;
+  text-align: center;
+  background-color: #040a1c;
+`;
+
+const Subtitle = styled.p`
+  color: #c4babb;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+`;
+
+const Heading = styled.h2`
+  font-size: 2.5rem;
+  color: #484691;
+  margin-bottom: 2rem;
 `;
 
 const ProjectGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Ensure space between cards */
+  justify-content: space-between;
   align-items: center;
-  max-width: 960px; /* Maximum width to fit 3 cards */
-  margin: 0 auto; /* Center the grid */
-  gap: 2rem; /* Increase space between rows */
+  max-width: 960px;
+  margin: 0 auto;
+  gap: 2rem;
+
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 const ProjectCard = styled.div`
   background-color: #241e20;
-  width: 30%; /* 3 cards in a row */
+  width: 30%;
   height: 350px;
   border-radius: 10px;
   padding: 0.5rem;
-  text-align: left; /* Shift title and link to the left */
+  text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 2rem; /* Increased space between rows */
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    height: auto;
+    text-align: center;
+    align-items: center;
+  }
 `;
 
 const ProjectImageStyled = styled.img`
-  width: 90%;
-  height: 70%;
+  width: 100%;
+  height: 200px;
   object-fit: cover;
   border-radius: 8px;
   margin: 0 auto 0.5rem auto;
+
+  @media screen and (max-width: 768px) {
+    height: 180px;
+  }
 `;
 
 const ProjectTitle = styled.h3`
   font-size: 1.2rem;
   color: #c4babb;
   margin-bottom: 0.3rem;
-  padding-left: 0.5rem; /* Shift title to the left */
+  padding-left: 0.5rem;
+
+  @media screen and (max-width: 768px) {
+    text-align: center;
+    padding-left: 0;
+  }
 `;
 
 const ProjectLink = styled.a`
   font-size: 0.9rem;
   color: #c4babb;
   text-decoration: none;
-  padding-left: 0.5rem; /* Shift link to the left */
-  margin-right: 1rem; /* Add margin between GitHub and YouTube links */
+  padding-left: 0.5rem;
+  margin-right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
 
   &:hover {
     text-decoration: underline;
   }
 
   &[youtube] {
-    color: #FF0000; /* Red color for YouTube */
+    color: #FF0000; /* Make the whole link red */
+  }
+
+  @media screen and (max-width: 768px) {
+    text-align: center;
+    padding-left: 0;
   }
 `;
+const YouTubeIcon = styled(FaYoutube)`
+  color: #FF0000;
+`;
+
 
 export default Portfolio;

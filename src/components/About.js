@@ -1,172 +1,175 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaBriefcase, FaProjectDiagram, FaHeadset } from 'react-icons/fa';
-import MyPhoto from '../me.jpg'; // Update the path to your photo
-import useTypewriterEffect from '../hooks/useTypewriterEffect'; // Import the hook
+import MyPhoto from '../me.jpg';
+import useTypewriterEffect from '../hooks/useTypewriterEffect';
 
 const About = () => {
   const typedDescription = useTypewriterEffect(
     "👋 Hello! I am a passionate technology developer, with expertise in several areas that come together to create effective and innovative solutions. My professional journey has been focused on driving efficiency and excellence through technology.",
-    40 // Typing speed in milliseconds
+    40
   );
 
   return (
-    <AboutSection id="about">
-      <TitleContainer>
-        <AboutMeTitle>About Me</AboutMeTitle>
-      </TitleContainer>
-      <AboutContent>
-        <ImageContainer>
-          <ProfileImage src={MyPhoto} alt="My Photo" />
-        </ImageContainer>
-        <RightContent>
-          <ButtonsContainer>
-            <ExperienceButton>
-              <IconContainer>
-                <FaBriefcase size={40} color="#c4babb" /> {/* Experience icon */}
-              </IconContainer>
-              <ButtonText>Experience</ButtonText>
-              <YearsText>4 Years</YearsText>
-            </ExperienceButton>
-            <ProjectsButton>
-              <IconContainer>
-                <FaProjectDiagram size={40} color="#c4babb" /> {/* Project icon */}
-              </IconContainer>
-              <ButtonText>Projects</ButtonText>
-              <YearsText>20+ Completed Projects</YearsText>
-            </ProjectsButton>
-            <SupportButton>
-              <IconContainer>
-                <FaHeadset size={40} color="#c4babb" /> {/* Support icon */}
-              </IconContainer>
-              <ButtonText>Support</ButtonText>
-              <YearsText>Online 24/7</YearsText>
-            </SupportButton>
-          </ButtonsContainer>
-          <DescriptionText>
-            {typedDescription}
-          </DescriptionText>
-        </RightContent>
-      </AboutContent>
-    </AboutSection>
+    <div className="responsive-container">
+      <AboutSection id="about">
+        <TitleContainer>
+          <AboutMeTitle>About Me</AboutMeTitle>
+        </TitleContainer>
+
+        <TopContent>
+          <ImageContainer>
+            <ProfileImage src={MyPhoto} alt="My Photo" />
+          </ImageContainer>
+
+          <TextAndButtonsWrapper>
+            <DescriptionWrapper>
+              <DescriptionText>{typedDescription}</DescriptionText>
+            </DescriptionWrapper>
+
+            <ButtonsContainer>
+              <InfoButton>
+                <FaBriefcase size={34} color="#c4babb" />
+                <ButtonText>Experience</ButtonText>
+                <YearsText>4 Years</YearsText>
+              </InfoButton>
+              <InfoButton>
+                <FaProjectDiagram size={34} color="#c4babb" />
+                <ButtonText>Projects</ButtonText>
+                <YearsText>20+ Completed Projects</YearsText>
+              </InfoButton>
+              <InfoButton>
+                <FaHeadset size={34} color="#c4babb" />
+                <ButtonText>Support</ButtonText>
+                <YearsText>Online 24/7</YearsText>
+              </InfoButton>
+            </ButtonsContainer>
+          </TextAndButtonsWrapper>
+        </TopContent>
+      </AboutSection>
+    </div>
   );
 };
 
+// ========== Styled Components ==========
+
 const AboutSection = styled.section`
-  padding: 2rem; /* Space around the section */
-  padding-top: 2rem; /* Reduced padding at the top to bring sections closer */
-  background-color: #040a1c; /* Background color */
-  color: #c4babb; /* Text color */
+  padding: 2rem;
+  background-color: #040a1c;
+  color: #c4babb;
 `;
 
 const TitleContainer = styled.div`
-  text-align: center; /* Center align titles */
-  margin-bottom: 1.5rem; /* Space below titles */
+  text-align: center;
+  margin-bottom: 1.5rem;
 `;
 
 const AboutMeTitle = styled.h3`
-  font-size: 2.5rem; /* Adjust font size for "About Me" */
-  margin: 0; /* Remove default margin */
-  color: #484691; /* Change font color */
+  font-size: 2.5rem;
+  margin: 0;
+  color: #484691;
 `;
 
-const AboutContent = styled.div`
+const TopContent = styled.div`
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ImageContainer = styled.div`
-  flex: 1; /* Take up one part of the flex container */
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
 
 const ProfileImage = styled.img`
-  width: 80%; /* Adjust image size to be smaller */
-  max-width: 280px; /* Set a max width */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 10px; /* Rounded corners for the image */
-  margin-top: 0.5rem; /* Adjusted margin to lift the image slightly */
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 10px;
 `;
 
-const RightContent = styled.div`
-  flex: 1; /* Take up one part of the flex container */
+const TextAndButtonsWrapper = styled.div`
   display: flex;
-  flex-direction: column; /* Arrange buttons and description vertically */
-  align-items: flex-start; /* Align items to the left */
-  padding-top: 50px;
+  flex-direction: column;
+  justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    align-items: center;
+    text-align: center;
+  }
 `;
+
+const DescriptionWrapper = styled.div`
+  max-width: 600px;
+
+  @media screen and (max-width: 768px) {
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+`;
+
+
+const DescriptionText = styled.p`
+  font-size: 1rem;
+  color: #c4babb;
+  line-height: 1.6;
+  margin-top: 1rem;
+  word-break: break-word;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 1rem;
+    text-align: center;
+    max-width: 100%;
+  }
+`;
+
 
 const ButtonsContainer = styled.div`
-  display: flex; /* Change to flex to place buttons next to each other */
-  gap: 1.5rem; /* Increased space between buttons */
-  margin-bottom: 1rem; /* Space below buttons */
-`;
-
-const ExperienceButton = styled.div`
-  background-color: #241e20; /* Match the background */
-  color: #c4babb;
-  width: 150px; /* Set fixed width for square shape */
-  height: 150px; /* Set fixed height for square shape */
-  border: none;
-  border-radius: 10px; /* Rounded corners */
   display: flex;
-  flex-direction: column; /* Align text and icon vertically */
-  align-items: center; /* Center align items */
-  justify-content: center; /* Center align items */
-  cursor: default; /* Not clickable */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
 `;
 
-const ProjectsButton = styled.div`
-  background-color: #241e20; /* Match the background */
+const InfoButton = styled.div`
+  background-color: #241e20;
   color: #c4babb;
-  width: 150px; /* Set fixed width for square shape */
-  height: 150px; /* Set fixed height for square shape */
-  border: none;
-  border-radius: 10px; /* Rounded corners */
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
   display: flex;
-  flex-direction: column; /* Align text and icon vertically */
-  align-items: center; /* Center align items */
-  justify-content: center; /* Center align items */
-  cursor: default; /* Not clickable */
-`;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
 
-const SupportButton = styled.div`
-  background-color: #241e20; /* Match the background */
-  color: #c4babb;
-  width: 150px; /* Set fixed width for square shape */
-  height: 150px; /* Set fixed height for square shape */
-  border: none;
-  border-radius: 10px; /* Rounded corners */
-  display: flex;
-  flex-direction: column; /* Align text and icon vertically */
-  align-items: center; /* Center align items */
-  justify-content: center; /* Center align items */
-  cursor: default; /* Not clickable */
-`;
-
-const IconContainer = styled.div`
-  margin-bottom: 0.5rem; /* Space between icon and text */
+  @media screen and (max-width: 480px) {
+    width: 95px;
+    height: 95px;
+    padding: 6px;
+  }
 `;
 
 const ButtonText = styled.span`
-  font-size: 1rem; /* Adjust font size for button text */
-  color: #c4babb; /* Font color */
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+  text-align: center;
 `;
 
 const YearsText = styled.span`
-  font-size: 0.8rem; /* Smaller font size for years */
-  color: #c4babb; /* Font color */
-  text-align: center; /* Center the text */
-`;
-
-const DescriptionText = styled.p`
-  text-align: left; /* Align description text to the left */
-  color: #c4babb; /* Font color */
-  font-size: 1rem; /* Font size for description */
-  margin-top: 1rem; /* Space above the description */
+  font-size: 0.75rem;
+  text-align: center;
+  margin-top: 0.2rem;
 `;
 
 export default About;

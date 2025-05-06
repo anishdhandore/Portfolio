@@ -1,9 +1,11 @@
 /* src/App.css */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
+  overflow-x: hidden;
   margin: 0;
   font-family: 'Arial', sans-serif;
 }
@@ -17,3 +19,50 @@ p {
   font-size: 1.1rem;
   color: #555;
 }
+
+.responsive-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+
+@media screen and (max-width: 768px) {
+  body {
+    padding: 0;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1rem;
+    padding: 0 15px;
+    text-align: center;
+  }
+
+  nav, .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section, .container, .experience-item, .portfolio-item {
+    width: 100% !important;
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .section-content {
+    flex-direction: column;
+  }
+
+  .image {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+

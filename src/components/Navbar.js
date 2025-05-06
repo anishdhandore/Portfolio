@@ -11,7 +11,11 @@ const Navbar = () => {
 
   return (
     <Nav>
-      <Name href="https://github.com/anishdhandore" target="_blank" rel="noopener noreferrer">
+      <Name
+        href="https://github.com/anishdhandore"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Anish Dhandore
       </Name>
       <ToggleContainer>
@@ -23,26 +27,32 @@ const Navbar = () => {
   );
 };
 
+// ========== Styled Components ==========
+
 const Nav = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
   background: #040a1c;
   display: flex;
-  justify-content: space-between; /* Space between name and toggle */
-  align-items: center; /* Center items vertically */
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem 10rem;
   z-index: 1000;
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem 1.5rem; /* Reduce horizontal padding on mobile */
+  }
 `;
 
 const Name = styled.a`
   font-size: 1rem;
   color: #484691;
   font-weight: bold;
-  text-decoration: none; /* Remove underline */
-  
+  text-decoration: none;
+
   &:hover {
-    color: #c4babb; /* Change color on hover */
+    color: #c4babb;
   }
 `;
 
@@ -52,24 +62,23 @@ const ToggleContainer = styled.div`
 `;
 
 const ToggleSwitch = styled.div`
-  width: 65px;
-  height: 34px;
-  background-color: ${props => (props.isDarkMode ? '#484691' : '#484691')}; /* Change color based on mode */
+  width: 60px;
+  height: 30px;
+  background-color: #484691;
   border-radius: 50px;
   position: relative;
   cursor: pointer;
-  margin-left: auto; /* Align toggle to the right */
 `;
 
 const Slider = styled.div`
   position: absolute;
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background-color: white;
-  top: 0;
-  left: ${props => (props.isDarkMode ? '0' : '32px')}; /* Move slider based on mode */
-  transition: left 0.2s; /* Smooth transition */
+  top: 1px;
+  left: ${props => (props.isDarkMode ? '1px' : '31px')};
+  transition: left 0.2s ease;
 `;
 
 export default Navbar;

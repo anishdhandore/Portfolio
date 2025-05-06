@@ -1,7 +1,7 @@
 // src/components/Contact.js
 import React from 'react';
 import styled from 'styled-components';
-import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa'; // Importing icons
+import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const Contact = () => {
   return (
@@ -14,13 +14,21 @@ const Contact = () => {
         </Pill>
         <Pill>
           <FaLinkedin style={{ color: '#0e76a8' }} />
-          <a href="https://www.linkedin.com/in/anish-dhandore/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.linkedin.com/in/anish-dhandore/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             LinkedIn
           </a>
         </Pill>
         <Pill>
           <FaGithub />
-          <a href="https://github.com/anishdhandore" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://github.com/anishdhandore"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             GitHub
           </a>
         </Pill>
@@ -30,46 +38,57 @@ const Contact = () => {
 };
 
 const ContactSection = styled.section`
-  padding: 5rem 0;
+  padding: 5rem 1rem;
   text-align: center;
 
   h2 {
-    font-size: 1.5rem;  /* Reduced font size */
-    color: #c4babb;  /* Light and skinny font color */
-    font-weight: 300;  /* Light weight for skinny text */
+    font-size: 1.5rem;
+    color: #c4babb;
+    font-weight: 300;
   }
 `;
 
 const ContactLinks = styled.div`
   display: flex;
   justify-content: center;
-  gap: 1rem; /* Spacing between pill buttons */
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-top: 2rem;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const Pill = styled.div`
   display: flex;
   align-items: center;
-  background-color: #1b1f2e; /* Button background color */
+  background-color: #1b1f2e;
   padding: 0.8rem 1.5rem;
-  border-radius: 50px; /* Pill shape */
+  border-radius: 50px;
   color: #ffffff;
   font-size: 1rem;
-  font-family: 'Poppins', sans-serif; /* Using Poppins for nice fonts */
+  font-family: 'Poppins', sans-serif;
   transition: background-color 0.3s ease;
-  
+
   a {
-    margin-left: 0.5rem; /* Space between icon and text */
-    color: #ffffff; /* Link text color */
+    margin-left: 0.5rem;
+    color: #ffffff;
     text-decoration: none;
   }
 
   &:hover {
-    background-color: #3b3771; /* Darker color on hover */
+    background-color: #3b3771;
   }
 
   svg {
-    font-size: 1.3rem; /* Icon size */
+    font-size: 1.3rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
+    justify-content: center;
   }
 `;
 
