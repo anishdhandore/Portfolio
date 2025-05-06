@@ -1,6 +1,6 @@
 {
-  "main.js": "/Portfolio/static/js/main.1dcbb661.chunk.js",
-  "main.js.map": "/Portfolio/static/js/main.1dcbb661.chunk.js.map",
+  "main.js": "/Portfolio/static/js/main.720b87b1.chunk.js",
+  "main.js.map": "/Portfolio/static/js/main.720b87b1.chunk.js.map",
   "static/css/1.f6833192.chunk.css": "/Portfolio/static/css/1.f6833192.chunk.css",
   "static/js/1.abee2ce8.chunk.js": "/Portfolio/static/js/1.abee2ce8.chunk.js",
   "static/js/1.abee2ce8.chunk.js.map": "/Portfolio/static/js/1.abee2ce8.chunk.js.map",
@@ -17,9 +17,9 @@
   "static/media/gcodes.jpg": "/Portfolio/static/media/gcodes.c57f1365.jpg",
   "static/media/zombie.jpg": "/Portfolio/static/media/zombie.f8cd3252.jpg",
   "static/media/artistic.jpg": "/Portfolio/static/media/artistic.037e36b7.jpg",
-  "static/media/index.css": "/Portfolio/static/media/poppins-latin-400-normal.42d8a788.woff",
+  "static/media/index.css": "/Portfolio/static/media/poppins-latin-400-normal.9212f6f9.woff2",
   "static/css/1.f6833192.chunk.css.map": "/Portfolio/static/css/1.f6833192.chunk.css.map",
   "index.html": "/Portfolio/index.html",
-  "precache-manifest.8576f3e6e6155712d7a8400687542e3f.js": "/Portfolio/precache-manifest.8576f3e6e6155712d7a8400687542e3f.js",
+  "precache-manifest.6dbb74bb182666086322f72c4ad825c6.js": "/Portfolio/precache-manifest.6dbb74bb182666086322f72c4ad825c6.js",
   "service-worker.js": "/Portfolio/service-worker.js"
 }
