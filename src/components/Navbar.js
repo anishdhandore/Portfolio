@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true); // Default is dark mode
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    // Add logic here to toggle the theme throughout the website
-  };
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <Nav>
+    <Nav isDarkMode={isDarkMode}>
       <Name
         href="https://github.com/anishdhandore"
         target="_blank"
         rel="noopener noreferrer"
+        isDarkMode={isDarkMode}
       >
         Anish Dhandore
       </Name>
       <ToggleContainer>
-        <ToggleSwitch onClick={toggleDarkMode} isDarkMode={isDarkMode}>
+        <ToggleSwitch onClick={toggleTheme} isDarkMode={isDarkMode}>
           <Slider isDarkMode={isDarkMode}></Slider>
         </ToggleSwitch>
       </ToggleContainer>
@@ -27,32 +24,32 @@ const Navbar = () => {
   );
 };
 
-// ========== Styled Components ==========
-
 const Nav = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
-  background: #040a1c;
+  background: ${props => props.isDarkMode ? '#040a1c' : '#ffffff'};
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 10rem;
   z-index: 1000;
+  transition: background-color 0.3s ease;
 
   @media screen and (max-width: 768px) {
-    padding: 1rem 1.5rem; /* Reduce horizontal padding on mobile */
+    padding: 1rem 1.5rem;
   }
 `;
 
 const Name = styled.a`
   font-size: 1rem;
-  color: #484691;
+  color: ${props => props.isDarkMode ? '#484691' : '#2c3e50'};
   font-weight: bold;
   text-decoration: none;
+  transition: color 0.3s ease;
 
   &:hover {
-    color: #c4babb;
+    color: ${props => props.isDarkMode ? '#c4babb' : '#34495e'};
   }
 `;
 
@@ -64,10 +61,11 @@ const ToggleContainer = styled.div`
 const ToggleSwitch = styled.div`
   width: 60px;
   height: 30px;
-  background-color: #484691;
+  background-color: ${props => props.isDarkMode ? '#484691' : '#95a5a6'};
   border-radius: 50px;
   position: relative;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 `;
 
 const Slider = styled.div`

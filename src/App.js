@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { GlobalStyle } from './styles/GlobalStyle';
 import Navbar from './components/Navbar';
@@ -8,14 +7,15 @@ import Experience from './components/Experience';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-// src/index.js or src/App.js
-import '@fontsource/poppins';  // Defaults to weight 400
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import '@fontsource/poppins';
 
-
-function App() {
+const AppContent = () => {
+  const { isDarkMode } = useTheme();
+  
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle isDarkMode={isDarkMode} />
       <Navbar />
       <Home />
       <About />
@@ -24,6 +24,14 @@ function App() {
       <Contact />
       <Footer />
     </>
+  );
+};
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

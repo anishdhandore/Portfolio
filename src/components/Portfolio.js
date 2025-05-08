@@ -7,8 +7,10 @@ import Safespace from '../safespace.jpg';
 import Gcodes from '../gcodes.jpg';
 import Zombie from '../zombie.jpg';
 import Artistic from '../artistic.jpg';
+import { useTheme } from '../context/ThemeContext';
 
 const Portfolio = () => {
+  const { isDarkMode } = useTheme();
   const projects = [
     {
       title: "Soccer Match Predictions",
@@ -50,31 +52,30 @@ const Portfolio = () => {
   ];
 
   return (
-    <PortfolioSection id="portfolio">
-      <Subtitle>My Portfolio</Subtitle>
-      <Heading>My Projects</Heading>
+    <PortfolioSection id="portfolio" isDarkMode={isDarkMode}>
+      <Subtitle isDarkMode={isDarkMode}>My Portfolio</Subtitle>
+      <Heading isDarkMode={isDarkMode}>My Projects</Heading>
       <ProjectGrid>
         {projects.map((project, index) => (
-          <ProjectCard key={index}>
+          <ProjectCard key={index} isDarkMode={isDarkMode}>
             <ProjectImageStyled src={project.image} alt={`Project ${index + 1}`} />
-            <ProjectTitle>{project.title}</ProjectTitle>
+            <ProjectTitle isDarkMode={isDarkMode}>{project.title}</ProjectTitle>
 
             {project.type === "colab" ? (
-              <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
+              <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer" isDarkMode={isDarkMode}>
                 <span role="img" aria-label="Link">🔗</span> Google Colab
               </ProjectLink>
             ) : project.type === "githubYoutube" ? (
               <div>
-                <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer">
+                <ProjectLink href={project.github} target="_blank" rel="noopener noreferrer" isDarkMode={isDarkMode}>
                   <FaGithub /> GitHub
                 </ProjectLink>
-                <ProjectLink href={project.youtube} target="_blank" rel="noopener noreferrer">
+                <ProjectLink href={project.youtube} target="_blank" rel="noopener noreferrer" isDarkMode={isDarkMode}>
                   <YouTubeIcon /> YouTube
                 </ProjectLink>
-
               </div>
             ) : (
-              <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
+              <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer" isDarkMode={isDarkMode}>
                 <FaGithub /> GitHub
               </ProjectLink>
             )}
@@ -85,24 +86,25 @@ const Portfolio = () => {
   );
 };
 
-// Styled Components
-
 const PortfolioSection = styled.section`
   padding: 3rem 1rem;
   text-align: center;
-  background-color: #040a1c;
+  background-color: ${props => props.isDarkMode ? '#040a1c' : '#ffffff'};
+  transition: background-color 0.3s ease;
 `;
 
 const Subtitle = styled.p`
-  color: #c4babb;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   font-size: 1rem;
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 `;
 
 const Heading = styled.h2`
   font-size: 2.5rem;
-  color: #484691;
+  color: ${props => props.isDarkMode ? '#484691' : '#2c3e50'};
   margin-bottom: 2rem;
+  transition: color 0.3s ease;
 `;
 
 const ProjectGrid = styled.div`
@@ -120,7 +122,7 @@ const ProjectGrid = styled.div`
 `;
 
 const ProjectCard = styled.div`
-  background-color: #241e20;
+  background-color: ${props => props.isDarkMode ? '#241e20' : '#f8f9fa'};
   width: 30%;
   height: 350px;
   border-radius: 10px;
@@ -130,6 +132,7 @@ const ProjectCard = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 2rem;
+  transition: background-color 0.3s ease;
 
   @media screen and (max-width: 768px) {
     width: 90%;
@@ -153,9 +156,10 @@ const ProjectImageStyled = styled.img`
 
 const ProjectTitle = styled.h3`
   font-size: 1.2rem;
-  color: #c4babb;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   margin-bottom: 0.3rem;
   padding-left: 0.5rem;
+  transition: color 0.3s ease;
 
   @media screen and (max-width: 768px) {
     text-align: center;
@@ -165,20 +169,21 @@ const ProjectTitle = styled.h3`
 
 const ProjectLink = styled.a`
   font-size: 0.9rem;
-  color: #c4babb;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   text-decoration: none;
   padding-left: 0.5rem;
   margin-right: 1rem;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
+  transition: color 0.3s ease;
 
   &:hover {
     text-decoration: underline;
   }
 
   &[youtube] {
-    color: #FF0000; /* Make the whole link red */
+    color: #FF0000;
   }
 
   @media screen and (max-width: 768px) {
@@ -186,9 +191,9 @@ const ProjectLink = styled.a`
     padding-left: 0;
   }
 `;
+
 const YouTubeIcon = styled(FaYoutube)`
   color: #FF0000;
 `;
-
 
 export default Portfolio;

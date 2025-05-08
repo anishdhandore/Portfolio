@@ -4,29 +4,7 @@ import Swift from '../swift.jpg';
 import GDSC from '../gdsc.jpg';
 import CSUSM from '../csusm.jpg';
 import SGS from '../sgs.jpg';
-
-const Experience = () => {
-  return (
-    <ExperienceSection id="experience">
-      <Subtitle>My Work</Subtitle>
-      <Heading>My Experience</Heading>
-
-      <ExperienceContainer>
-        {experiences.map((exp, index) => (
-          <ExperienceItem key={index}>
-            <Logo src={exp.logo} alt="Company Logo" />
-            <Details>
-              <Role>{exp.role}</Role>
-              <Company>{exp.company}</Company>
-              <Duration>{exp.duration}</Duration>
-              <Description>{exp.description}</Description>
-            </Details>
-          </ExperienceItem>
-        ))}
-      </ExperienceContainer>
-    </ExperienceSection>
-  );
-};
+import { useTheme } from '../context/ThemeContext';
 
 const experiences = [
   {
@@ -63,23 +41,49 @@ const experiences = [
   },
 ];
 
-// Styled Components
+const Experience = () => {
+  const { isDarkMode } = useTheme();
+  return (
+    <ExperienceSection id="experience" isDarkMode={isDarkMode}>
+      <Subtitle isDarkMode={isDarkMode}>My Work</Subtitle>
+      <Heading isDarkMode={isDarkMode}>My Experience</Heading>
+
+      <ExperienceContainer>
+        {experiences.map((exp, index) => (
+          <ExperienceItem key={index} isDarkMode={isDarkMode}>
+            <Logo src={exp.logo} alt="Company Logo" />
+            <Details isDarkMode={isDarkMode}>
+              <Role isDarkMode={isDarkMode}>{exp.role}</Role>
+              <Company isDarkMode={isDarkMode}>{exp.company}</Company>
+              <Duration isDarkMode={isDarkMode}>{exp.duration}</Duration>
+              <Description isDarkMode={isDarkMode}>{exp.description}</Description>
+            </Details>
+          </ExperienceItem>
+        ))}
+      </ExperienceContainer>
+    </ExperienceSection>
+  );
+};
+
 const ExperienceSection = styled.section`
-  background-color: #040a1c;
+  background-color: ${props => props.isDarkMode ? '#040a1c' : '#ffffff'};
   padding: 5rem 1rem;
   text-align: center;
+  transition: background-color 0.3s ease;
 `;
 
 const Subtitle = styled.p`
-  color: #c4babb;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   font-size: 1rem;
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 `;
 
 const Heading = styled.h2`
   font-size: 2.5rem;
-  color: #484691;
+  color: ${props => props.isDarkMode ? '#484691' : '#2c3e50'};
   margin-bottom: 3rem;
+  transition: color 0.3s ease;
 `;
 
 const ExperienceContainer = styled.div`
@@ -92,11 +96,14 @@ const ExperienceContainer = styled.div`
 const ExperienceItem = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center; /* <-- fix vertical alignment */
+  align-items: center;
   width: 100%;
   max-width: 900px;
   padding: 1.5rem;
   gap: 2rem;
+  background-color: ${props => props.isDarkMode ? 'transparent' : '#f8f9fa'};
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -119,8 +126,9 @@ const Logo = styled.img`
 
 const Details = styled.div`
   flex: 1;
-  color: #c4babb;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   text-align: left;
+  transition: color 0.3s ease;
 
   @media screen and (max-width: 768px) {
     text-align: center;
@@ -130,23 +138,31 @@ const Details = styled.div`
 const Role = styled.h3`
   font-size: 1.5rem;
   margin: 0.5rem 0;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  transition: color 0.3s ease;
 `;
 
 const Company = styled.p`
   font-weight: bold;
   font-size: 1.1rem;
   margin: 0.3rem 0;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  transition: color 0.3s ease;
 `;
 
 const Duration = styled.p`
   font-style: italic;
   font-size: 0.9rem;
   margin-bottom: 0.8rem;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  transition: color 0.3s ease;
 `;
 
 const Description = styled.p`
   font-size: 0.95rem;
   line-height: 1.5;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  transition: color 0.3s ease;
 `;
 
 export default Experience;

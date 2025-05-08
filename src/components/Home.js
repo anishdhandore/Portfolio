@@ -1,9 +1,10 @@
-// src/components/Home.js
 import React from 'react';
 import styled from 'styled-components';
 import NarutoImage from '../naruto_processed.jpg';
+import { useTheme } from '../context/ThemeContext';
 
 const Home = () => {
+    const { isDarkMode } = useTheme();
     const scrollToAbout = () => {
         const aboutSection = document.getElementById("about");
         if (aboutSection) {
@@ -12,28 +13,25 @@ const Home = () => {
     };
   return (
     <div className='responsive-container'>
-    <HeroSection id="home">
-      <HeroContent>
+    <HeroSection id="home" isDarkMode={isDarkMode}>
+      <HeroContent isDarkMode={isDarkMode}>
         <text>Hello, I am</text>
         <h1>Anish Dhandore</h1>
         <text>Software Engineer</text>
         <br></br>
         <Image src={NarutoImage} alt="Naruto" />
 
-        {/* New buttons */}
         <ButtonContainer>
-          {/* <DownloadButton href="/AnishDhandoreResume.pdf" target="_blank" download>
-            Download CV
-          </DownloadButton> */}
           <OpenButton
             href="https://anishdhandore.github.io/Portfolio/AnishDhandoreResumeCopy.pdf"
             target="_blank"
             rel="noopener noreferrer"
+            isDarkMode={isDarkMode}
           >
             View CV
           </OpenButton>
 
-          <AboutButton id="about" onClick={scrollToAbout}>
+          <AboutButton id="about" onClick={scrollToAbout} isDarkMode={isDarkMode}>
             About Me
           </AboutButton >
         </ButtonContainer>
@@ -51,92 +49,72 @@ const HeroSection = styled.section`
   justify-content: center;
   align-items: center;
   text-align: center;
-  text-color: #c4babb;
+  text-color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
 `;
 
 const HeroContent = styled.div`
-  
   h1 {
-    font-size: 3.0rem;  /* Reduced font size */
-    color: #c4babb;  /* Light and skinny font color */
-    font-weight: 300;  /* Light weight for skinny text */
+    font-size: 3.0rem;
+    color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+    font-weight: 300;
   }
 
   p {
-    font-size: 1.2rem;  /* Reduced font size for paragraph */
-    color: #c4babb;  /* Light font color */
-    font-weight: 300;  /* Light weight */
+    font-size: 1.2rem;
+    color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+    font-weight: 300;
     margin-bottom: 2rem;
   }
 
-  text{
-    color: #c4babb;
+  text {
+    color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   }
 `;
 
 const Image = styled.img`
-  width: 30%;  /* Reduced width */
-  max-width: 200px;  /* Set a smaller max width */
-  height: auto;  /* Keep the aspect ratio */
-  margin: 1rem 0;  /* Margin around the image */
+  width: 30%;
+  max-width: 200px;
+  height: auto;
+  margin: 1rem 0;
 `;
 
 const ButtonContainer = styled.div`
-  margin-top: 1rem; /* Space above the buttons */
+  margin-top: 1rem;
   display: flex;
   justify-content: center;
-  gap: 1rem; /* Space between buttons */
-`;
-
-const DownloadButton = styled.a`
-  background-color: transparent; /* Ghost button background */
-  color: #484691; /* Text color */
-  padding: 0.75rem 1.5rem;
-  border: 2px solid #0c0b24; /* Match the background color */
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1rem;
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 0 0 2px #484691; /* Margin effect using box-shadow */
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    
-    color: #0a091c; /* Hover text color */
-  }
+  gap: 1rem;
 `;
 
 const OpenButton = styled.a`
-  background-color: transparent; /* Ghost button background */
-  color: #484691; /* Text color */
+  background-color: transparent;
+  color: ${props => props.isDarkMode ? '#484691' : '#2c3e50'};
   padding: 0.75rem 1.5rem;
-  border: 2px solid #0c0b24; /* Match the background color */
+  border: 2px solid ${props => props.isDarkMode ? '#0c0b24' : '#ecf0f1'};
   cursor: pointer;
   text-decoration: none;
   font-size: 1rem;
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 0 0 2px #484691; /* Margin effect using box-shadow */
-  transition: background-color 0.3s, color 0.3s;
+  border-radius: 5px;
+  box-shadow: 0 0 0 2px ${props => props.isDarkMode ? '#484691' : '#95a5a6'};
+  transition: all 0.3s ease;
 
   &:hover {
-    
-    color: #0a091c; /* Hover text color */
+    color: ${props => props.isDarkMode ? '#0a091c' : '#34495e'};
   }
 `;
 
 const AboutButton = styled.a`
-  background-color: #484691; /* Button color */
-  color: #0a091c;
+  background-color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
+  color: ${props => props.isDarkMode ? '#0a091c' : '#ffffff'};
   padding: 0.75rem 1.5rem;
   border: none;
   cursor: pointer;
   text-decoration: none;
   font-size: 1rem;
-  border-radius: 5px; /* Rounded corners */
+  border-radius: 5px;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #0a091c; /* Hover color */
+    background-color: ${props => props.isDarkMode ? '#0a091c' : '#2980b9'};
   }
 `;
 

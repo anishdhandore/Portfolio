@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { FaBriefcase, FaProjectDiagram, FaHeadset } from 'react-icons/fa';
 import MyPhoto from '../me.jpg';
 import useTypewriterEffect from '../hooks/useTypewriterEffect';
+import { useTheme } from '../context/ThemeContext';
 
 const About = () => {
+  const { isDarkMode } = useTheme();
   const typedDescription = useTypewriterEffect(
     "👋 Hello! I am a passionate technology developer, with expertise in several areas that come together to create effective and innovative solutions. My professional journey has been focused on driving efficiency and excellence through technology.",
     40
@@ -12,9 +14,9 @@ const About = () => {
 
   return (
     <div className="responsive-container">
-      <AboutSection id="about">
+      <AboutSection id="about" isDarkMode={isDarkMode}>
         <TitleContainer>
-          <AboutMeTitle>About Me</AboutMeTitle>
+          <AboutMeTitle isDarkMode={isDarkMode}>About Me</AboutMeTitle>
         </TitleContainer>
 
         <TopContent>
@@ -24,24 +26,24 @@ const About = () => {
 
           <TextAndButtonsWrapper>
             <DescriptionWrapper>
-              <DescriptionText>{typedDescription}</DescriptionText>
+              <DescriptionText isDarkMode={isDarkMode}>{typedDescription}</DescriptionText>
             </DescriptionWrapper>
 
             <ButtonsContainer>
-              <InfoButton>
-                <FaBriefcase size={34} color="#c4babb" />
-                <ButtonText>Experience</ButtonText>
-                <YearsText>4 Years</YearsText>
+              <InfoButton isDarkMode={isDarkMode}>
+                <FaBriefcase size={34} color={isDarkMode ? "#c4babb" : "#2c3e50"} />
+                <ButtonText isDarkMode={isDarkMode}>Experience</ButtonText>
+                <YearsText isDarkMode={isDarkMode}>4 Years</YearsText>
               </InfoButton>
-              <InfoButton>
-                <FaProjectDiagram size={34} color="#c4babb" />
-                <ButtonText>Projects</ButtonText>
-                <YearsText>20+ Completed Projects</YearsText>
+              <InfoButton isDarkMode={isDarkMode}>
+                <FaProjectDiagram size={34} color={isDarkMode ? "#c4babb" : "#2c3e50"} />
+                <ButtonText isDarkMode={isDarkMode}>Projects</ButtonText>
+                <YearsText isDarkMode={isDarkMode}>20+ Completed Projects</YearsText>
               </InfoButton>
-              <InfoButton>
-                <FaHeadset size={34} color="#c4babb" />
-                <ButtonText>Support</ButtonText>
-                <YearsText>Online 24/7</YearsText>
+              <InfoButton isDarkMode={isDarkMode}>
+                <FaHeadset size={34} color={isDarkMode ? "#c4babb" : "#2c3e50"} />
+                <ButtonText isDarkMode={isDarkMode}>Support</ButtonText>
+                <YearsText isDarkMode={isDarkMode}>Online 24/7</YearsText>
               </InfoButton>
             </ButtonsContainer>
           </TextAndButtonsWrapper>
@@ -53,8 +55,9 @@ const About = () => {
 
 const AboutSection = styled.section`
   padding: 2rem;
-  background-color: #040a1c;
-  color: #c4babb;
+  background-color: ${props => props.isDarkMode ? '#040a1c' : '#ffffff'};
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  transition: background-color 0.3s ease, color 0.3s ease;
 `;
 
 const TitleContainer = styled.div`
@@ -65,7 +68,8 @@ const TitleContainer = styled.div`
 const AboutMeTitle = styled.h3`
   font-size: 2.5rem;
   margin: 0;
-  color: #484691;
+  color: ${props => props.isDarkMode ? '#484691' : '#2c3e50'};
+  transition: color 0.3s ease;
 `;
 
 const TopContent = styled.div`
@@ -115,13 +119,13 @@ const DescriptionWrapper = styled.div`
   }
 `;
 
-
 const DescriptionText = styled.p`
   font-size: 1rem;
-  color: #c4babb;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   line-height: 1.6;
   margin-top: 1rem;
   word-break: break-word;
+  transition: color 0.3s ease;
 
   @media screen and (max-width: 768px) {
     padding: 0 1rem;
@@ -129,7 +133,6 @@ const DescriptionText = styled.p`
     max-width: 100%;
   }
 `;
-
 
 const ButtonsContainer = styled.div`
   display: flex;
@@ -140,8 +143,8 @@ const ButtonsContainer = styled.div`
 `;
 
 const InfoButton = styled.div`
-  background-color: #241e20;
-  color: #c4babb;
+  background-color: ${props => props.isDarkMode ? '#241e20' : '#f8f9fa'};
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
   width: 120px;
   height: 120px;
   border-radius: 10px;
@@ -150,6 +153,7 @@ const InfoButton = styled.div`
   align-items: center;
   justify-content: center;
   padding: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   @media screen and (max-width: 480px) {
     width: 95px;
@@ -162,12 +166,14 @@ const ButtonText = styled.span`
   font-size: 0.9rem;
   margin-top: 0.4rem;
   text-align: center;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  transition: color 0.3s ease;
 `;
 
 const YearsText = styled.span`
-  font-size: 0.75rem;
-  text-align: center;
-  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  transition: color 0.3s ease;
 `;
 
 export default About;
