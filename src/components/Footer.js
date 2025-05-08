@@ -1,3 +1,4 @@
+// src/components/Footer.js
 import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../context/ThemeContext';

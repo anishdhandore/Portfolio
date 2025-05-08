@@ -1,3 +1,4 @@
+// src/components/Contact.js
 import React from 'react';
 import styled from 'styled-components';
 import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
