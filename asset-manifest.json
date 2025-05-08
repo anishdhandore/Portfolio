@@ -1,9 +1,9 @@
 {
-  "main.js": "/Portfolio/static/js/main.1c0e0b2f.chunk.js",
-  "main.js.map": "/Portfolio/static/js/main.1c0e0b2f.chunk.js.map",
-  "static/css/1.f6833192.chunk.css": "/Portfolio/static/css/1.f6833192.chunk.css",
-  "static/js/1.abee2ce8.chunk.js": "/Portfolio/static/js/1.abee2ce8.chunk.js",
-  "static/js/1.abee2ce8.chunk.js.map": "/Portfolio/static/js/1.abee2ce8.chunk.js.map",
+  "main.js": "/Portfolio/static/js/main.7de9f45e.chunk.js",
+  "main.js.map": "/Portfolio/static/js/main.7de9f45e.chunk.js.map",
+  "static/css/1.bc5bbf65.chunk.css": "/Portfolio/static/css/1.bc5bbf65.chunk.css",
+  "static/js/1.9c82401e.chunk.js": "/Portfolio/static/js/1.9c82401e.chunk.js",
+  "static/js/1.9c82401e.chunk.js.map": "/Portfolio/static/js/1.9c82401e.chunk.js.map",
   "runtime~main.js": "/Portfolio/static/js/runtime~main.3b961160.js",
   "runtime~main.js.map": "/Portfolio/static/js/runtime~main.3b961160.js.map",
   "static/media/naruto_processed.jpg": "/Portfolio/static/media/naruto_processed.23c40d72.jpg",
@@ -17,9 +17,9 @@
   "static/media/gcodes.jpg": "/Portfolio/static/media/gcodes.c57f1365.jpg",
   "static/media/zombie.jpg": "/Portfolio/static/media/zombie.f8cd3252.jpg",
   "static/media/artistic.jpg": "/Portfolio/static/media/artistic.037e36b7.jpg",
-  "static/media/index.css": "/Portfolio/static/media/poppins-latin-400-normal.9212f6f9.woff2",
-  "static/css/1.f6833192.chunk.css.map": "/Portfolio/static/css/1.f6833192.chunk.css.map",
+  "static/media/index.css": "/Portfolio/static/media/open-sans-latin-400-normal.e922d016.woff",
+  "static/css/1.bc5bbf65.chunk.css.map": "/Portfolio/static/css/1.bc5bbf65.chunk.css.map",
   "index.html": "/Portfolio/index.html",
-  "precache-manifest.bfefb2a3d9c3ba4adfb19d2d61a2333f.js": "/Portfolio/precache-manifest.bfefb2a3d9c3ba4adfb19d2d61a2333f.js",
+  "precache-manifest.1c14d94ea0e233b31898667810e2571f.js": "/Portfolio/precache-manifest.1c14d94ea0e233b31898667810e2571f.js",
   "service-worker.js": "/Portfolio/service-worker.js"
 }
