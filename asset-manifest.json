@@ -1,6 +1,6 @@
 {
-  "main.js": "/Portfolio/static/js/main.720b87b1.chunk.js",
-  "main.js.map": "/Portfolio/static/js/main.720b87b1.chunk.js.map",
+  "main.js": "/Portfolio/static/js/main.1c0e0b2f.chunk.js",
+  "main.js.map": "/Portfolio/static/js/main.1c0e0b2f.chunk.js.map",
   "static/css/1.f6833192.chunk.css": "/Portfolio/static/css/1.f6833192.chunk.css",
   "static/js/1.abee2ce8.chunk.js": "/Portfolio/static/js/1.abee2ce8.chunk.js",
   "static/js/1.abee2ce8.chunk.js.map": "/Portfolio/static/js/1.abee2ce8.chunk.js.map",
@@ -20,6 +20,6 @@
   "static/media/index.css": "/Portfolio/static/media/poppins-latin-400-normal.9212f6f9.woff2",
   "static/css/1.f6833192.chunk.css.map": "/Portfolio/static/css/1.f6833192.chunk.css.map",
   "index.html": "/Portfolio/index.html",
-  "precache-manifest.6dbb74bb182666086322f72c4ad825c6.js": "/Portfolio/precache-manifest.6dbb74bb182666086322f72c4ad825c6.js",
+  "precache-manifest.bfefb2a3d9c3ba4adfb19d2d61a2333f.js": "/Portfolio/precache-manifest.bfefb2a3d9c3ba4adfb19d2d61a2333f.js",
   "service-worker.js": "/Portfolio/service-worker.js"
 }
