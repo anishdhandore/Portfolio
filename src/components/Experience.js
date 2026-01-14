@@ -33,11 +33,11 @@ const Experience = () => {
 const experiences = [
   {
     logo: SGS,
-    role: 'Wireless Engineer',
+    role: 'Software Engineer',
     company: 'SGS North America',
     duration: '02/2025 - Present',
     description:
-      'Conducted RF testing and compliance verification on various electronic devices, ensuring adherence to regulatory standards such as FCC, CE, and industry-specific requirements. Operated and calibrated advanced RF test equipment including spectrum analyzers, signal generators, and network analyzers. Performed EMI/EMC tests, analyzed results, and supported documentation for technical reports. Collaborated with engineering teams to troubleshoot performance issues, optimize test procedures, and assist in device certification processes.',
+      'Engineered and maintained backend test automation software to orchestrate RF and regulatory compliance validation workflows across heterogeneous hardware systems, integrating Keysight Technologies, Anritsu, and Rohde & Schwarz instrumentation. Developed modular, reusable test components and data parsers to standardize RF measurement acquisition and analysis for FCC and CE compliance testing. Implemented robust logging, error handling, and result validation to improve automation reliability, while collaborating with engineering and compliance teams to troubleshoot test failures, optimize automated test procedures, and support device certification processes.',
   },
   {
     logo: Swift,
