@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import NarutoImage from '../naruto_processed.jpg';
+import NarutoImage from './images/naruto_processed.jpg';
 import { useTheme } from '../context/ThemeContext';
 
 const Home = () => {

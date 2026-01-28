@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FaBriefcase, FaProjectDiagram, FaHeadset } from 'react-icons/fa';
-import MyPhoto from '../me.jpg';
+import MyPhoto from './images/me.jpg';
 import useTypewriterEffect from '../hooks/useTypewriterEffect';
 import { useTheme } from '../context/ThemeContext';
 

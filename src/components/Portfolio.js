@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { FaGithub, FaYoutube } from 'react-icons/fa';
-import Soccer from '../soccer.jpg';
-import Dogs from '../dogs.jpg';
-import Safespace from '../safespace.jpg';
-import Gcodes from '../gcodes.jpg';
-import Zombie from '../zombie.jpg';
-import Artistic from '../artistic.jpg';
+import Soccer from '../images/soccer.jpg';
+import Dogs from '../images/dogs.jpg';
+import Safespace from '../images/safespace.jpg';
+import Gcodes from '../images/gcodes.jpg';
+import Zombie from '../images/zombie.jpg';
+import Artistic from '../images/artistic.jpg';
 import { useTheme } from '../context/ThemeContext';
 
 const Portfolio = () => {

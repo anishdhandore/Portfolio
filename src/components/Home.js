@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import NarutoImage from '../naruto_processed.jpg';
+import NarutoImage from '../images/naruto_processed.jpg';
 import { useTheme } from '../context/ThemeContext';
 
 const Home = () => {
@@ -209,7 +209,7 @@ const Home = () => {
 
                     <ButtonContainer>
                         <OpenButton
-                            href="https://anishdhandore.github.io/Portfolio/AnishDhandoreResumeCopy.pdf"
+                            href="https://anishdhandore.github.io/Portfolio/AnishDhandoreResume-8.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             isDarkMode={isDarkMode}

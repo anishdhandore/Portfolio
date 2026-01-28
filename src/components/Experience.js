@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Swift from '../swift.jpg';
-import GDSC from '../gdsc.jpg';
-import CSUSM from '../csusm.jpg';
-import SGS from '../sgs.jpg';
+import Swift from '../images/swift.jpg';
+import GDSC from '../images/gdsc.jpg';
+import CSUSM from '../images/csusm.jpg';
+import SGS from '../images/sgs.jpg';
 import { useTheme } from '../context/ThemeContext';
 
 const Experience = () => {
