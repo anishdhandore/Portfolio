@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React, { useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import NarutoImage from '../images/naruto_processed.jpg';
+import ProfileImage from '../images/profile_icon_no_bg.png';
 import { useTheme } from '../context/ThemeContext';
 
 const Home = () => {
@@ -203,7 +203,7 @@ const Home = () => {
                     <AnimatedText>Software Engineer</AnimatedText>
                     <br />
                     <ImageContainer>
-                        <Image src={NarutoImage} alt="Naruto" />
+                        <Image src={ProfileImage} alt="Anish Dhandore" />
                         <ImageGlow isDarkMode={isDarkMode} />
                     </ImageContainer>
 
@@ -262,6 +262,10 @@ const HeroSection = styled.section`
 const HeroContent = styled.div`
     animation: ${fadeIn} 0.5s ease-out;
     margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
     h1 {
         font-size: 3.0rem;
@@ -278,24 +282,29 @@ const HeroContent = styled.div`
 const AnimatedText = styled.text`
     display: block;
     animation: ${fadeIn} 0.3s ease-out;
-    font-size: 1.5rem;
-    margin: 0.5rem 0;
+    font-size: 1.3rem;
+    margin: 0.7rem 0;
+    line-height: 1.6;
 `;
 
 const AnimatedTitle = styled.h1`
-    font-size: 4rem !important;
+    font-size: 3.5rem !important;
     background: linear-gradient(45deg, ${props => props.isDarkMode ? '#484691' : '#3498db'}, ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'});
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: ${fadeIn} 1s ease-out;
-    margin: 1rem 0;
+    margin: 1.2rem 0;
+    line-height: 1.4;
 `;
 
 const ImageContainer = styled.div`
     position: relative;
-    margin: 2rem auto;
-    width: 30%;
-    max-width: 200px;
+    margin: 2.5rem auto;
+    width: 50%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const Image = styled.img`

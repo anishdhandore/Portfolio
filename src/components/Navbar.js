@@ -53,8 +53,11 @@ const Navbar = () => {
               <DropdownItem onClick={() => scrollToSection('about')} isDarkMode={isDarkMode}>
                 <span role="img" aria-label="About">🎯</span> About
               </DropdownItem>
+              <DropdownItem onClick={() => scrollToSection('skills')} isDarkMode={isDarkMode}>
+                <span role="img" aria-label="Skills">⚡</span> Skills
+              </DropdownItem>
               <DropdownItem onClick={() => scrollToSection('experience')} isDarkMode={isDarkMode}>
-                <span role="img" aria-label="Experience">⚡</span> Experience
+                <span role="img" aria-label="Experience">💼</span> Experience
               </DropdownItem>
               <DropdownItem onClick={() => scrollToSection('portfolio')} isDarkMode={isDarkMode}>
                 <span role="img" aria-label="Projects">🎨</span> Projects
