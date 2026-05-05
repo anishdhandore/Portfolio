@@ -1,9 +1,9 @@
 {
-  "main.js": "/Portfolio/static/js/main.bb2a4cdc.chunk.js",
-  "main.js.map": "/Portfolio/static/js/main.bb2a4cdc.chunk.js.map",
-  "static/css/1.e887a6f0.chunk.css": "/Portfolio/static/css/1.e887a6f0.chunk.css",
-  "static/js/1.5128271e.chunk.js": "/Portfolio/static/js/1.5128271e.chunk.js",
-  "static/js/1.5128271e.chunk.js.map": "/Portfolio/static/js/1.5128271e.chunk.js.map",
+  "main.js": "/Portfolio/static/js/main.179763ee.chunk.js",
+  "main.js.map": "/Portfolio/static/js/main.179763ee.chunk.js.map",
+  "static/css/1.c9e34f24.chunk.css": "/Portfolio/static/css/1.c9e34f24.chunk.css",
+  "static/js/1.680b9256.chunk.js": "/Portfolio/static/js/1.680b9256.chunk.js",
+  "static/js/1.680b9256.chunk.js.map": "/Portfolio/static/js/1.680b9256.chunk.js.map",
   "runtime~main.js": "/Portfolio/static/js/runtime~main.3b961160.js",
   "runtime~main.js.map": "/Portfolio/static/js/runtime~main.3b961160.js.map",
   "static/media/profile_icon_no_bg.png": "/Portfolio/static/media/profile_icon_no_bg.80168b4b.png",
@@ -18,9 +18,9 @@
   "static/media/zombie.jpg": "/Portfolio/static/media/zombie.f8cd3252.jpg",
   "static/media/artistic.jpg": "/Portfolio/static/media/artistic.037e36b7.jpg",
   "static/media/DanceAI.png": "/Portfolio/static/media/DanceAI.f1d1df2e.png",
-  "static/media/index.css": "/Portfolio/static/media/open-sans-latin-400-normal.8655d20b.woff2",
-  "static/css/1.e887a6f0.chunk.css.map": "/Portfolio/static/css/1.e887a6f0.chunk.css.map",
+  "static/media/index.css": "/Portfolio/static/media/open-sans-cyrillic-400-normal.7e04c847.woff",
+  "static/css/1.c9e34f24.chunk.css.map": "/Portfolio/static/css/1.c9e34f24.chunk.css.map",
   "index.html": "/Portfolio/index.html",
-  "precache-manifest.91fce7c54f5b613efd2572ff3be4170d.js": "/Portfolio/precache-manifest.91fce7c54f5b613efd2572ff3be4170d.js",
+  "precache-manifest.992d9471a6926511680baa56781d2920.js": "/Portfolio/precache-manifest.992d9471a6926511680baa56781d2920.js",
   "service-worker.js": "/Portfolio/service-worker.js"
 }
