@@ -1,116 +1,97 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
 import {
-  FaCode,
-  FaServer,
-  FaDesktop,
-  FaDatabase,
-  FaCloud,
-  FaCog,
-  FaGitAlt
+  FaCode, FaServer, FaDesktop, FaDatabase, FaCloud, FaCog,
 } from 'react-icons/fa';
 import {
-  SiPython,
-  SiJavascript,
-  SiTypescript,
-  SiCplusplus,
-  SiSwift,
-  SiCsharp,
-  SiNodedotjs,
-  SiExpress,
-  SiFastapi,
-  SiFlask,
-  SiDotnet,
-  SiReact,
-  SiNextdotjs,
-  SiRedux,
-  SiTailwindcss,
-  SiPostgresql,
-  SiMysql,
-  SiMongodb,
-  SiRedis,
-  SiAmazon,
-  SiDocker,
-  SiGithubactions,
-  SiFirebase,
-  SiLinux
+  SiPython, SiJavascript, SiTypescript, SiCplusplus, SiSwift, SiCsharp,
+  SiNodedotjs, SiExpress, SiFastapi, SiFlask, SiDotnet, SiReact, SiNextdotjs,
+  SiRedux, SiTailwindcss, SiPostgresql, SiMysql, SiMongodb, SiRedis,
+  SiAmazon, SiDocker, SiGithubactions, SiFirebase, SiLinux,
 } from 'react-icons/si';
 import { useTheme } from '../context/ThemeContext';
 
-// Skill data with mastery levels (1-5 scale mapped to percentages)
 const skillCategories = {
   Languages: {
     icon: FaCode,
-    color: '#FF6B6B',
+    color: '#F87171',
     skills: [
-      { name: 'Python 3', level: 95, icon: SiPython },
-      { name: 'JavaScript (ES6+)', level: 92, icon: SiJavascript },
-      { name: 'TypeScript', level: 90, icon: SiTypescript },
-      { name: 'C++ 17/20', level: 88, icon: SiCplusplus },
-      { name: 'Java', level: 85, icon: FaCode },
-      { name: 'Swift', level: 80, icon: SiSwift },
-      { name: 'C#', level: 82, icon: SiCsharp },
-      { name: 'SQL', level: 90, icon: FaDatabase },
-      { name: 'Bash', level: 85, icon: FaCode },
-    ]
+      { name: 'Python 3',        level: 95, icon: SiPython },
+      { name: 'JavaScript',      level: 92, icon: SiJavascript },
+      { name: 'TypeScript',      level: 90, icon: SiTypescript },
+      { name: 'C++ 17/20',       level: 88, icon: SiCplusplus },
+      { name: 'Java',            level: 85, icon: FaCode },
+      { name: 'Swift',           level: 80, icon: SiSwift },
+      { name: 'C#',              level: 82, icon: SiCsharp },
+      { name: 'SQL',             level: 90, icon: FaDatabase },
+      { name: 'Bash',            level: 85, icon: FaCode },
+    ],
   },
   Backend: {
     icon: FaServer,
-    color: '#4ECDC4',
+    color: '#34D399',
     skills: [
-      { name: 'Node.js', level: 92, icon: SiNodedotjs },
-      { name: 'Express', level: 90, icon: SiExpress },
-      { name: 'FastAPI', level: 88, icon: SiFastapi },
-      { name: 'Flask', level: 85, icon: SiFlask },
-      { name: 'ASP.NET Core', level: 80, icon: SiDotnet },
-      { name: 'REST/gRPC', level: 90, icon: FaCode },
-      { name: 'WebSockets', level: 85, icon: FaCode },
-    ]
+      { name: 'Node.js',     level: 92, icon: SiNodedotjs },
+      { name: 'Express',     level: 90, icon: SiExpress },
+      { name: 'FastAPI',     level: 88, icon: SiFastapi },
+      { name: 'Flask',       level: 85, icon: SiFlask },
+      { name: 'ASP.NET',     level: 80, icon: SiDotnet },
+      { name: 'REST/gRPC',   level: 90, icon: FaCode },
+      { name: 'WebSockets',  level: 85, icon: FaCode },
+    ],
   },
   Frontend: {
     icon: FaDesktop,
-    color: '#95E1D3',
+    color: '#60A5FA',
     skills: [
-      { name: 'React', level: 95, icon: SiReact },
-      { name: 'Next.js', level: 88, icon: SiNextdotjs },
-      { name: 'Redux/RTK', level: 90, icon: SiRedux },
+      { name: 'React',       level: 95, icon: SiReact },
+      { name: 'Next.js',     level: 88, icon: SiNextdotjs },
+      { name: 'Redux/RTK',   level: 90, icon: SiRedux },
       { name: 'React Query', level: 85, icon: FaDesktop },
-      { name: 'Tailwind CSS', level: 92, icon: SiTailwindcss },
-      { name: 'Chakra UI', level: 88, icon: FaDesktop },
-    ]
+      { name: 'Tailwind',    level: 92, icon: SiTailwindcss },
+      { name: 'Chakra UI',   level: 88, icon: FaDesktop },
+    ],
   },
   Databases: {
     icon: FaDatabase,
-    color: '#FFE66D',
+    color: '#FBBF24',
     skills: [
       { name: 'PostgreSQL', level: 90, icon: SiPostgresql },
-      { name: 'MySQL', level: 88, icon: SiMysql },
-      { name: 'SQLite', level: 85, icon: FaDatabase },
-      { name: 'MongoDB', level: 87, icon: SiMongodb },
-      { name: 'Redis', level: 82, icon: SiRedis },
-    ]
+      { name: 'MySQL',      level: 88, icon: SiMysql },
+      { name: 'SQLite',     level: 85, icon: FaDatabase },
+      { name: 'MongoDB',    level: 87, icon: SiMongodb },
+      { name: 'Redis',      level: 82, icon: SiRedis },
+    ],
   },
   'Cloud/DevOps': {
     icon: FaCloud,
-    color: '#A8E6CF',
+    color: '#A78BFA',
     skills: [
-      { name: 'AWS', level: 85, icon: SiAmazon },
-      { name: 'Docker', level: 90, icon: SiDocker },
-      { name: 'GitHub Actions', level: 88, icon: SiGithubactions },
-      { name: 'Firebase', level: 85, icon: SiFirebase },
-      { name: 'Linux', level: 90, icon: SiLinux },
-      { name: 'CI/CD', level: 88, icon: SiGithubactions },
-    ]
+      { name: 'AWS',             level: 85, icon: SiAmazon },
+      { name: 'Docker',          level: 90, icon: SiDocker },
+      { name: 'GitHub Actions',  level: 88, icon: SiGithubactions },
+      { name: 'Firebase',        level: 85, icon: SiFirebase },
+      { name: 'Linux',           level: 90, icon: SiLinux },
+      { name: 'CI/CD',           level: 88, icon: SiGithubactions },
+    ],
   },
   Automation: {
     icon: FaCog,
-    color: '#FF8B94',
+    color: '#F472B6',
     skills: [
-      { name: 'Test Automation', level: 88, icon: FaCog },
+      { name: 'Test Automation',  level: 88, icon: FaCog },
       { name: 'Code Refactoring', level: 92, icon: FaCode },
-      { name: 'Log Analysis', level: 85, icon: FaCog },
-    ]
-  }
+      { name: 'Log Analysis',     level: 85, icon: FaCog },
+    ],
+  },
+};
+
+const getMastery = (level) => {
+  if (level >= 90) return { name: 'Master',       color: '#F59E0B' };
+  if (level >= 80) return { name: 'Expert',        color: '#F87171' };
+  if (level >= 70) return { name: 'Advanced',      color: '#34D399' };
+  if (level >= 60) return { name: 'Intermediate',  color: '#60A5FA' };
+  return               { name: 'Novice',         color: '#A78BFA' };
 };
 
 const Skills = () => {
@@ -124,455 +105,294 @@ const Skills = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animate all skills
-            Object.values(skillCategories).forEach((category) => {
-              category.skills.forEach((skill, index) => {
+            Object.values(skillCategories).forEach((cat) => {
+              cat.skills.forEach((skill, i) => {
                 setTimeout(() => {
-                  setAnimatedSkills((prev) => ({
-                    ...prev,
-                    [skill.name]: skill.level
-                  }));
-                }, index * 50);
+                  setAnimatedSkills(prev => ({ ...prev, [skill.name]: skill.level }));
+                }, i * 40);
               });
             });
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
   }, []);
-
-  const getMasteryLevel = (level) => {
-    if (level >= 90) return { name: 'Master', color: '#FFD700' };
-    if (level >= 80) return { name: 'Expert', color: '#FF6B6B' };
-    if (level >= 70) return { name: 'Advanced', color: '#4ECDC4' };
-    if (level >= 60) return { name: 'Intermediate', color: '#95E1D3' };
-    return { name: 'Novice', color: '#A8E6CF' };
-  };
 
   return (
     <div className="responsive-container">
       <SkillsSection id="skills" isDarkMode={isDarkMode} ref={sectionRef}>
-        <TitleContainer>
-          <SkillsTitle isDarkMode={isDarkMode}>
-            <TitleIcon>⚡</TitleIcon>
-            Skill Constellation
-          </SkillsTitle>
-          <Subtitle isDarkMode={isDarkMode}>
-            Master your tools, master your craft
-          </Subtitle>
-        </TitleContainer>
+        <SectionHeader>
+          <SectionLabel isDarkMode={isDarkMode}>Technical Arsenal</SectionLabel>
+          <SectionTitle isDarkMode={isDarkMode}>Skill Constellation</SectionTitle>
+          <SectionSub isDarkMode={isDarkMode}>Master your tools, master your craft</SectionSub>
+        </SectionHeader>
 
-        <CategoriesGrid>
-          {Object.entries(skillCategories).map(([categoryName, category], catIndex) => {
-            const CategoryIcon = category.icon;
+        <Grid>
+          {Object.entries(skillCategories).map(([catName, cat], catIdx) => {
+            const CatIcon = cat.icon;
             return (
-              <CategoryCard
-                key={categoryName}
-                isDarkMode={isDarkMode}
-                categoryColor={category.color}
-                delay={catIndex * 100}
-              >
-                <CategoryHeader>
-                  <CategoryIconWrapper categoryColor={category.color}>
-                    <CategoryIcon size={28} />
-                  </CategoryIconWrapper>
-                  <CategoryTitle isDarkMode={isDarkMode}>{categoryName}</CategoryTitle>
-                </CategoryHeader>
+              <CategoryCard key={catName} isDarkMode={isDarkMode} accentColor={cat.color} delay={catIdx * 80}>
+                <CatHeader>
+                  <CatIconWrap accentColor={cat.color}>
+                    <CatIcon size={20} color="#fff" />
+                  </CatIconWrap>
+                  <CatName isDarkMode={isDarkMode}>{catName}</CatName>
+                </CatHeader>
 
-                <SkillsGrid>
-                  {category.skills.map((skill, skillIndex) => {
+                <SkillGrid>
+                  {cat.skills.map((skill, skillIdx) => {
                     const SkillIcon = skill.icon || FaCode;
-                    const animatedLevel = animatedSkills[skill.name] || 0;
-                    const mastery = getMasteryLevel(skill.level);
-                    const isHovered = hoveredSkill === skill.name;
+                    const animated = animatedSkills[skill.name] || 0;
+                    const mastery = getMastery(skill.level);
+                    const hovered = hoveredSkill === skill.name;
 
                     return (
-                      <SkillOrb
+                      <SkillChip
                         key={skill.name}
                         isDarkMode={isDarkMode}
-                        categoryColor={category.color}
-                        masteryColor={mastery.color}
-                        level={skill.level}
-                        delay={(catIndex * 50) + (skillIndex * 30)}
-                        isHovered={isHovered}
+                        accentColor={cat.color}
+                        hovered={hovered}
+                        delay={(catIdx * 40) + (skillIdx * 25)}
                         onMouseEnter={() => setHoveredSkill(skill.name)}
                         onMouseLeave={() => setHoveredSkill(null)}
                       >
-                        <SkillIconWrapper
-                          categoryColor={category.color}
-                          masteryColor={mastery.color}
-                          isHovered={isHovered}
-                        >
-                          <SkillIcon size={18} />
-                        </SkillIconWrapper>
-                        <SkillName isDarkMode={isDarkMode}>{skill.name}</SkillName>
-                        <MasteryBadge masteryColor={mastery.color}>
-                          {mastery.name}
-                        </MasteryBadge>
-                        <LevelBar>
-                          <LevelFill
-                            style={{ width: `${animatedLevel}%` }}
-                            categoryColor={category.color}
-                            masteryColor={mastery.color}
-                          />
-                        </LevelBar>
-                        <LevelText>{animatedLevel}%</LevelText>
-                        
-                        {isHovered && (
+                        <ChipIcon accentColor={cat.color} masteryColor={mastery.color}>
+                          <SkillIcon size={16} />
+                        </ChipIcon>
+                        <ChipName isDarkMode={isDarkMode}>{skill.name}</ChipName>
+                        <MasteryTag masteryColor={mastery.color}>{mastery.name}</MasteryTag>
+                        <ChipTrack isDarkMode={isDarkMode}>
+                          <ChipFill style={{ width: `${animated}%` }} accentColor={cat.color} />
+                        </ChipTrack>
+                        <ChipPct isDarkMode={isDarkMode}>{animated}%</ChipPct>
+
+                        {hovered && (
                           <Tooltip isDarkMode={isDarkMode} masteryColor={mastery.color}>
-                            <TooltipTitle>{skill.name}</TooltipTitle>
-                            <TooltipLevel>Mastery: {mastery.name}</TooltipLevel>
-                            <TooltipProgress>Progress: {skill.level}%</TooltipProgress>
+                            <TipName>{skill.name}</TipName>
+                            <TipMastery masteryColor={mastery.color}>{mastery.name}</TipMastery>
+                            <TipPct isDarkMode={isDarkMode}>{skill.level}%</TipPct>
                           </Tooltip>
                         )}
-                      </SkillOrb>
+                      </SkillChip>
                     );
                   })}
-                </SkillsGrid>
+                </SkillGrid>
               </CategoryCard>
             );
           })}
-        </CategoriesGrid>
+        </Grid>
       </SkillsSection>
     </div>
   );
 };
 
-const float = keyframes`
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(5deg);
-  }
+const fadeUp = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 `;
 
-const pulse = keyframes`
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.9;
-  }
-`;
-
-const glow = keyframes`
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(72, 70, 145, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(72, 70, 145, 0.8);
-  }
-`;
-
-const slideInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const fillBar = keyframes`
-  from {
-    width: 0%;
-  }
-`;
-
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-`;
+const fillBar = keyframes`from { width: 0%; }`;
 
 const SkillsSection = styled.section`
-  padding: 2.5rem 2rem;
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(180deg, #040a1c 0%, #0a0f1f 100%)' 
-    : 'linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%)'};
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
+  padding: 5rem 1rem 4rem;
+  overflow: hidden;
+  background: ${props => props.isDarkMode
+    ? 'linear-gradient(180deg, #0A0814 0%, #06050A 100%)'
+    : 'linear-gradient(180deg, #F3EEFF 0%, #FDFCFF 100%)'};
   position: relative;
   z-index: 1;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 50%, ${props => props.isDarkMode ? 'rgba(72, 70, 145, 0.1)' : 'rgba(52, 152, 219, 0.05)'}, transparent 50%),
-                radial-gradient(circle at 80% 80%, ${props => props.isDarkMode ? 'rgba(72, 70, 145, 0.1)' : 'rgba(52, 152, 219, 0.05)'}, transparent 50%);
-    pointer-events: none;
-  }
-
-  @media screen and (max-width: 768px) {
-    padding: 3rem 1rem;
-  }
 `;
 
-const TitleContainer = styled.div`
+const SectionHeader = styled.div`
   text-align: center;
-  margin-bottom: 2rem;
-  position: relative;
-  z-index: 2;
+  margin-bottom: 3rem;
+  animation: ${fadeUp} 0.6s ease-out both;
 `;
 
-const TitleIcon = styled.span`
-  font-size: 2rem;
-  display: inline-block;
-  animation: ${pulse} 2s ease-in-out infinite;
-  margin-right: 0.5rem;
-`;
-
-const SkillsTitle = styled.h2`
-  font-size: 2.5rem;
-  margin: 0.5rem 0;
-  background: linear-gradient(45deg, ${props => props.isDarkMode ? '#484691' : '#3498db'}, ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'});
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+const SectionLabel = styled.div`
+  font-size: 0.78rem;
   font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  @media screen and (max-width: 768px) {
-    font-size: 2.5rem;
-  }
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: ${props => props.isDarkMode ? '#8B5CF6' : '#7C3AED'};
+  margin-bottom: 0.6rem;
 `;
 
-const Subtitle = styled.p`
-  font-size: 1rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#7f8c8d'};
-  margin-top: 0.5rem;
-  font-weight: 300;
+const SectionTitle = styled.h2`
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: ${props => props.isDarkMode ? '#F1EEFF' : '#1C1528'};
+  margin-bottom: 0.5rem;
+`;
+
+const SectionSub = styled.p`
+  font-size: 0.95rem;
+  color: ${props => props.isDarkMode ? '#9D97B8' : '#5C5470'};
   font-style: italic;
 `;
 
-const CategoriesGrid = styled.div`
+const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.1rem;
   max-width: 1400px;
   margin: 0 auto;
-  position: relative;
-  z-index: 2;
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: 580px) {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 `;
 
 const CategoryCard = styled.div`
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, rgba(36, 30, 32, 0.8) 0%, rgba(26, 20, 22, 0.8) 100%)' 
-    : 'linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(233, 236, 239, 0.9) 100%)'};
-  border-radius: 20px;
-  padding: 1.25rem;
-  border: 2px solid ${props => props.categoryColor}40;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3),
-              0 0 30px ${props => props.categoryColor}20;
+  background: ${props => props.isDarkMode
+    ? 'rgba(14,12,21,0.7)'
+    : 'rgba(255,255,255,0.8)'};
+  border: 1px solid ${props => `${props.accentColor}25`};
+  border-radius: 18px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px ${props => props.isDarkMode ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.05)'};
   opacity: 0;
-  animation: ${slideInUp} 0.6s ease-out forwards;
-  animation-delay: ${props => props.delay}ms;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: ${fadeUp} 0.5s ${props => props.delay}ms ease-out forwards;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4),
-                0 0 40px ${props => props.categoryColor}30;
+    border-color: ${props => `${props.accentColor}50`};
+    box-shadow: 0 8px 32px ${props => `${props.accentColor}15`};
   }
 `;
 
-const CategoryHeader = styled.div`
+const CatHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid ${props => props.isDarkMode ? '#484691' : '#3498db'}40;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(139,92,246,0.12);
 `;
 
-const CategoryIconWrapper = styled.div`
-  width: 40px;
-  height: 40px;
+const CatIconWrap = styled.div`
+  width: 36px;
+  height: 36px;
   border-radius: 10px;
-  background: linear-gradient(135deg, ${props => props.categoryColor}, ${props => props.categoryColor}CC);
+  background: linear-gradient(135deg, ${props => props.accentColor}, ${props => props.accentColor}99);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 5px 15px ${props => props.categoryColor}50;
-  animation: ${pulse} 3s ease-in-out infinite;
-  
-  svg {
-    font-size: 20px;
-  }
+  box-shadow: 0 4px 12px ${props => props.accentColor}40;
+  flex-shrink: 0;
 `;
 
-const CategoryTitle = styled.h3`
-  font-size: 1.2rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  font-weight: 600;
+const CatName = styled.h3`
+  font-size: 1rem;
+  font-weight: 700;
+  color: ${props => props.isDarkMode ? '#F1EEFF' : '#1C1528'};
   margin: 0;
 `;
 
-const SkillsGrid = styled.div`
+const SkillGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 0.75rem;
-
-  @media screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-  }
+  grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+  gap: 0.6rem;
 `;
 
-const SkillOrb = styled.div`
+const SkillChip = styled.div`
   position: relative;
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, rgba(26, 20, 22, 0.9) 0%, rgba(36, 30, 32, 0.9) 100%)' 
-    : 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%)'};
   border-radius: 12px;
-  padding: 0.75rem 0.5rem;
-  border: 2px solid ${props => props.categoryColor}40;
+  padding: 0.65rem 0.5rem;
+  background: ${props => props.isDarkMode
+    ? 'rgba(139,92,246,0.04)'
+    : 'rgba(124,58,237,0.03)'};
+  border: 1px solid ${props => props.hovered
+    ? `${props.accentColor}60`
+    : `${props.accentColor}20`};
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  gap: 0.3rem;
+  cursor: default;
   opacity: 0;
-  animation: ${slideInUp} 0.5s ease-out forwards;
-  animation-delay: ${props => props.delay}ms;
-  box-shadow: ${props => props.isHovered 
-    ? `0 10px 30px ${props.categoryColor}50, 0 0 20px ${props.masteryColor}40` 
-    : '0 5px 15px rgba(0, 0, 0, 0.2)'};
+  animation: ${fadeUp} 0.4s ${props => props.delay}ms ease-out forwards;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    transform: translateY(-8px) scale(1.05);
-    border-color: ${props => props.categoryColor};
-    background: ${props => props.isDarkMode 
-      ? 'linear-gradient(135deg, rgba(36, 30, 32, 1) 0%, rgba(26, 20, 22, 1) 100%)' 
-      : 'linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(248, 249, 250, 1) 100%)'};
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px ${props => `${props.accentColor}25`};
   }
 `;
 
-const SkillIconWrapper = styled.div`
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, ${props => props.categoryColor}, ${props => props.masteryColor});
+const ChipIcon = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 3px 10px ${props => props.categoryColor}50;
-  transition: all 0.3s ease;
-  animation: ${props => props.isHovered ? float : 'none'} 2s ease-in-out infinite;
+  background: linear-gradient(135deg, ${props => props.accentColor}30, ${props => props.masteryColor}20);
+  color: ${props => props.accentColor};
+  transition: transform 0.2s ease;
 
-  ${SkillOrb}:hover & {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 6px 20px ${props => props.categoryColor}70;
-  }
+  ${SkillChip}:hover & { transform: scale(1.1); }
 `;
 
-const SkillName = styled.span`
-  font-size: 0.7rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  text-align: center;
-  font-weight: 600;
-  line-height: 1.1;
-`;
-
-const MasteryBadge = styled.div`
-  font-size: 0.6rem;
-  padding: 0.15rem 0.4rem;
-  border-radius: 8px;
-  background: ${props => props.masteryColor}30;
-  color: ${props => props.masteryColor};
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
-`;
-
-const LevelBar = styled.div`
-  width: 100%;
-  height: 4px;
-  background-color: ${props => props.isDarkMode ? '#1a1416' : '#e9ecef'};
-  border-radius: 8px;
-  overflow: hidden;
-  margin-top: 0.15rem;
-`;
-
-const LevelFill = styled.div`
-  height: 100%;
-  background: linear-gradient(90deg, ${props => props.categoryColor}, ${props => props.masteryColor});
-  border-radius: 10px;
-  animation: ${fillBar} 1.5s ease-out;
-  box-shadow: 0 0 10px ${props => props.categoryColor}60;
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    animation: ${rotate} 2s linear infinite;
-  }
-`;
-
-const LevelText = styled.span`
+const ChipName = styled.span`
   font-size: 0.65rem;
-  color: ${props => props.isDarkMode ? '#7f8c8d' : '#95a5a6'};
   font-weight: 600;
+  text-align: center;
+  color: ${props => props.isDarkMode ? '#F1EEFF' : '#1C1528'};
+  line-height: 1.2;
+`;
+
+const MasteryTag = styled.div`
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.35rem;
+  border-radius: 6px;
+  background: ${props => props.masteryColor}22;
+  color: ${props => props.masteryColor};
+`;
+
+const ChipTrack = styled.div`
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  background: ${props => props.isDarkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'};
+  overflow: hidden;
+`;
+
+const ChipFill = styled.div`
+  height: 100%;
+  border-radius: 3px;
+  background: ${props => props.accentColor};
+  animation: ${fillBar} 1.2s ease-out;
+`;
+
+const ChipPct = styled.span`
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: ${props => props.isDarkMode ? '#5C5470' : '#9D97B8'};
 `;
 
 const Tooltip = styled.div`
   position: absolute;
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, #241e20 0%, #1a1416 100%)' 
-    : 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)'};
-  padding: 1rem;
-  border-radius: 12px;
-  border: 2px solid ${props => props.masteryColor};
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
-              0 0 20px ${props => props.masteryColor}40;
-  z-index: 1000;
-  min-width: 150px;
-  animation: ${slideInUp} 0.3s ease-out;
+  background: ${props => props.isDarkMode ? 'rgba(14,12,21,0.97)' : 'rgba(255,255,255,0.97)'};
+  border: 1px solid ${props => props.masteryColor}55;
+  border-radius: 10px;
+  padding: 0.75rem;
+  min-width: 130px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  z-index: 100;
   pointer-events: none;
+  animation: ${fadeUp} 0.2s ease-out;
 
   &::after {
     content: '';
@@ -580,28 +400,28 @@ const Tooltip = styled.div`
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    border: 8px solid transparent;
-    border-top-color: ${props => props.masteryColor};
+    border: 6px solid transparent;
+    border-top-color: ${props => props.masteryColor}55;
   }
 `;
 
-const TooltipTitle = styled.div`
-  font-size: 1rem;
-  font-weight: 700;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  margin-bottom: 0.5rem;
-`;
-
-const TooltipLevel = styled.div`
+const TipName = styled.div`
   font-size: 0.85rem;
-  color: ${props => props.masteryColor};
-  font-weight: 600;
+  font-weight: 700;
+  color: ${props => props.isDarkMode ? '#F1EEFF' : '#1C1528'};
   margin-bottom: 0.25rem;
 `;
 
-const TooltipProgress = styled.div`
-  font-size: 0.8rem;
-  color: ${props => props.isDarkMode ? '#7f8c8d' : '#95a5a6'};
+const TipMastery = styled.div`
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: ${props => props.masteryColor};
+  margin-bottom: 0.15rem;
+`;
+
+const TipPct = styled.div`
+  font-size: 0.7rem;
+  color: ${props => props.isDarkMode ? '#9D97B8' : '#5C5470'};
 `;
 
 export default Skills;

@@ -1,4 +1,3 @@
-// src/components/Footer.js
 import React from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../context/ThemeContext';
@@ -7,26 +6,28 @@ const Footer = () => {
   const { isDarkMode } = useTheme();
   return (
     <FooterContainer isDarkMode={isDarkMode}>
-      <CopyrightText isDarkMode={isDarkMode}>© {new Date().getFullYear()} Anish Dhandore. All rights reserved.</CopyrightText>
+      <Text isDarkMode={isDarkMode}>
+        © {new Date().getFullYear()} Anish Dhandore. All rights reserved.
+      </Text>
     </FooterContainer>
   );
 };
 
 const FooterContainer = styled.footer`
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  padding: 1.5rem 0;
+  padding: 1.75rem 2rem;
   text-align: center;
-  font-size: 0.9rem;
-  border-top: 1px solid ${props => props.isDarkMode ? '#3e4252' : '#e9ecef'};
-  background-color: ${props => props.isDarkMode ? '#040a1c' : '#ffffff'};
+  border-top: 1px solid ${props => props.isDarkMode
+    ? 'rgba(139,92,246,0.12)'
+    : 'rgba(124,58,237,0.08)'};
+  background: ${props => props.isDarkMode ? '#06050A' : '#FDFCFF'};
   transition: all 0.3s ease;
 `;
 
-const CopyrightText = styled.p`
-  margin: 0;
-  font-weight: 300;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  transition: color 0.3s ease;
+const Text = styled.p`
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: ${props => props.isDarkMode ? '#5C5470' : '#9D97B8'};
+  letter-spacing: 0.02em;
 `;
 
 export default Footer;
