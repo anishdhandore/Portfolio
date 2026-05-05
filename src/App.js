@@ -12,38 +12,32 @@ import Footer from './components/Footer';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  * {
+  *, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+  }
+
+  html {
     scroll-behavior: smooth;
   }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    background: #06050A;
   }
 
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: ${props => props.isDarkMode ? '#0a091c' : '#f5f6fa'};
-  }
-
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb {
-    background: ${props => props.isDarkMode ? '#484691' : '#3498db'};
-    border-radius: 4px;
+    background: rgba(139,92,246,0.4);
+    border-radius: 6px;
   }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.isDarkMode ? '#c4babb' : '#2980b9'};
-  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(139,92,246,0.7); }
 `;
 
 const App = () => {

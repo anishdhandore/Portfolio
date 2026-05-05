@@ -1,17 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { 
-  FaCode, 
-  FaDatabase, 
-  FaCloud, 
-  FaMobile, 
-  FaRocket, 
-  FaTrophy,
-  FaStar,
-  FaMedal,
-  FaAward,
-  FaGamepad
-} from 'react-icons/fa';
+import { FaTrophy, FaStar, FaMedal, FaAward } from 'react-icons/fa';
 import MyPhoto from '../images/me.jpg';
 import { useTheme } from '../context/ThemeContext';
 
@@ -27,14 +16,14 @@ const About = () => {
     'Cloud Architecture': 85,
     'Mobile Dev': 80,
     'Team Leadership': 88,
-    'Innovation': 92
+    'Innovation': 92,
   };
 
   const achievements = [
-    { icon: FaTrophy, name: '4 Years Experience', color: '#FFD700' },
-    { icon: FaStar, name: '20+ Projects', color: '#FF6B6B' },
-    { icon: FaMedal, name: 'Always Learning', color: '#4ECDC4' },
-    { icon: FaAward, name: 'Tech Enthusiast', color: '#95E1D3' },
+    { icon: FaTrophy, name: '4 Years Experience', color: '#F59E0B' },
+    { icon: FaStar,   name: '20+ Projects',        color: '#EF4444' },
+    { icon: FaMedal,  name: 'Always Learning',     color: '#10B981' },
+    { icon: FaAward,  name: 'Tech Enthusiast',      color: '#06B6D4' },
   ];
 
   useEffect(() => {
@@ -43,551 +32,432 @@ const About = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setAchievementsUnlocked(true);
-            // Animate stats
-            Object.keys(stats).forEach((stat, index) => {
+            Object.keys(stats).forEach((stat, i) => {
               setTimeout(() => {
-                setAnimatedStats((prev) => ({
-                  ...prev,
-                  [stat]: stats[stat]
-                }));
-              }, index * 150);
+                setAnimatedStats(prev => ({ ...prev, [stat]: stats[stat] }));
+              }, i * 120);
             });
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
   }, []);
 
   return (
     <div className="responsive-container">
       <AboutSection id="about" isDarkMode={isDarkMode} ref={sectionRef}>
-        <TitleContainer>
-          <GameIcon isDarkMode={isDarkMode}>
-            <FaGamepad />
-          </GameIcon>
-          <AboutMeTitle isDarkMode={isDarkMode}>Character Profile</AboutMeTitle>
-          <Subtitle isDarkMode={isDarkMode}>Level 42 • Software Engineer</Subtitle>
-        </TitleContainer>
+        <SectionHeader>
+          <SectionLabel isDarkMode={isDarkMode}>Character Profile</SectionLabel>
+          <SectionTitle isDarkMode={isDarkMode}>About Me</SectionTitle>
+          <SectionSub isDarkMode={isDarkMode}>Level 42 · Software Engineer</SectionSub>
+        </SectionHeader>
 
-        <GameContainer>
-          <LeftPanel isDarkMode={isDarkMode}>
-            <CharacterCard isDarkMode={isDarkMode}>
-              <CharacterImage src={MyPhoto} alt="Anish Dhandore" />
-              <CharacterName isDarkMode={isDarkMode}>Anish Dhandore</CharacterName>
-              <CharacterClass isDarkMode={isDarkMode}>Full-Stack Developer</CharacterClass>
-              <LevelBadge isDarkMode={isDarkMode}>
-                <LevelText>LVL 42</LevelText>
-                <XPBar>
-                  <XPFill style={{ width: '68%' }} isDarkMode={isDarkMode} />
-                </XPBar>
-                <XPText>68% to Next Level</XPText>
-              </LevelBadge>
-            </CharacterCard>
+        <BentoGrid>
+          {/* Character card */}
+          <CharacterCard isDarkMode={isDarkMode}>
+            <CharacterImg src={MyPhoto} alt="Anish Dhandore" />
+            <CharacterName isDarkMode={isDarkMode}>Anish Dhandore</CharacterName>
+            <CharacterRole isDarkMode={isDarkMode}>Full-Stack Developer</CharacterRole>
+            <LevelBlock isDarkMode={isDarkMode}>
+              <LevelLabel isDarkMode={isDarkMode}>LVL 42</LevelLabel>
+              <XPTrack isDarkMode={isDarkMode}>
+                <XPFill isDarkMode={isDarkMode} style={{ width: '68%' }} />
+              </XPTrack>
+              <XPCaption isDarkMode={isDarkMode}>68% to Next Level</XPCaption>
+            </LevelBlock>
+          </CharacterCard>
 
-            <AchievementsSection isDarkMode={isDarkMode}>
-              <AchievementsTitle isDarkMode={isDarkMode}>Achievements</AchievementsTitle>
-              <AchievementsGrid>
-                {achievements.map((achievement, index) => {
-                  const Icon = achievement.icon;
-                  return (
-                    <AchievementBadge
-                      key={index}
-                      isDarkMode={isDarkMode}
-                      unlocked={achievementsUnlocked}
-                      delay={index * 100}
-                    >
-                      <Icon size={24} color={achievement.color} />
-                      <AchievementName>{achievement.name}</AchievementName>
-                    </AchievementBadge>
-                  );
-                })}
-              </AchievementsGrid>
-            </AchievementsSection>
-          </LeftPanel>
+          {/* Bio */}
+          <BioCard isDarkMode={isDarkMode}>
+            <CardLabel isDarkMode={isDarkMode}>Bio</CardLabel>
+            <BioText isDarkMode={isDarkMode}>
+              <span role="img" aria-label="wave">👋</span> Hello! I'm a passionate technology developer with expertise in several areas
+              that come together to create effective and innovative solutions. My professional
+              journey has been focused on driving efficiency and excellence through technology.
+            </BioText>
+          </BioCard>
 
-          <RightPanel isDarkMode={isDarkMode}>
-            <BioCard isDarkMode={isDarkMode}>
-              <BioTitle isDarkMode={isDarkMode}>Bio</BioTitle>
-              <BioText isDarkMode={isDarkMode}>
-                👋 Hello! I am a passionate technology developer, with expertise in several areas 
-                that come together to create effective and innovative solutions. My professional 
-                journey has been focused on driving efficiency and excellence through technology.
-              </BioText>
-            </BioCard>
+          {/* Quick stats */}
+          <QuickStatsCard isDarkMode={isDarkMode}>
+            {[
+              { value: '4+',  label: 'Years' },
+              { value: '20+', label: 'Projects' },
+              { value: '24/7', label: 'Available' },
+            ].map(({ value, label }) => (
+              <StatBlock key={label}>
+                <StatNum isDarkMode={isDarkMode}>{value}</StatNum>
+                <StatLbl isDarkMode={isDarkMode}>{label}</StatLbl>
+              </StatBlock>
+            ))}
+          </QuickStatsCard>
 
-            <StatsCard isDarkMode={isDarkMode}>
-              <StatsTitle isDarkMode={isDarkMode}>Skill Stats</StatsTitle>
-              <StatsList>
-                {Object.entries(stats).map(([statName, value], index) => {
-                  const animatedValue = animatedStats[statName] || 0;
-                  return (
-                    <StatItem key={statName} isDarkMode={isDarkMode}>
-                      <StatHeader>
-                        <StatName isDarkMode={isDarkMode}>{statName}</StatName>
-                        <StatValue isDarkMode={isDarkMode}>{animatedValue}%</StatValue>
-                      </StatHeader>
-                      <StatBar isDarkMode={isDarkMode}>
-                        <StatBarFill
-                          style={{ width: `${animatedValue}%` }}
-                          isDarkMode={isDarkMode}
-                          delay={index * 100}
-                        />
-                      </StatBar>
-                    </StatItem>
-                  );
-                })}
-              </StatsList>
-            </StatsCard>
+          {/* Skill stats */}
+          <SkillStatsCard isDarkMode={isDarkMode}>
+            <CardLabel isDarkMode={isDarkMode}>Skill Stats</CardLabel>
+            <BarList>
+              {Object.entries(stats).map(([name, max], i) => {
+                const val = animatedStats[name] || 0;
+                return (
+                  <BarItem key={name}>
+                    <BarMeta>
+                      <BarName isDarkMode={isDarkMode}>{name}</BarName>
+                      <BarVal isDarkMode={isDarkMode}>{val}%</BarVal>
+                    </BarMeta>
+                    <BarTrack isDarkMode={isDarkMode}>
+                      <BarFill style={{ width: `${val}%` }} isDarkMode={isDarkMode} delay={i * 100} />
+                    </BarTrack>
+                  </BarItem>
+                );
+              })}
+            </BarList>
+          </SkillStatsCard>
 
-            <QuickStats isDarkMode={isDarkMode}>
-              <QuickStatItem isDarkMode={isDarkMode}>
-                <QuickStatValue isDarkMode={isDarkMode}>4+</QuickStatValue>
-                <QuickStatLabel>Years</QuickStatLabel>
-              </QuickStatItem>
-              <QuickStatItem isDarkMode={isDarkMode}>
-                <QuickStatValue isDarkMode={isDarkMode}>20+</QuickStatValue>
-                <QuickStatLabel>Projects</QuickStatLabel>
-              </QuickStatItem>
-              <QuickStatItem isDarkMode={isDarkMode}>
-                <QuickStatValue isDarkMode={isDarkMode}>24/7</QuickStatValue>
-                <QuickStatLabel>Available</QuickStatLabel>
-              </QuickStatItem>
-            </QuickStats>
-          </RightPanel>
-        </GameContainer>
+          {/* Achievements */}
+          <AchievCard isDarkMode={isDarkMode}>
+            <CardLabel isDarkMode={isDarkMode}>Achievements</CardLabel>
+            <AchievGrid>
+              {achievements.map(({ icon: Icon, name, color }, i) => (
+                <AchievBadge
+                  key={name}
+                  isDarkMode={isDarkMode}
+                  accentColor={color}
+                  unlocked={achievementsUnlocked}
+                  delay={i * 80}
+                >
+                  <Icon size={22} color={color} />
+                  <AchievName isDarkMode={isDarkMode}>{name}</AchievName>
+                </AchievBadge>
+              ))}
+            </AchievGrid>
+          </AchievCard>
+        </BentoGrid>
       </AboutSection>
     </div>
   );
 };
 
-const glow = keyframes`
-  0%, 100% {
-    box-shadow: 0 0 10px rgba(72, 70, 145, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(72, 70, 145, 0.8);
-  }
+const fadeUp = keyframes`
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 `;
 
-const slideInLeft = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
+const fillBar = keyframes`from { width: 0%; }`;
 
-const slideInRight = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-`;
-
-const bounceIn = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(0.3) translateY(-20px);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  70% {
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-`;
-
-const pulse = keyframes`
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-`;
-
-const fillBar = keyframes`
-  from {
-    width: 0%;
-  }
+const popIn = keyframes`
+  0%   { opacity: 0; transform: scale(0.6) translateY(10px); }
+  60%  { transform: scale(1.04); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
 `;
 
 const AboutSection = styled.section`
-  padding: 3rem 2rem;
-  background-color: ${props => props.isDarkMode ? '#040a1c' : '#ffffff'};
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  padding: 5rem 1rem 4rem;
+  background: ${props => props.isDarkMode
+    ? 'linear-gradient(180deg, #06050A 0%, #0A0814 100%)'
+    : 'linear-gradient(180deg, #FDFCFF 0%, #F3EEFF 100%)'};
   position: relative;
   z-index: 1;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @media screen and (max-width: 768px) {
-    padding: 2rem 1rem;
-  }
+  overflow: hidden;
 `;
 
-const TitleContainer = styled.div`
+const SectionHeader = styled.div`
   text-align: center;
   margin-bottom: 3rem;
-  animation: ${slideInRight} 0.6s ease-out;
+  animation: ${fadeUp} 0.6s ease-out both;
 `;
 
-const GameIcon = styled.div`
-  font-size: 3rem;
-  color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  margin-bottom: 1rem;
-  animation: ${pulse} 2s ease-in-out infinite;
+const SectionLabel = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: ${props => props.isDarkMode ? '#8B5CF6' : '#7C3AED'};
+  margin-bottom: 0.75rem;
 `;
 
-const AboutMeTitle = styled.h2`
-  font-size: 3rem;
-  margin: 0.5rem 0;
-  background: linear-gradient(45deg, ${props => props.isDarkMode ? '#484691' : '#3498db'}, ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'});
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-
-  @media screen and (max-width: 768px) {
-    font-size: 2rem;
-  }
+const SectionTitle = styled.h2`
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  color: ${props => props.isDarkMode ? '#F1EEFF' : '#1C1528'};
 `;
 
-const Subtitle = styled.p`
-  font-size: 1.2rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#7f8c8d'};
-  margin-top: 0.5rem;
-  font-weight: 300;
+const SectionSub = styled.p`
+  font-size: 1rem;
+  color: ${props => props.isDarkMode ? '#9D97B8' : '#5C5470'};
+  font-weight: 400;
 `;
 
-const GameContainer = styled.div`
+const BentoGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 2rem;
+  grid-template-columns: 260px 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.1rem;
   max-width: 1200px;
-  width: 100%;
+  margin: 0 auto;
 
-  @media screen and (max-width: 968px) {
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 580px) {
     grid-template-columns: 1fr;
-    gap: 2rem;
   }
 `;
 
-const LeftPanel = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  animation: ${slideInLeft} 0.6s ease-out;
-`;
+const glass = (isDarkMode) => `
+  background: ${isDarkMode
+    ? 'rgba(14,12,21,0.7)'
+    : 'rgba(255,255,255,0.75)'};
+  border: 1px solid ${isDarkMode
+    ? 'rgba(139,92,246,0.18)'
+    : 'rgba(124,58,237,0.12)'};
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px ${isDarkMode ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.06)'};
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-const RightPanel = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  animation: ${slideInRight} 0.6s ease-out;
+  &:hover {
+    border-color: ${isDarkMode ? 'rgba(139,92,246,0.35)' : 'rgba(124,58,237,0.25)'};
+    box-shadow: 0 8px 40px ${isDarkMode ? 'rgba(139,92,246,0.1)' : 'rgba(124,58,237,0.08)'};
+  }
 `;
 
 const CharacterCard = styled.div`
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, #241e20 0%, #1a1416 100%)' 
-    : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'};
-  border-radius: 20px;
-  padding: 2rem;
+  ${props => glass(props.isDarkMode)}
+  grid-row: 1 / 3;
+  padding: 1.75rem 1.25rem;
   text-align: center;
-  border: 2px solid ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: ${fadeUp} 0.6s 0.1s ease-out both;
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(72, 70, 145, 0.4);
-  }
+  @media (max-width: 1024px) { grid-row: auto; }
+  @media (max-width: 580px)  { padding: 1.5rem 1rem; }
 `;
 
-const CharacterImage = styled.img`
-  width: 150px;
-  height: 150px;
+const pulse = keyframes`
+  0%, 100% { box-shadow: 0 0 0 0 rgba(139,92,246,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(139,92,246,0); }
+`;
+
+const CharacterImg = styled.img`
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid ${props => props.isDarkMode ? '#484691' : '#3498db'};
+  border: 3px solid rgba(139,92,246,0.5);
   margin-bottom: 1rem;
   animation: ${pulse} 3s ease-in-out infinite;
 `;
 
 const CharacterName = styled.h3`
-  font-size: 1.5rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  margin: 0.5rem 0;
-  font-weight: 600;
-`;
-
-const CharacterClass = styled.p`
-  font-size: 1rem;
-  color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-`;
-
-const LevelBadge = styled.div`
-  margin-top: 1rem;
-`;
-
-const LevelText = styled.div`
   font-size: 1.2rem;
   font-weight: 700;
-  color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
+  color: ${props => props.isDarkMode ? '#F1EEFF' : '#1C1528'};
+  margin-bottom: 0.3rem;
+`;
+
+const CharacterRole = styled.p`
+  font-size: 0.85rem;
+  color: ${props => props.isDarkMode ? '#8B5CF6' : '#7C3AED'};
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+`;
+
+const LevelBlock = styled.div`
+  width: 100%;
+  text-align: left;
+`;
+
+const LevelLabel = styled.div`
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: ${props => props.isDarkMode ? '#8B5CF6' : '#7C3AED'};
   margin-bottom: 0.5rem;
 `;
 
-const XPBar = styled.div`
+const XPTrack = styled.div`
   width: 100%;
-  height: 12px;
-  background-color: ${props => props.isDarkMode ? '#1a1416' : '#e9ecef'};
-  border-radius: 10px;
+  height: 8px;
+  border-radius: 8px;
+  background: ${props => props.isDarkMode ? 'rgba(139,92,246,0.15)' : 'rgba(124,58,237,0.1)'};
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
+`;
+
+const shimmer = keyframes`
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
 `;
 
 const XPFill = styled.div`
   height: 100%;
-  background: linear-gradient(90deg, ${props => props.isDarkMode ? '#484691' : '#3498db'}, ${props => props.isDarkMode ? '#5a56b3' : '#2980b9'});
-  border-radius: 10px;
-  animation: ${fillBar} 1.5s ease-out;
-  box-shadow: 0 0 10px ${props => props.isDarkMode ? 'rgba(72, 70, 145, 0.6)' : 'rgba(52, 152, 219, 0.6)'};
-`;
-
-const XPText = styled.div`
-  font-size: 0.85rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#7f8c8d'};
-`;
-
-const AchievementsSection = styled.div`
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, #241e20 0%, #1a1416 100%)' 
-    : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'};
-  border-radius: 20px;
-  padding: 1.5rem;
-  border: 2px solid ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-`;
-
-const AchievementsTitle = styled.h3`
-  font-size: 1.3rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  margin-bottom: 1rem;
-  text-align: center;
-  font-weight: 600;
-`;
-
-const AchievementsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-`;
-
-const AchievementBadge = styled.div`
-  background: ${props => props.isDarkMode ? '#1a1416' : '#ffffff'};
-  border-radius: 12px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  border: 2px solid ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  opacity: ${props => props.unlocked ? 1 : 0};
-  transform: ${props => props.unlocked ? 'scale(1)' : 'scale(0.5)'};
-  animation: ${props => props.unlocked ? bounceIn : 'none'} 0.6s ease-out;
-  animation-delay: ${props => props.delay}ms;
-  animation-fill-mode: both;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-const AchievementName = styled.span`
-  font-size: 0.85rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  text-align: center;
-  font-weight: 500;
-`;
-
-const BioCard = styled.div`
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, #241e20 0%, #1a1416 100%)' 
-    : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'};
-  border-radius: 20px;
-  padding: 2rem;
-  border: 2px solid ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-`;
-
-const BioTitle = styled.h3`
-  font-size: 1.5rem;
-  color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  margin-bottom: 1rem;
-  font-weight: 600;
-`;
-
-const BioText = styled.p`
-  font-size: 1rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  line-height: 1.8;
-  margin: 0;
-`;
-
-const StatsCard = styled.div`
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, #241e20 0%, #1a1416 100%)' 
-    : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'};
-  border-radius: 20px;
-  padding: 2rem;
-  border: 2px solid ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-`;
-
-const StatsTitle = styled.h3`
-  font-size: 1.5rem;
-  color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-`;
-
-const StatsList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`;
-
-const StatItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const StatHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const StatName = styled.span`
-  font-size: 1rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#2c3e50'};
-  font-weight: 500;
-`;
-
-const StatValue = styled.span`
-  font-size: 1rem;
-  color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  font-weight: 700;
-`;
-
-const StatBar = styled.div`
-  width: 100%;
-  height: 16px;
-  background-color: ${props => props.isDarkMode ? '#1a1416' : '#e9ecef'};
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-`;
-
-const StatBarFill = styled.div`
-  height: 100%;
-  background: linear-gradient(90deg, ${props => props.isDarkMode ? '#484691' : '#3498db'}, ${props => props.isDarkMode ? '#5a56b3' : '#2980b9'});
-  border-radius: 10px;
-  animation: ${fillBar} 1.5s ease-out;
-  animation-delay: ${props => props.delay}ms;
-  animation-fill-mode: both;
-  box-shadow: 0 0 10px ${props => props.isDarkMode ? 'rgba(72, 70, 145, 0.6)' : 'rgba(52, 152, 219, 0.6)'};
+  border-radius: 8px;
+  background: linear-gradient(90deg, #7C3AED, #8B5CF6, #A78BFA);
   position: relative;
   overflow: hidden;
+  animation: ${fillBar} 1.5s ease-out;
 
   &::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
-    animation: shimmer 2s infinite;
+    top: 0; left: 0; bottom: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: ${shimmer} 2s 1.5s ease-in-out infinite;
   }
 `;
 
-const shimmer = keyframes`
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+const XPCaption = styled.div`
+  font-size: 0.75rem;
+  color: ${props => props.isDarkMode ? '#9D97B8' : '#5C5470'};
 `;
 
-const QuickStats = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+const BioCard = styled.div`
+  ${props => glass(props.isDarkMode)}
+  padding: 1.75rem;
+  animation: ${fadeUp} 0.6s 0.15s ease-out both;
 `;
 
-const QuickStatItem = styled.div`
-  background: ${props => props.isDarkMode 
-    ? 'linear-gradient(135deg, #241e20 0%, #1a1416 100%)' 
-    : 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'};
-  border-radius: 15px;
+const CardLabel = styled.div`
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: ${props => props.isDarkMode ? '#8B5CF6' : '#7C3AED'};
+  margin-bottom: 1rem;
+`;
+
+const BioText = styled.p`
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: ${props => props.isDarkMode ? '#9D97B8' : '#5C5470'};
+`;
+
+const QuickStatsCard = styled.div`
+  ${props => glass(props.isDarkMode)}
   padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1rem;
+  animation: ${fadeUp} 0.6s 0.2s ease-out both;
+`;
+
+const StatBlock = styled.div`
   text-align: center;
-  border: 2px solid ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+`;
+
+const StatNum = styled.div`
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: ${props => props.isDarkMode ? '#8B5CF6' : '#7C3AED'};
+`;
+
+const StatLbl = styled.div`
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: ${props => props.isDarkMode ? '#9D97B8' : '#5C5470'};
+  margin-top: 0.25rem;
+`;
+
+const SkillStatsCard = styled.div`
+  ${props => glass(props.isDarkMode)}
+  padding: 1.75rem;
+  animation: ${fadeUp} 0.6s 0.25s ease-out both;
+`;
+
+const BarList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+`;
+
+const BarItem = styled.div``;
+
+const BarMeta = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+`;
+
+const BarName = styled.span`
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: ${props => props.isDarkMode ? '#F1EEFF' : '#1C1528'};
+`;
+
+const BarVal = styled.span`
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: ${props => props.isDarkMode ? '#8B5CF6' : '#7C3AED'};
+`;
+
+const BarTrack = styled.div`
+  width: 100%;
+  height: 6px;
+  border-radius: 6px;
+  background: ${props => props.isDarkMode ? 'rgba(139,92,246,0.12)' : 'rgba(124,58,237,0.08)'};
+  overflow: hidden;
+`;
+
+const BarFill = styled.div`
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #7C3AED, #A78BFA);
+  animation: ${fillBar} 1.2s ${props => props.delay}ms ease-out both;
+`;
+
+const AchievCard = styled.div`
+  ${props => glass(props.isDarkMode)}
+  padding: 1.75rem;
+  animation: ${fadeUp} 0.6s 0.3s ease-out both;
+`;
+
+const AchievGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+`;
+
+const AchievBadge = styled.div`
+  padding: 1rem;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: ${props => props.isDarkMode ? 'rgba(139,92,246,0.06)' : 'rgba(124,58,237,0.04)'};
+  border: 1px solid ${props => `${props.accentColor}28`};
+  cursor: default;
+  opacity: ${props => props.unlocked ? 1 : 0};
+  animation: ${props => props.unlocked ? popIn : 'none'} 0.5s ${props => props.delay}ms ease-out both;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
+    border-color: ${props => `${props.accentColor}55`};
   }
 `;
 
-const QuickStatValue = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  color: ${props => props.isDarkMode ? '#484691' : '#3498db'};
-  margin-bottom: 0.5rem;
-`;
-
-const QuickStatLabel = styled.div`
-  font-size: 0.9rem;
-  color: ${props => props.isDarkMode ? '#c4babb' : '#7f8c8d'};
-  font-weight: 500;
+const AchievName = styled.span`
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: ${props => props.isDarkMode ? '#9D97B8' : '#5C5470'};
+  line-height: 1.3;
 `;
 
 export default About;
