@@ -69,7 +69,11 @@ const Home = () => {
           let currentText = '';
           for (let i = 0; i < line.length; i++) {
             currentText += line[i];
-            const matchedKeyword = this.example.keywords.find(k => currentText.endsWith(k));
+
+            let matchedKeyword = null;
+            for (const k of this.example.keywords) {
+              if (currentText.endsWith(k)) { matchedKeyword = k; break; }
+            }
             if (matchedKeyword) {
               ctx.fillStyle = isDarkMode ? '#9D97B8' : '#5C5470';
               ctx.fillText(currentText.slice(0, -matchedKeyword.length), x, index * lineHeight);
@@ -79,7 +83,11 @@ const Home = () => {
               x += ctx.measureText(matchedKeyword).width;
               currentText = '';
             }
-            const matchedString = this.example.strings.find(s => currentText.endsWith(s));
+
+            let matchedString = null;
+            for (const s of this.example.strings) {
+              if (currentText.endsWith(s)) { matchedString = s; break; }
+            }
             if (matchedString) {
               ctx.fillStyle = isDarkMode ? '#9D97B8' : '#5C5470';
               ctx.fillText(currentText.slice(0, -matchedString.length), x, index * lineHeight);
