@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(kill 29734)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(git status *)",
+      "Bash(git stash *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
