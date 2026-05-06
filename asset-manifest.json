@@ -18,9 +18,9 @@
   "static/media/zombie.jpg": "/static/media/zombie.f8cd3252.jpg",
   "static/media/artistic.jpg": "/static/media/artistic.037e36b7.jpg",
   "static/media/DanceAI.png": "/static/media/DanceAI.f1d1df2e.png",
-  "static/media/index.css": "/static/media/open-sans-greek-400-normal.cbca61f2.woff2",
+  "static/media/index.css": "/static/media/open-sans-latin-400-normal.e922d016.woff",
   "static/css/1.b71fc1c0.chunk.css.map": "/static/css/1.b71fc1c0.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.8b252b37c99fe666acd31b0ec4fa9566.js": "/precache-manifest.8b252b37c99fe666acd31b0ec4fa9566.js",
+  "precache-manifest.d734b3bd939f028abe481c5f324a38bd.js": "/precache-manifest.d734b3bd939f028abe481c5f324a38bd.js",
   "service-worker.js": "/service-worker.js"
 }
