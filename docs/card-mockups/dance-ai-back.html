@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Dance AI — Models</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 800px; overflow: hidden; }
+  body { font-family: Inter, system-ui, sans-serif; color: #ECEAF6;
+    background: radial-gradient(800px 500px at 20% 0%, rgba(124,92,255,0.22), transparent 60%), #09080F; padding: 28px 32px; display: flex; flex-direction: column; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
+  .crumb { font-size: 13px; color: #77738F; margin-bottom: 8px; }
+  h1 { font-family: 'Space Grotesk'; font-size: 34px; letter-spacing: -0.03em; }
+  .pill { padding: 8px 14px; border-radius: 99px; font-size: 13px; background: rgba(61,255,168,0.1); color: #7CFFC4; border: 1px solid rgba(61,255,168,0.3); }
+  .grid { flex: 1; display: grid; grid-template-columns: 1.35fr 1fr; gap: 18px; }
+  .grid > .card { display: flex; flex-direction: column; }
+  .card { border-radius: 20px; padding: 22px; background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); }
+  .card h2 { font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; margin-bottom: 4px; }
+  .card h2 small { color: #77738F; font-weight: 500; }
+  .sub { font-size: 13px; color: #8D89A3; margin-bottom: 18px; }
+  .big { display: flex; align-items: baseline; gap: 10px; margin-bottom: 18px; }
+  .big b { font-family: 'Space Grotesk'; font-size: 64px; letter-spacing: -0.04em; background: linear-gradient(90deg, #B7A3FF, #FF8CC8); -webkit-background-clip: text; color: transparent; }
+  .big span { color: #8D89A3; font-size: 14px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stat { border-radius: 14px; padding: 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); }
+  .stat small { font-size: 11px; color: #77738F; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .stat b { display: block; font-family: 'Space Grotesk'; font-size: 24px; margin-top: 6px; }
+  .chart { margin-top: 18px; flex: 1; min-height: 160px; position: relative; border-radius: 14px; background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.05); overflow: hidden; }
+  .chart svg { position: absolute; inset: 0; }
+  .labels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .lab { border-radius: 12px; padding: 12px; font-size: 13px; background: rgba(255,255,255,0.035); display: flex; align-items: center; gap: 10px; }
+  .lab i { width: 10px; height: 10px; border-radius: 50%; }
+  .side { display: flex; flex-direction: column; gap: 18px; }
+  .row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px; }
+  .row:last-child { border: 0; }
+  .row span { color: #8D89A3; }
+  .row b { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .hub { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 14px; background: rgba(255,210,30,0.08); border: 1px solid rgba(255,210,30,0.22); font-size: 13px; color: #FFE38A; }
+  .hub b { font-size: 20px; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div>
+      <p class="crumb">Models / Emotion</p>
+      <h1>Emotion classifier</h1>
+    </div>
+    <span class="pill">● Deployed · loaded from Hugging Face</span>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>RoBERTa · multi-label <small>roberta-base · 125M params</small></h2>
+      <p class="sub">Fine-tuned on GoEmotions, grouped into 6 macro emotions</p>
+      <div class="big"><b>86.6%</b><span>overall accuracy</span></div>
+      <div class="stats">
+        <div class="stat"><small>Hamming loss</small><b>0.134</b></div>
+        <div class="stat"><small>Jaccard</small><b>0.498</b></div>
+        <div class="stat"><small>Throughput</small><b>486/s</b></div>
+      </div>
+      <div class="chart">
+        <svg viewBox="0 0 640 160" preserveAspectRatio="none">
+          <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9B7BFF" stop-opacity="0.45"/><stop offset="1" stop-color="#9B7BFF" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0 130 C80 120 120 96 180 84 C250 70 300 56 360 48 C430 40 500 34 640 30 L640 160 L0 160 Z" fill="url(#g)"/>
+          <path d="M0 130 C80 120 120 96 180 84 C250 70 300 56 360 48 C430 40 500 34 640 30" fill="none" stroke="#B7A3FF" stroke-width="2.5"/>
+          <path d="M0 40 C90 58 160 80 240 96 C320 110 420 118 640 124" fill="none" stroke="#FF8CC8" stroke-width="2" stroke-dasharray="5 6" opacity="0.8"/>
+        </svg>
+      </div>
+    </section>
+
+    <aside class="side">
+      <section class="card">
+        <h2>Emotions</h2>
+        <p class="sub">Six macro categories the dancer responds to</p>
+        <div class="labels">
+          <div class="lab"><i style="background:#FF7CC0"></i>Joy</div>
+          <div class="lab"><i style="background:#FFB347"></i>Surprise</div>
+          <div class="lab"><i style="background:#FF5C7A"></i>Love</div>
+          <div class="lab"><i style="background:#5CC8FF"></i>Calm</div>
+          <div class="lab"><i style="background:#7C8CFF"></i>Sadness</div>
+          <div class="lab"><i style="background:#FF6A3D"></i>Anger</div>
+        </div>
+      </section>
+      <section class="card">
+        <h2>SVR · intensity <small>scikit-learn</small></h2>
+        <div class="row"><span>Mean absolute error</span><b>0.155</b></div>
+        <div class="row"><span>RMSE</span><b>0.192</b></div>
+        <div class="row"><span>Pearson r</span><b>0.477</b></div>
+      </section>
+      <section class="card">
+        <h2>Training <small>~1.5 h total</small></h2>
+        <div class="row"><span>Per epoch</span><b>~65 s</b></div>
+        <div class="row"><span>Samples / sec</span><b>~486</b></div>
+      </section>
+      <div class="hub"><b>🤗</b>anishdhandore/RoBERTa_text_classification</div>
+    </aside>
+  </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Matchday — Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 800px; overflow: hidden; }
+  body { font-family: Inter, system-ui, sans-serif; color: #E9F0EA; background: #070B09; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; }
+  .crumb { font-size: 13px; color: #8C9A90; margin-bottom: 6px; }
+  h1 { font-family: 'Barlow Condensed'; font-size: 42px; text-transform: uppercase; line-height: 1; }
+  .run { padding: 10px 16px; border-radius: 10px; background: #C6F432; color: #070B09; font-weight: 700; font-size: 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 18px; }
+  .card { border-radius: 18px; padding: 22px; background: #0D1410; border: 1px solid rgba(255,255,255,0.07); }
+  .card h2 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: #B9C6BC; }
+  .metric { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .metric:last-child { border: 0; }
+  .metric span { color: #8C9A90; font-size: 14px; }
+  .metric b { font-family: 'Barlow Condensed'; font-size: 34px; letter-spacing: 0.01em; }
+  .split { display: flex; height: 12px; border-radius: 99px; overflow: hidden; margin: 6px 0 10px; }
+  .split i:first-child { flex: 35; background: #C6F432; }
+  .split i:last-child { flex: 9; background: rgba(198,244,50,0.3); }
+  .legend { display: flex; justify-content: space-between; font-size: 12px; color: #8C9A90; }
+  pre { font-family: 'JetBrains Mono', monospace; font-size: 13.5px; line-height: 1.75; color: #C9D6CC; background: #080D0A; border-radius: 14px; padding: 18px 20px; border: 1px solid rgba(255,255,255,0.05); }
+  .k { color: #C6F432; } .s { color: #FFB86B; } .c { color: #5E6E63; } .f { color: #7CD3FF; }
+  .out { margin-top: 14px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #8C9A90; display: flex; gap: 18px; }
+  .out b { color: #E6FF8E; font-weight: 500; }
+  .qs { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .q { border-radius: 18px; padding: 22px; background: linear-gradient(135deg, rgba(198,244,50,0.12), rgba(198,244,50,0.02)); border: 1px solid rgba(198,244,50,0.2); display: flex; flex-direction: column; justify-content: space-between; }
+  .q small { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #C6F432; font-weight: 700; }
+  .q p { font-family: 'Barlow Condensed'; font-size: 30px; line-height: 1.1; text-transform: uppercase; }
+  .q span { font-size: 13px; color: #8C9A90; }
+  .feat { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .feat span { padding: 7px 12px; border-radius: 99px; font-size: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div><p class="crumb">Model / Regression</p><h1>Predicting future form</h1></div>
+    <span class="run">▶ Run model</span>
+  </div>
+  <div class="grid">
+    <section class="card">
+      <h2>Linear regression · test set</h2>
+      <div class="metric"><span>Mean absolute error</span><b>31.97</b></div>
+      <div class="metric"><span>Root mean squared error</span><b>39.72</b></div>
+      <div style="margin-top:18px">
+        <p style="font-size:13px;color:#B9C6BC;margin-bottom:4px">Train / test split</p>
+        <div class="split"><i></i><i></i></div>
+        <div class="legend"><span>35 clubs train</span><span>9 clubs test</span></div>
+      </div>
+      <div class="feat"><span>Cities</span><span>Matches won</span><span>Matches lost</span><span>Win ratio</span></div>
+    </section>
+    <section class="card">
+      <h2>train.py</h2>
+<pre><span class="k">from</span> sklearn.linear_model <span class="k">import</span> LinearRegression
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+
+X_train, X_test, y_train, y_test = <span class="f">train_test_split</span>(
+    X, y, test_size=<span class="s">9</span>, random_state=<span class="s">42</span>)
+
+lm = <span class="f">LinearRegression</span>().<span class="f">fit</span>(X_train, y_train)
+predictions = lm.<span class="f">predict</span>(X_test)
+
+<span class="c"># split each club's history in half and</span>
+<span class="c"># measure who improved the most</span>
+improvement = second_half - first_half</pre>
+      <div class="out"><span>MAE <b>31.97</b></span><span>RMSE <b>39.72</b></span><span>n = <b>44</b></span></div>
+    </section>
+  </div>
+  <div class="qs">
+    <div class="q"><small>Exploratory question</small><p>Which clubs have been the best, and the worst, so far?</p><span>Answered with matches won, lost and win ratio</span></div>
+    <div class="q"><small>Predictive question</small><p>Which clubs will improve the most next?</p><span>Answered by comparing each club’s first and second half</span></div>
+  </div>
+</body>
+</html>

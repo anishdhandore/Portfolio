@@ -1,0 +1,41 @@
+:root {
+  --color-paper: #ffffff;
+  --color-ink: #141414;
+  --color-ink-muted: #8c8c8c; /* large text only (3.4:1) */
+  --color-ink-soft: #666666; /* small text (5.7:1) */
+  --color-surface: #f3f3f3;
+  --color-surface-strong: #e9e9e9;
+  --color-live: #1f9d55;
+
+  /* Floating navbar (dark pill) */
+  --nav-bg: rgba(14, 14, 16, 0.92);
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --nav-ink: #f4f4f2;
+  --nav-ink-muted: rgba(244, 244, 242, 0.62);
+  --nav-cta-fill: #f4f4f2;
+  --nav-cta-hover: #d6d6d2;
+  --nav-cta-ink: #0e0e10;
+  --nav-offset: 16px;
+  --nav-height: 60px;
+
+
+  --font-display: 'Inter Tight Variable', 'Inter Tight', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Inter', system-ui, sans-serif;
+
+  --text-sm: 0.9375rem;
+  --text-base: 1rem;
+  --text-lead: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --text-hero: clamp(2.5rem, 1.3rem + 4.2vw, 5rem);
+
+  --space-gutter: clamp(1rem, 0.4rem + 3vw, 4rem);
+  --space-section: clamp(3rem, 2rem + 5vw, 7rem);
+  --content-max: 75rem;
+
+  --radius-card: 28px;
+  --radius-control: 10px;
+  --radius-pill: 999px;
+
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}

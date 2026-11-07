@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"><link rel="stylesheet" href="_mobile.css">
+<style>
+body { color: #F2EFE9; background: #1F2023; position: relative; }
+.map { position: absolute; inset: 0; }
+.status { position: relative; z-index: 2; }
+.pin { position: absolute; transform: translate(-50%,-100%); z-index: 1; }
+.pin i { display: block; width: 16px; height: 16px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: #9C988F; border: 3px solid #1F2023; }
+.pin.on i { width: 24px; height: 24px; background: #E9B872; box-shadow: 0 0 0 8px rgba(233,184,114,.2); }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 12px 16px 34px; border-radius: 28px 28px 0 0; background: #1F2023; box-shadow: 0 -20px 40px rgba(0,0,0,.4); }
+.grab { width: 40px; height: 5px; border-radius: 99px; background: #46474D; margin: 0 auto 14px; }
+.sheet h2 { font: 700 26px 'Playfair Display'; }
+.sheet .sub { font-size: 13px; color: #9C988F; margin-top: 2px; }
+.item { display: grid; grid-template-columns: 54px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #333439; }
+.item:last-child { border: 0; }
+.thumb { width: 54px; height: 54px; border-radius: 14px; }
+.item b { font: 700 16px 'Playfair Display'; display: block; }
+.item small { font-size: 12px; color: #9C988F; }
+.item em { font-style: normal; font-size: 13px; color: #E9B872; }
+.home-bar { background: #F2EFE9; z-index: 3; }
+</style></head><body>
+<svg class="map" viewBox="0 0 390 844" preserveAspectRatio="xMidYMid slice"><rect width="390" height="844" fill="#26282C"/><path d="M0 520 C120 500 220 560 390 520 L390 844 L0 844 Z" fill="#1C2A33"/><g stroke="#34363B" stroke-width="9" fill="none"><path d="M0 160 L390 120"/><path d="M0 300 L390 270"/><path d="M90 0 L120 600"/><path d="M260 0 L290 600"/></g><path d="M-10 220 C120 200 220 340 400 300" stroke="#3D3F45" stroke-width="18" fill="none"/><rect x="30" y="330" width="90" height="60" rx="12" fill="#24352B"/></svg>
+<div class="status"><span>9:41</span><i></i></div>
+<span class="pin on" style="left:230px;top:250px"><i></i></span><span class="pin" style="left:120px;top:190px"><i></i></span><span class="pin" style="left:70px;top:360px"><i></i></span><span class="pin" style="left:320px;top:420px"><i></i></span>
+<div class="sheet"><div class="grab"></div><h2>Museums nearby</h2><p class="sub">San Francisco · sorted by distance</p>
+<div class="item"><span class="thumb" style="background:url(photos/museum-visitors.jpg) center/cover"></span><div><b>SFMOMA</b><small>151 Third St</small></div><em>1.2 km</em></div>
+<div class="item"><span class="thumb" style="background:url(photos/gallery-white.jpg) center/cover"></span><div><b>Asian Art Museum</b><small>200 Larkin St</small></div><em>2.1 km</em></div>
+<div class="item"><span class="thumb" style="background:url(photos/frames-wall.jpg) center/cover"></span><div><b>de Young Museum</b><small>Golden Gate Park</small></div><em>5.8 km</em></div>
+</div>
+<div class="home-bar"></div>
+</body></html>

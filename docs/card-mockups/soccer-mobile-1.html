@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="_mobile.css">
+<style>
+body { color: #E9F0EA; background: #070B09; position: relative; }
+.pad { padding: 6px 20px; }
+.brand { display: flex; gap: 8px; align-items: center; font-weight: 800; font-size: 17px; }
+.ball { width: 24px; height: 24px; border-radius: 50%; background: #C6F432; }
+h1 { font: 700 40px/0.95 'Barlow Condensed'; text-transform: uppercase; margin-top: 18px; }
+.sub { font-size: 13px; color: #8C9A90; margin-top: 8px; }
+.hero { margin: 16px 16px 0; padding: 18px; border-radius: 22px; background: linear-gradient(140deg, rgba(198,244,50,.2), rgba(198,244,50,.03)); border: 1px solid rgba(198,244,50,.3); }
+.hero small { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #C6F432; font-weight: 700; }
+.club { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.crest { width: 44px; height: 44px; border-radius: 14px; background: #1F4BD1; }
+.club b { font: 700 28px 'Barlow Condensed'; text-transform: uppercase; display: block; }
+.club span { font-size: 12px; color: #8C9A90; }
+.ratio { margin-left: auto; text-align: right; font: 700 34px 'Barlow Condensed'; color: #E6FF8E; }
+.ratio small { display: block; font: 600 11px Inter; color: #8C9A90; letter-spacing: 0; text-transform: none; }
+.list { margin: 14px 16px 0; border-radius: 22px; background: #0D1410; border: 1px solid rgba(255,255,255,.07); padding: 6px 16px; }
+.tr { display: grid; grid-template-columns: 22px 1fr auto; align-items: center; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: 15px; }
+.tr:last-child { border: 0; }
+.tr span:first-child { color: #8C9A90; }
+.tr b { font-variant-numeric: tabular-nums; }
+.dot { display: inline-block; width: 14px; height: 14px; border-radius: 5px; margin-right: 10px; vertical-align: -2px; }
+.tabs { position: absolute; left: 16px; right: 16px; bottom: 26px; height: 62px; border-radius: 22px; background: #0D1410; border: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-around; align-items: center; font-size: 11px; color: #8C9A90; }
+.tabs span.on { color: #C6F432; font-weight: 700; }
+.home-bar { background: #E9F0EA; }
+</style></head><body>
+<div class="status"><span>9:41</span><i></i></div>
+<div class="pad"><div class="brand"><span class="ball"></span>Matchday</div>
+<h1>Who dominates<br>next?</h1><p class="sub">Win ratios for every club since 2000</p></div>
+<div class="hero"><small>Top of the table</small><div class="club"><span class="crest"></span><div><b>Chelsea</b><span>411 wins · 268 losses</span></div><div class="ratio">1.53<small>win ratio</small></div></div></div>
+<div class="list">
+<div class="tr"><span>2</span><span><i class="dot" style="background:#D11F2B"></i>Liverpool</span><b>1.42</b></div>
+<div class="tr"><span>3</span><span><i class="dot" style="background:#E8E8E8"></i>Leeds</span><b>1.05</b></div>
+<div class="tr"><span>4</span><span><i class="dot" style="background:#2D5BD1"></i>Leicester</span><b>0.91</b></div>
+<div class="tr"><span>5</span><span><i class="dot" style="background:#C81E3A"></i>Charlton</span><b>0.85</b></div>
+<div class="tr"><span>6</span><span><i class="dot" style="background:#58B7E8"></i>Coventry</span><b>0.67</b></div>
+</div>
+<div class="tabs"><span class="on">Table</span><span>Clubs</span><span>Forecast</span><span>Model</span></div>
+<div class="home-bar"></div>
+</body></html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SafeSpace — History</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 800px; overflow: hidden; }
+  body { font-family: Inter, system-ui, sans-serif; color: #0B1B26; background: #F5FBFD; padding: 34px 48px; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 26px; }
+  h1 { font-size: 38px; letter-spacing: -0.04em; font-weight: 800; }
+  .sub { font-size: 14px; color: #557082; margin-top: 6px; }
+  .filters { display: flex; gap: 8px; }
+  .filters span { padding: 8px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; background: #fff; border: 1px solid #DDEFF5; color: #557082; }
+  .filters span.on { background: #0B1B26; color: #fff; border-color: #0B1B26; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 18px; }
+  .kpi { border-radius: 18px; padding: 18px 20px; background: #fff; border: 1px solid #DDEFF5; }
+  .kpi small { font-size: 12px; color: #8AA3B1; font-weight: 600; }
+  .kpi b { display: block; font-size: 30px; letter-spacing: -0.03em; margin-top: 4px; }
+  .list { border-radius: 20px; background: #fff; border: 1px solid #DDEFF5; overflow: hidden; }
+  .row { display: grid; grid-template-columns: 1fr 160px 150px; align-items: center; padding: 16px 22px; border-bottom: 1px solid #EEF6F9; font-size: 15px; }
+  .row:last-child { border: 0; }
+  .row.head2 { font-size: 12px; color: #8AA3B1; font-weight: 600; background: #FAFDFE; }
+  .site { display: flex; align-items: center; gap: 12px; font-weight: 500; }
+  .fav { width: 30px; height: 30px; border-radius: 9px; background: #E6F6FB; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: #2A8FB0; }
+  .ok, .bad { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 99px; font-size: 13px; font-weight: 600; }
+  .ok { background: #E3F8EE; color: #138A51; }
+  .bad { background: #FDECEC; color: #C93636; }
+  .count { color: #557082; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <div><h1>Scan history</h1><p class="sub">Every page checked, cached for instant results</p></div>
+    <div class="filters"><span class="on">All</span><span>Safe</span><span>Flagged</span></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><small>Pages scanned</small><b>5</b></div>
+    <div class="kpi"><small>Safe for kids</small><b>3</b></div>
+    <div class="kpi"><small>Flagged</small><b>2</b></div>
+  </div>
+  <div class="list">
+    <div class="row head2"><span>Page</span><span>Status</span><span>Flagged words</span></div>
+    <div class="row"><span class="site"><i class="fav">N</i>kids.nationalgeographic.com</span><span><span class="ok">● Safe</span></span><span class="count">0</span></div>
+    <div class="row"><span class="site"><i class="fav">O</i>ourartistic.space</span><span><span class="ok">● Safe</span></span><span class="count">0</span></div>
+    <div class="row"><span class="site"><i class="fav">N</i>nasa.gov/kids</span><span><span class="ok">● Safe</span></span><span class="count">0</span></div>
+    <div class="row"><span class="site"><i class="fav">G</i>genius.com/…family-reunion-lyrics</span><span><span class="bad">● Flagged</span></span><span class="count">50</span></div>
+    <div class="row"><span class="site"><i class="fav">R</i>reddit.com/r/…</span><span><span class="bad">● Flagged</span></span><span class="count">7</span></div>
+  </div>
+</body>
+</html>

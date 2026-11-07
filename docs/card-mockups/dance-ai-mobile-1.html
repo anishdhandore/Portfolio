@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="_mobile.css">
+<style>
+body { color: #ECEAF6; background: radial-gradient(400px 400px at 80% 10%, rgba(124,92,255,.3), transparent 60%), #09080F; position: relative; }
+.top { display: flex; justify-content: space-between; align-items: center; padding: 10px 22px; }
+.brand { display: flex; gap: 8px; align-items: center; font: 700 18px 'Space Grotesk'; }
+.logo { width: 26px; height: 26px; border-radius: 8px; background: linear-gradient(135deg,#8B6CFF,#FF5CA8); display: grid; place-items: center; }
+.logo span { width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.av { width: 32px; height: 32px; border-radius: 50%; background: #1E1A2E; border: 1px solid rgba(255,255,255,.1); }
+.stage { margin: 8px 16px 0; height: 400px; border-radius: 26px; position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.08);
+  background: radial-gradient(260px 240px at 50% 15%, rgba(178,150,255,.4), transparent 70%), linear-gradient(180deg,#15121F,#07060B); }
+.cone { position: absolute; left: 50%; top: -20px; width: 300px; height: 420px; transform: translateX(-50%); background: linear-gradient(180deg, rgba(200,180,255,.22), transparent); clip-path: polygon(44% 0,56% 0,100% 100%,0 100%); }
+.floor { position: absolute; left: -20%; right: -20%; bottom: -40px; height: 180px; transform: perspective(300px) rotateX(62deg); background-image: linear-gradient(rgba(160,140,255,.25) 1px, transparent 1px), linear-gradient(90deg, rgba(160,140,255,.25) 1px, transparent 1px); background-size: 30px 30px; mask-image: radial-gradient(closest-side,#000 40%,transparent); }
+.dancer { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); }
+.tag { position: absolute; left: 14px; top: 14px; padding: 6px 10px; border-radius: 8px; font-size: 12px; background: rgba(0,0,0,.45); border: 1px solid rgba(255,124,192,.4); color: #FFB4DA; }
+.sheet { margin: 14px 16px 0; padding: 16px; border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)); border: 1px solid rgba(255,255,255,.08); }
+.sheet small { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #77738F; font-weight: 600; }
+.prompt { margin-top: 10px; background: #fff; color: #15121F; border-radius: 16px; padding: 14px; font-size: 15px; font-weight: 500; }
+.row { display: flex; gap: 8px; margin-top: 12px; }
+.chip { flex: 1; padding: 10px; border-radius: 14px; background: rgba(255,255,255,.05); font-size: 11px; color: #77738F; }
+.chip b { display: block; font: 700 18px 'Space Grotesk'; color: #ECEAF6; margin-top: 2px; }
+.btn { margin: 14px 16px 0; padding: 16px; border-radius: 18px; text-align: center; font-weight: 600; background: linear-gradient(135deg,#7C5CFF,#C153FF); box-shadow: 0 12px 30px rgba(124,92,255,.45); }
+.home-bar { background: #fff; }
+</style></head><body>
+<div class="status"><span>9:41</span><i></i></div>
+<div class="top"><div class="brand"><span class="logo"><span></span></span>Dance AI</div><span class="av"></span></div>
+<div class="stage"><div class="cone"></div><div class="floor"></div>
+<svg class="dancer" width="190" height="280" viewBox="0 0 300 430"><defs><linearGradient id="s" gradientUnits="userSpaceOnUse" x1="60" y1="40" x2="260" y2="200"><stop offset="0" stop-color="#F4EEFF"/><stop offset="1" stop-color="#A996E8"/></linearGradient><linearGradient id="u" gradientUnits="userSpaceOnUse" x1="0" y1="130" x2="0" y2="410"><stop offset="0" stop-color="#8B6CFF"/><stop offset="1" stop-color="#4B2FB8"/></linearGradient></defs>
+<g stroke-linecap="round" fill="none"><path d="M138 250 L112 330 L92 410" stroke="url(#u)" stroke-width="30"/><path d="M162 250 L196 322 L236 384" stroke="url(#u)" stroke-width="30"/><path d="M150 140 L150 250" stroke="url(#u)" stroke-width="58"/><path d="M128 148 L86 104 L64 44" stroke="url(#s)" stroke-width="22"/><path d="M172 150 L222 176 L262 140" stroke="url(#s)" stroke-width="22"/></g><circle cx="150" cy="96" r="28" fill="url(#s)"/></svg>
+<span class="tag">● Joy · 0.86</span></div>
+<div class="sheet"><small>Your prompt</small><div class="prompt">I just got the job!</div>
+<div class="row"><div class="chip">Intensity<b>0.75</b></div><div class="chip">Style<b>Upbeat</b></div><div class="chip">Tempo<b>124</b></div></div></div>
+<div class="btn">Generate dance</div>
+<div class="home-bar"></div>
+</body></html>

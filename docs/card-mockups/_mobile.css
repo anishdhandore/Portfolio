@@ -1,0 +1,8 @@
+/* shared base for the 390×844 mobile screens */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 390px; height: 844px; overflow: hidden; }
+body { font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.status { height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 14px 28px 0; font-size: 15px; font-weight: 600; }
+.status i { display: inline-block; width: 26px; height: 12px; border-radius: 3px; border: 1.5px solid currentColor; opacity: 0.9; position: relative; }
+.status i::after { content: ''; position: absolute; inset: 1.5px; right: 5px; border-radius: 1.5px; background: currentColor; }
+.home-bar { position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; border-radius: 99px; transform: translateX(-50%); }

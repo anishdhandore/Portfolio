@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="_mobile.css">
+<style>
+body { color: #1A1608; background: #FFF9E8; position: relative; }
+.top { display: flex; justify-content: space-between; align-items: center; padding: 8px 20px; }
+.brand { display: flex; gap: 8px; align-items: center; font: 700 18px Fraunces; }
+.paw { width: 30px; height: 30px; border-radius: 9px; background: #1A1608; display: grid; place-items: center; }
+.av { width: 32px; height: 32px; border-radius: 50%; background: #F5B800; display: grid; place-items: center; font-weight: 700; font-size: 14px; }
+h1 { font: 700 34px/1.02 Fraunces; letter-spacing: -.02em; padding: 14px 20px 0; }
+.search { margin: 16px 16px 0; display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 16px; padding: 14px 16px; box-shadow: 0 10px 28px rgba(90,70,0,.14); font-size: 15px; color: #A39A75; }
+.breed { margin: 16px 16px 0; border-radius: 24px; overflow: hidden; background: #F5B800; }
+.photo { height: 230px; background: url(photos/golden-retriever.jpg) center 40%/cover; }
+.info { padding: 16px; }
+.info h2 { font: 700 24px Fraunces; }
+.info p { font-size: 13px; color: #3D3613; margin-top: 2px; }
+.traits { display: flex; gap: 8px; margin-top: 12px; }
+.traits div { flex: 1; border-radius: 12px; background: rgba(255,255,255,.55); padding: 9px; font-size: 11px; color: #5A5233; }
+.traits b { display: block; font-size: 14px; color: #1A1608; }
+.tabs { position: absolute; left: 16px; right: 16px; bottom: 26px; height: 62px; border-radius: 22px; background: #1A1608; display: flex; justify-content: space-around; align-items: center; font-size: 11px; color: #CFC6A0; }
+.tabs span.on { color: #F5B800; font-weight: 700; }
+.home-bar { background: #1A1608; }
+</style></head><body>
+<div class="status"><span>9:41</span><i></i></div>
+<div class="top"><div class="brand"><span class="paw"><svg width="16" height="16" viewBox="0 0 24 24" fill="#F5B800"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><ellipse cx="6" cy="10" rx="2.2" ry="2.8"/><ellipse cx="10" cy="6.5" rx="2.2" ry="2.8"/><ellipse cx="14" cy="6.5" rx="2.2" ry="2.8"/><ellipse cx="18" cy="10" rx="2.2" ry="2.8"/></svg></span>Preserving Paws</div><span class="av">A</span></div>
+<h1>Every dog deserves someone to love.</h1>
+<div class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A39A75" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Search any breed</div>
+<div class="breed"><div class="photo"></div><div class="info"><h2>Golden Retriever</h2><p>Friendly, intelligent and devoted</p>
+<div class="traits"><div>Size<b>Large</b></div><div>Energy<b>High</b></div><div>Lifespan<b>10–12y</b></div></div></div></div>
+<div class="tabs"><span class="on">Dogopedia</span><span>Adopt</span><span>Help</span><span>Profile</span></div>
+<div class="home-bar"></div>
+</body></html>

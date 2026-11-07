@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Dance AI — Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 800px; overflow: hidden; }
+  body {
+    font-family: Inter, system-ui, sans-serif;
+    color: #ECEAF6;
+    background:
+      radial-gradient(900px 500px at 78% 30%, rgba(124, 92, 255, 0.22), transparent 60%),
+      radial-gradient(700px 400px at 10% 100%, rgba(255, 92, 168, 0.12), transparent 60%),
+      #09080F;
+  }
+  .app { display: grid; grid-template-columns: 420px 1fr; gap: 20px; height: 100%; padding: 22px; }
+  .topbar { position: absolute; left: 22px; right: 22px; top: 18px; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; letter-spacing: -0.02em; }
+  .logo { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, #8B6CFF, #FF5CA8); display: grid; place-items: center; }
+  .logo span { width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: 0 0 12px #fff; }
+  .nav { display: flex; gap: 6px; padding: 5px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.07); }
+  .nav a { padding: 7px 14px; border-radius: 8px; font-size: 13px; color: #9C98B8; text-decoration: none; font-weight: 500; }
+  .nav a.on { background: rgba(255,255,255,0.09); color: #fff; }
+  .live { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #9C98B8; }
+  .live i { width: 8px; height: 8px; border-radius: 50%; background: #3DFFA8; box-shadow: 0 0 10px #3DFFA8; }
+
+  .panel {
+    margin-top: 58px; border-radius: 22px; padding: 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.025));
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  h1 { font-family: 'Space Grotesk'; font-size: 30px; line-height: 1.05; letter-spacing: -0.03em; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, #A48BFF, #FF7CC0); -webkit-background-clip: text; color: transparent; }
+  .label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #77738F; font-weight: 600; }
+  .prompt { border-radius: 16px; background: #fff; color: #15121F; padding: 16px 16px 12px; box-shadow: 0 10px 40px rgba(124,92,255,0.25); }
+  .prompt p { font-size: 17px; font-weight: 500; line-height: 1.35; }
+  .prompt p b { display: inline-block; width: 2px; height: 20px; background: #7C5CFF; vertical-align: -4px; margin-left: 2px; }
+  .prompt .row { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+  .prompt .hint { font-size: 12px; color: #8D89A3; }
+  .btn { padding: 10px 18px; border-radius: 11px; font-weight: 600; font-size: 14px; color: #fff; background: linear-gradient(135deg, #7C5CFF, #C153FF); box-shadow: 0 8px 22px rgba(124,92,255,0.45); }
+  .emotions { display: flex; flex-direction: column; gap: 10px; }
+  .emo { display: grid; grid-template-columns: 92px 1fr 40px; align-items: center; gap: 10px; font-size: 13px; color: #B9B5D2; }
+  .bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,0.07); overflow: hidden; }
+  .bar i { display: block; height: 100%; border-radius: inherit; background: rgba(255,255,255,0.22); }
+  .emo.top { color: #fff; font-weight: 600; }
+  .emo.top .bar i { background: linear-gradient(90deg, #7C5CFF, #FF7CC0); box-shadow: 0 0 14px rgba(255,124,192,0.6); }
+  .emo span:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  .chips { display: flex; gap: 8px; }
+  .chip { flex: 1; border-radius: 14px; padding: 12px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); }
+  .chip b { display: block; font-family: 'Space Grotesk'; font-size: 22px; letter-spacing: -0.02em; margin-top: 4px; }
+  .chip small { color: #77738F; font-size: 11px; }
+
+  .recent { display: flex; flex-direction: column; gap: 8px; }
+  .recent div { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 12px; background: rgba(255,255,255,0.03); font-size: 13px; }
+  .recent i { width: 28px; height: 28px; border-radius: 8px; }
+  .recent small { color: #77738F; font-size: 12px; }
+  .stage {
+    position: relative; margin-top: 58px; border-radius: 22px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background:
+      radial-gradient(420px 380px at 50% 18%, rgba(178,150,255,0.35), transparent 70%),
+      linear-gradient(180deg, #14111F 0%, #0C0A14 60%, #07060B 100%);
+  }
+  .cone { position: absolute; left: 50%; top: -40px; width: 520px; height: 640px; transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(200,180,255,0.20), rgba(200,180,255,0)); clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%); filter: blur(4px); }
+  .floor { position: absolute; left: -10%; right: -10%; bottom: -60px; height: 300px; transform: perspective(500px) rotateX(62deg);
+    background-image: linear-gradient(rgba(160,140,255,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(160,140,255,0.22) 1px, transparent 1px);
+    background-size: 46px 46px; mask-image: radial-gradient(closest-side, #000 40%, transparent); }
+  .spot { position: absolute; left: 50%; bottom: 92px; width: 300px; height: 56px; transform: translateX(-50%); border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(190,170,255,0.55), transparent); }
+  .dancer { position: absolute; left: 50%; bottom: 110px; transform: translateX(-50%); }
+  .hud { position: absolute; left: 20px; top: 18px; display: flex; gap: 8px; }
+  .tag { padding: 6px 10px; border-radius: 8px; font-size: 12px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); color: #D9D5F0; backdrop-filter: blur(8px); }
+  .tag.joy { color: #FFB4DA; border-color: rgba(255,124,192,0.4); }
+  .cam { position: absolute; right: 20px; top: 18px; display: flex; gap: 6px; }
+  .cam span { width: 30px; height: 30px; border-radius: 9px; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
+  .timeline { position: absolute; left: 20px; right: 20px; bottom: 18px; height: 58px; border-radius: 14px; padding: 10px 14px;
+    background: rgba(10,8,18,0.7); border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(10px); display: flex; align-items: center; gap: 14px; }
+  .play { width: 34px; height: 34px; border-radius: 50%; background: #fff; display: grid; place-items: center; flex-shrink: 0; }
+  .play::after { content: ''; border-left: 11px solid #120F1C; border-top: 7px solid transparent; border-bottom: 7px solid transparent; margin-left: 3px; }
+  .wave { flex: 1; height: 34px; display: flex; align-items: center; gap: 3px; }
+  .wave i { flex: 1; border-radius: 2px; background: rgba(255,255,255,0.18); }
+  .wave i.on { background: linear-gradient(180deg, #FF7CC0, #7C5CFF); }
+  .time { font-size: 12px; color: #9C98B8; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand"><div class="logo"><span></span></div>Dance AI</div>
+    <nav class="nav"><a class="on">Studio</a><a>Library</a><a>Models</a></nav>
+    <div class="live"><i></i>Model online · RoBERTa</div>
+  </div>
+
+  <main class="app">
+    <section class="panel">
+      <h1>Turn a feeling<br /><em>into a dance.</em></h1>
+      <div>
+        <p class="label" style="margin-bottom:8px">Your prompt</p>
+        <div class="prompt">
+          <p>I just got the job and I can’t stop smiling!<b></b></p>
+          <div class="row"><span class="hint">Emotion is detected as you type</span><span class="btn">Generate dance</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom:12px">Emotion analysis</p>
+        <div class="emotions">
+          <div class="emo top"><span>Joy</span><div class="bar"><i style="width:86%"></i></div><span>0.86</span></div>
+          <div class="emo"><span>Surprise</span><div class="bar"><i style="width:41%"></i></div><span>0.41</span></div>
+          <div class="emo"><span>Love</span><div class="bar"><i style="width:28%"></i></div><span>0.28</span></div>
+          <div class="emo"><span>Calm</span><div class="bar"><i style="width:12%"></i></div><span>0.12</span></div>
+          <div class="emo"><span>Sadness</span><div class="bar"><i style="width:4%"></i></div><span>0.04</span></div>
+        </div>
+      </div>
+      <div class="chips">
+        <div class="chip"><small>Intensity</small><b>0.75</b></div>
+        <div class="chip"><small>Style</small><b>Upbeat</b></div>
+        <div class="chip"><small>Tempo</small><b>124 bpm</b></div>
+      </div>
+      <div>
+        <p class="label" style="margin-bottom:10px">Recent dances</p>
+        <div class="recent">
+          <div><i style="background:linear-gradient(135deg,#7C5CFF,#FF7CC0)"></i><span>“Best day ever”</span><small>Joy</small></div>
+          <div><i style="background:linear-gradient(135deg,#3D6BFF,#47D7FF)"></i><span>“Rainy Sunday mood”</span><small>Calm</small></div>
+          <div><i style="background:linear-gradient(135deg,#FF8A3D,#FF3D6B)"></i><span>“We won the finals!”</span><small>Surprise</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage">
+      <div class="cone"></div>
+      <div class="floor"></div>
+      <div class="spot"></div>
+      <svg class="dancer" width="300" height="430" viewBox="0 0 300 430">
+        <defs>
+          <linearGradient id="skin" gradientUnits="userSpaceOnUse" x1="60" y1="40" x2="260" y2="200"><stop offset="0" stop-color="#F4EEFF"/><stop offset="1" stop-color="#A996E8"/></linearGradient>
+          <linearGradient id="suit" gradientUnits="userSpaceOnUse" x1="0" y1="130" x2="0" y2="410"><stop offset="0" stop-color="#8B6CFF"/><stop offset="1" stop-color="#4B2FB8"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <g stroke-linecap="round" fill="none" filter="url(#glow)">
+          <!-- legs -->
+          <path d="M138 250 L112 330 L92 410" stroke="url(#suit)" stroke-width="30"/>
+          <path d="M162 250 L196 322 L236 384" stroke="url(#suit)" stroke-width="30"/>
+          <!-- torso -->
+          <path d="M150 140 L150 250" stroke="url(#suit)" stroke-width="58"/>
+          <!-- arms -->
+          <path d="M128 148 L86 104 L64 44" stroke="url(#skin)" stroke-width="22"/>
+          <path d="M172 150 L222 176 L262 140" stroke="url(#skin)" stroke-width="22"/>
+        </g>
+        <circle cx="150" cy="96" r="28" fill="url(#skin)" filter="url(#glow)"/>
+        <ellipse cx="90" cy="414" rx="22" ry="8" fill="#0D0A18"/>
+        <ellipse cx="240" cy="388" rx="22" ry="8" fill="#0D0A18"/>
+        <!-- motion trails -->
+        <path d="M56 70 Q40 40 64 18" stroke="#FF7CC0" stroke-width="3" fill="none" opacity="0.6"/>
+        <path d="M276 128 Q296 150 282 178" stroke="#A48BFF" stroke-width="3" fill="none" opacity="0.6"/>
+      </svg>
+      <div class="hud"><span class="tag joy">● Joy · 0.86</span><span class="tag">Character: Boss</span></div>
+      <div class="cam"><span></span><span></span><span></span></div>
+      <div class="timeline">
+        <div class="play"></div>
+        <div class="wave" id="wave"></div>
+        <span class="time">0:07 / 0:16</span>
+      </div>
+    </section>
+  </main>
+  <script>
+    const wave = document.getElementById('wave');
+    const heights = [8,14,22,30,18,12,26,34,20,10,16,28,32,24,14,8,12,22,30,26,18,10,14,24,32,28,16,10,8,18,26,20];
+    heights.forEach((h, i) => { const b = document.createElement('i'); b.style.height = h + 'px'; if (i < 15) b.className = 'on'; wave.appendChild(b); });
+  </script>
+</body>
+</html>

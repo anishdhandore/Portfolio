@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="_mobile.css">
+<style>
+body { color: #ECEAF6; background: radial-gradient(400px 400px at 10% 0%, rgba(124,92,255,.25), transparent 60%), #09080F; position: relative; }
+.pad { padding: 8px 22px; }
+h1 { font: 700 30px/1.05 'Space Grotesk'; letter-spacing: -.03em; margin-top: 10px; }
+h1 em { font-style: normal; background: linear-gradient(90deg,#A48BFF,#FF7CC0); -webkit-background-clip: text; color: transparent; }
+.sub { font-size: 14px; color: #8D89A3; margin-top: 8px; }
+.card { margin: 18px 16px 0; padding: 18px; border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03)); border: 1px solid rgba(255,255,255,.08); }
+.card small { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #77738F; font-weight: 600; }
+.emo { display: grid; grid-template-columns: 78px 1fr 36px; align-items: center; gap: 10px; font-size: 14px; color: #B9B5D2; margin-top: 14px; }
+.bar { height: 8px; border-radius: 99px; background: rgba(255,255,255,.07); overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: inherit; background: rgba(255,255,255,.22); }
+.emo.top { color: #fff; font-weight: 600; } .emo.top .bar i { background: linear-gradient(90deg,#7C5CFF,#FF7CC0); }
+.emo span:last-child { text-align: right; }
+.gauge { display: flex; align-items: center; gap: 16px; margin-top: 14px; }
+.ring { width: 86px; height: 86px; border-radius: 50%; background: conic-gradient(#FF7CC0 0 75%, rgba(255,255,255,.08) 75%); display: grid; place-items: center; }
+.ring span { width: 66px; height: 66px; border-radius: 50%; background: #121019; display: grid; place-items: center; font: 700 20px 'Space Grotesk'; }
+.gauge p { font-size: 13px; color: #8D89A3; line-height: 1.45; }
+.gauge p b { color: #fff; display: block; font-size: 15px; }
+.tabs { position: absolute; left: 16px; right: 16px; bottom: 26px; height: 64px; border-radius: 22px; background: rgba(20,17,31,.9); border: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-around; align-items: center; }
+.tabs span { width: 22px; height: 22px; border-radius: 7px; border: 2px solid #5E5A75; }
+.tabs span.on { border-color: #B7A3FF; background: rgba(183,163,255,.2); }
+.home-bar { background: #fff; }
+</style></head><body>
+<div class="status"><span>9:41</span><i></i></div>
+<div class="pad"><h1>How you<br><em>feel, decoded.</em></h1><p class="sub">“I just got the job!” · analysed by RoBERTa</p></div>
+<div class="card"><small>Emotion analysis</small>
+<div class="emo top"><span>Joy</span><div class="bar"><i style="width:86%"></i></div><span>0.86</span></div>
+<div class="emo"><span>Surprise</span><div class="bar"><i style="width:41%"></i></div><span>0.41</span></div>
+<div class="emo"><span>Love</span><div class="bar"><i style="width:28%"></i></div><span>0.28</span></div>
+<div class="emo"><span>Calm</span><div class="bar"><i style="width:12%"></i></div><span>0.12</span></div></div>
+<div class="card"><small>Intensity</small><div class="gauge"><div class="ring"><span>0.75</span></div><p><b>Strong</b>The dancer moves faster and bigger as intensity rises.</p></div></div>
+<div class="tabs"><span class="on"></span><span></span><span></span><span></span></div>
+<div class="home-bar"></div>
+</body></html>

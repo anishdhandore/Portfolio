@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Our Artistic Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 800px; overflow: hidden; }
+  body { font-family: Inter, system-ui, sans-serif; color: #F2EFE9; background: #1F2023; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 48px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: 'Playfair Display'; font-size: 22px; font-weight: 700; }
+  .links { display: flex; gap: 30px; font-size: 14px; color: #9C988F; }
+  .links .on { color: #F2EFE9; }
+  .hero { padding: 18px 48px 0; display: flex; align-items: flex-end; justify-content: space-between; }
+  h1 { font-family: 'Playfair Display'; font-size: 60px; line-height: 1; letter-spacing: -0.02em; }
+  h1 em { color: #E9B872; }
+  .count { font-size: 14px; color: #9C988F; text-align: right; }
+  .count b { display: block; font-family: 'Playfair Display'; font-size: 34px; color: #F2EFE9; }
+  .bar { margin: 24px 48px 0; display: flex; gap: 12px; align-items: center; }
+  .city { flex: 0 0 360px; display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 14px; background: #2B2C30; border: 1px solid #3A3B40; font-size: 15px; }
+  .city small { color: #9C988F; }
+  .chips { display: flex; gap: 8px; }
+  .chip { padding: 12px 16px; border-radius: 99px; font-size: 14px; border: 1px solid #3A3B40; color: #C9C5BC; }
+  .chip.on { background: #E9B872; color: #1F2023; border-color: #E9B872; font-weight: 600; }
+  .grid { margin: 24px 48px 0; display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; }
+  .place { border-radius: 20px; overflow: hidden; background: #2B2C30; border: 1px solid #36373C; }
+  .art { height: 330px; position: relative; }
+  .place:not(:first-child) .art { height: 268px; }
+  .art span { position: absolute; left: 14px; top: 14px; padding: 6px 10px; border-radius: 99px; background: rgba(31,32,35,0.75); font-size: 12px; backdrop-filter: blur(6px); }
+  .meta { padding: 16px 18px 18px; }
+  .meta h3 { font-family: 'Playfair Display'; font-size: 22px; }
+  .meta p { font-size: 13px; color: #9C988F; margin-top: 4px; }
+  .meta .row { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+  .go { padding: 9px 14px; border-radius: 10px; background: #F2EFE9; color: #1F2023; font-size: 13px; font-weight: 600; }
+  .dist { font-size: 13px; color: #C9C5BC; }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="brand"><svg width="44" height="22" viewBox="0 0 44 22" fill="#F2EFE9"><rect x="2" y="9" width="6" height="11"/><rect x="10" y="3" width="6" height="17"/><rect x="18" y="11" width="8" height="9"/><rect x="28" y="1" width="5" height="19"/><rect x="35" y="8" width="7" height="12"/><rect x="0" y="20" width="44" height="2"/></svg>Our Artistic Space</div>
+    <div class="links"><span>Home</span><span class="on">Search</span><span>Events</span><span>About</span></div>
+  </nav>
+  <section class="hero">
+    <h1>Find your<br /><em>art community.</em></h1>
+    <p class="count"><b>24 places</b>near San Francisco</p>
+  </section>
+  <div class="bar">
+    <div class="city"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E9B872" stroke-width="2.2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>San Francisco, CA <small>· 10 km</small></div>
+    <div class="chips"><span class="chip on">Museums</span><span class="chip">Galleries</span><span class="chip">Art schools</span><span class="chip">Supply stores</span></div>
+  </div>
+  <section class="grid">
+    <article class="place">
+      <div class="art" style="background:url(photos/museum-visitors.jpg) center/cover"><span>Modern art</span></div>
+      <div class="meta"><h3>SFMOMA</h3><p>151 Third St · (415) 357-4000</p><div class="row"><span class="dist">1.2 km away</span><span class="go">Take me there →</span></div></div>
+    </article>
+    <article class="place">
+      <div class="art" style="background:url(photos/frames-wall.jpg) center/cover"><span>Fine art</span></div>
+      <div class="meta"><h3>de Young Museum</h3><p>50 Hagiwara Tea Garden Dr</p><div class="row"><span class="dist">5.8 km</span><span class="go">Directions</span></div></div>
+    </article>
+    <article class="place">
+      <div class="art" style="background:url(photos/gallery-white.jpg) center/cover"><span>Asian art</span></div>
+      <div class="meta"><h3>Asian Art Museum</h3><p>200 Larkin St</p><div class="row"><span class="dist">2.1 km</span><span class="go">Directions</span></div></div>
+    </article>
+  </section>
+</body>
+</html>
