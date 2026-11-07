@@ -777,12 +777,12 @@ Error generating stack: `+e.message+`
   ${({$isFlipped:e})=>e?`display: none;`:`left: 5%; top: 4%;`}
 `,Ly=F.span`
   font-family: ${Oy};
-  font-size: calc(var(--card-width) * 0.085);
+  font-size: max(calc(var(--card-width) * 0.085), 12px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
 `,Ry=F.span`
-  font-size: calc(var(--card-width) * 0.065);
+  font-size: max(calc(var(--card-width) * 0.065), 10px);
   line-height: 1;
 `,zy=F.span`
   position: absolute;
@@ -793,7 +793,7 @@ Error generating stack: `+e.message+`
   border-radius: 999px;
   background: ${Sy};
   color: #ffffff;
-  font-size: calc(var(--card-width) * 0.042);
+  font-size: max(calc(var(--card-width) * 0.042), 8px);
   font-weight: 600;
   letter-spacing: 0.01em;
   box-shadow: 0 4px 12px rgba(179, 19, 43, 0.45);
@@ -813,7 +813,8 @@ Error generating stack: `+e.message+`
   background: linear-gradient(180deg, rgba(40, 40, 46, 0.96), rgba(16, 16, 18, 0.97));
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 10px 24px rgba(0, 0, 0, 0.35);
-  font-size: calc(var(--card-width) * 0.048);
+  /* floor keeps names readable on small phone cards */
+  font-size: max(calc(var(--card-width) * 0.048), 9.5px);
   transition: background-color 0.5s ease;
 
 
@@ -829,6 +830,11 @@ Error generating stack: `+e.message+`
   color: rgba(244, 244, 242, 0.6);
   font-size: 0.9em;
   font-variant-numeric: tabular-nums;
+
+  /* phone cards are small; the name gets the room (the year is on the case study) */
+  @media (max-width: 639px) {
+    display: none;
+  }
 `,Uy=F.div`
   grid-column: 1 / -1;
   display: grid;
@@ -884,18 +890,18 @@ Error generating stack: `+e.message+`
   opacity: ${({$isOn:e})=>e?.5:0};
   transition: opacity 0.35s ease;
   pointer-events: none;
-`,Xy=6,Zy=.09,Qy=16,$y=.45,eb=({count:e,stageWidth:t,cardWidth:n,cardHeight:r})=>{let i=n*1.08;if(i*(e-1)+n<=t){let t=(e-1)/2;return Array.from({length:e},(e,n)=>{let a=t===0?0:(n-t)/t;return{x:(n-t)*i,y:a*a*r*Zy,rotate:a*Xy}})}let a=Math.ceil(e/2),o=a*r+(a-1)*Qy;return Array.from({length:e},(t,i)=>{let a=Math.floor(i/2),s=i===e-1&&e%2==1,c=i%2==0?-1:1;return{x:s?0:c*(n/2+Qy/2),y:a*(r+Qy)-o/2+r/2,rotate:0}})},tb=(e,t)=>({x:e*7%5-2,y:(e-(t-1))*2.5,rotate:e*13%7-3}),nb=(e,t,[n,r])=>{let i=r-n,a=i*$y,o=n+e*(t>1?(i-a)/(t-1):0);return{start:o,end:o+a}},rb=70,ib=6,ab={stiffness:220,damping:20},ob={type:`spring`,stiffness:320,damping:26},sb=1.08,cb=26,lb=e=>Math.min(1,Math.max(0,e)),ub=e=>e<.5?4*e*e*e:1-(-2*e+2)**3/2,db=(e,t,n)=>e+(t-e)*n,fb=e=>{let t=Oh(.5),n=Oh(.5),r=Mh(Q(n,[0,1],[ib,-6]),ab),i=Mh(Q(t,[0,1],[-6,ib]),ab);return(0,y.useEffect)(()=>{e||(t.set(.5),n.set(.5))},[e,t,n]),{rotateX:r,rotateY:i,onPointerMove:r=>{if(!e||r.pointerType!==`mouse`)return;let i=r.currentTarget.getBoundingClientRect();t.set((r.clientX-i.left)/i.width),n.set((r.clientY-i.top)/i.height)}}},pb=({project:e,index:t,count:n,progress:r,spot:i,dealRange:a,isDealt:o,pick:s,side:c,onPick:l})=>{let u=`card-${(0,y.useId)().replace(/[^a-zA-Z0-9]/g,``)}`,{start:d,end:f}=nb(t,n,a),p=tb(t,n),m=s===`picked`,h=Oh(+!!m);(0,y.useEffect)(()=>h.set(+!!m),[m,h]);let g=Q(r,e=>ub(lb((e-d)/(f-d)))),_=Q(g,e=>db(p.x,i.x,e)),v=Q(g,e=>db(p.y,i.y,e)-Math.sin(Math.PI*e)*rb),x=Q(g,e=>db(p.rotate,i.rotate,e)-Math.sin(Math.PI*e)*6),S=Q(g,e=>1+Math.sin(Math.PI*e)*.08),C=Q(g,[0,.25,.8,1],[180,180,0,0]),w=Q([g,h],([e,r])=>e<=0?n-t:e<1?100+t:r?60:10+t),T=Q([Q(g,e=>.55+Math.sin(Math.PI*e)*.25),Q([g,h],([e,t])=>t?60:18+Math.sin(Math.PI*e)*30)],([e,t])=>`0 ${(t/2).toFixed(1)}px ${t.toFixed(1)}px -8px rgba(0, 0, 0, ${e.toFixed(3)})`),E=fb(m),ee=o?{onPointerEnter:e=>e.pointerType===`mouse`&&l(t),onPointerLeave:e=>e.pointerType===`mouse`&&l(null),onFocus:()=>l(t),onBlur:()=>l(null)}:{};return(0,b.jsx)(mb,{style:{x:_,y:v,rotate:x,scale:S,zIndex:w},children:(0,b.jsxs)(hb,{animate:{rotate:m?-i.rotate:0,y:m?-34:0,x:s===`other`?c*cb:0,scale:m?sb:1},transition:ob,...ee,children:[(0,b.jsx)(_b,{style:{rotateX:E.rotateX,rotateY:E.rotateY},onPointerMove:E.onPointerMove,children:(0,b.jsxs)(vb,{style:{rotateY:C,boxShadow:T},children:[(0,b.jsx)(Dy,{project:e,headingId:u,isActive:m,isDimmed:s===`other`}),(0,b.jsx)(Ey,{})]})}),(0,b.jsx)(gb,{href:`/work/${e.slug}`,"aria-label":`${e.name}: view case study`,tabIndex:o?0:-1,$isEnabled:o})]})})},mb=F($.div)`
+`,Xy=6,Zy=.09,Qy=16,$y=.45,eb=({count:e,width:t,height:n,ratio:r,maxWidth:i=1/0})=>{let a=[2,3].map(a=>{let o=Math.ceil(e/a),s=(t-(a-1)*Qy)/a,c=(n-(o-1)*Qy)/o/r;return{columns:a,cardWidth:Math.floor(Math.min(s,c,i))}}).reduce((e,t)=>t.cardWidth>e.cardWidth?t:e);return{...a,cardHeight:Math.floor(a.cardWidth*r)}},tb=({count:e,stageWidth:t,cardWidth:n,cardHeight:r,columns:i})=>{let a=n*1.08,o=a*(e-1)+n;if(!i&&o<=t){let t=(e-1)/2;return Array.from({length:e},(e,n)=>{let i=t===0?0:(n-t)/t;return{x:(n-t)*a,y:i*i*r*Zy,rotate:i*Xy}})}let s=i??2,c=Math.ceil(e/s),l=c*r+(c-1)*Qy,u=n+Qy;return Array.from({length:e},(t,n)=>{let i=Math.floor(n/s),a=i===c-1?e-i*s:s;return{x:(n%s-(a-1)/2)*u,y:i*(r+Qy)-l/2+r/2,rotate:0}})},nb=(e,t)=>({x:e*7%5-2,y:(e-(t-1))*2.5,rotate:e*13%7-3}),rb=(e,t,[n,r])=>{let i=r-n,a=i*$y,o=n+e*(t>1?(i-a)/(t-1):0);return{start:o,end:o+a}},ib=70,ab=6,ob={stiffness:220,damping:20},sb={type:`spring`,stiffness:320,damping:26},cb=1.08,lb=26,ub=e=>Math.min(1,Math.max(0,e)),db=e=>e<.5?4*e*e*e:1-(-2*e+2)**3/2,fb=(e,t,n)=>e+(t-e)*n,pb=e=>{let t=Oh(.5),n=Oh(.5),r=Mh(Q(n,[0,1],[ab,-6]),ob),i=Mh(Q(t,[0,1],[-6,ab]),ob);return(0,y.useEffect)(()=>{e||(t.set(.5),n.set(.5))},[e,t,n]),{rotateX:r,rotateY:i,onPointerMove:r=>{if(!e||r.pointerType!==`mouse`)return;let i=r.currentTarget.getBoundingClientRect();t.set((r.clientX-i.left)/i.width),n.set((r.clientY-i.top)/i.height)}}},mb=({project:e,index:t,count:n,progress:r,spot:i,dealRange:a,isDealt:o,pick:s,side:c,onPick:l})=>{let u=`card-${(0,y.useId)().replace(/[^a-zA-Z0-9]/g,``)}`,{start:d,end:f}=rb(t,n,a),p=nb(t,n),m=s===`picked`,h=Oh(+!!m);(0,y.useEffect)(()=>h.set(+!!m),[m,h]);let g=Q(r,e=>db(ub((e-d)/(f-d)))),_=Q(g,e=>fb(p.x,i.x,e)),v=Q(g,e=>fb(p.y,i.y,e)-Math.sin(Math.PI*e)*ib),x=Q(g,e=>fb(p.rotate,i.rotate,e)-Math.sin(Math.PI*e)*6),S=Q(g,e=>1+Math.sin(Math.PI*e)*.08),C=Q(g,[0,.25,.8,1],[180,180,0,0]),w=Q([g,h],([e,r])=>e<=0?n-t:e<1?100+t:r?60:10+t),T=Q([Q(g,e=>.55+Math.sin(Math.PI*e)*.25),Q([g,h],([e,t])=>t?60:18+Math.sin(Math.PI*e)*30)],([e,t])=>`0 ${(t/2).toFixed(1)}px ${t.toFixed(1)}px -8px rgba(0, 0, 0, ${e.toFixed(3)})`),E=pb(m),ee=o?{onPointerEnter:e=>e.pointerType===`mouse`&&l(t),onPointerLeave:e=>e.pointerType===`mouse`&&l(null),onFocus:()=>l(t),onBlur:()=>l(null)}:{};return(0,b.jsx)(hb,{style:{x:_,y:v,rotate:x,scale:S,zIndex:w},children:(0,b.jsxs)(gb,{animate:{rotate:m?-i.rotate:0,y:m?-34:0,x:s===`other`?c*lb:0,scale:m?cb:1},transition:sb,...ee,children:[(0,b.jsx)(vb,{style:{rotateX:E.rotateX,rotateY:E.rotateY},onPointerMove:E.onPointerMove,children:(0,b.jsxs)(yb,{style:{rotateY:C,boxShadow:T},children:[(0,b.jsx)(Dy,{project:e,headingId:u,isActive:m,isDimmed:s===`other`}),(0,b.jsx)(Ey,{})]})}),(0,b.jsx)(_b,{href:`/work/${e.slug}`,"aria-label":`${e.name}: view case study`,tabIndex:o?0:-1,$isEnabled:o})]})})},hb=F($.div)`
   position: absolute;
   left: calc(50% - var(--card-width) / 2);
   top: calc(50% - var(--card-height) / 2);
   width: var(--card-width);
   height: var(--card-height);
   perspective: 1200px;
-`,hb=F($.div)`
+`,gb=F($.div)`
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-`,gb=F.a`
+`,_b=F.a`
   position: absolute;
   inset: 0;
   border-radius: var(--card-radius);
@@ -908,38 +914,38 @@ Error generating stack: `+e.message+`
     outline: 3px solid ${Sy};
     outline-offset: 3px;
   }
-`,_b=F($.div)`
+`,vb=F($.div)`
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-`,vb=F($.div)`
+`,yb=F($.div)`
   position: relative;
   width: 100%;
   height: 100%;
   border-radius: var(--card-radius);
   transform-style: preserve-3d;
-`,yb=`/assets/dance-ai-mobile-1-Ct6iWDqT.webp`,bb=`/assets/soccer-mobile-1-Dgq8TlOj.webp`,xb=`/assets/paws-mobile-1-BO0uE_-X.webp`,Sb=`/assets/safe-space-mobile-1-DZ6KHBui.webp`,Cb=`/assets/artistic-mobile-1-By4VPfPa.webp`,wb=[{rank:`A`,slug:`dance-ai`,name:`Dance AI`,year:`2025`,hook:`Type how you feel. A 3D dancer moves to match it.`,summary:`Reads the emotion in any sentence with a fine-tuned RoBERTa model (86.6% accuracy) and an SVR intensity model, then animates a 3D character to dance it out in real time.`,award:`Winner · World’s Largest Hackathon`,tech:[`React`,`Three.js`,`RoBERTa`,`Flask`],screen:yb,links:[{label:`GitHub`,href:`https://github.com/anishdhandore/Dance_AI_Cleanup`}]},{rank:`K`,slug:`soccer-predictions`,name:`Soccer Match Predictions`,year:`2022`,hook:`Two decades of Premier League results, one question: who dominates next?`,summary:`Explores Premier League match data since 2000 and models which clubs are most likely to dominate upcoming seasons from their win/loss history.`,award:null,tech:[`Python`,`Pandas`,`scikit-learn`,`Seaborn`],screen:bb,links:[{label:`Notebook`,href:`https://colab.research.google.com/drive/1xT5S3eeZPcjfPexal9m9Z2PjLedSJ0wA?usp=sharing`}]},{rank:`Q`,slug:`preserving-paws`,name:`Preserving Paws`,year:`2021`,hook:`Look up any breed, find a shelter nearby, or report a dog in danger.`,summary:`A solo-built Django app: a breed encyclopedia scraped with Beautiful Soup and Wolfram Alpha, shelter search through the Petfinder API, and abuse reports routed to the nearest World Animal Protection office.`,award:`Best Community Project · ST Hacks 2021`,tech:[`Django`,`Petfinder API`,`Beautiful Soup`,`SQLite`],screen:xb,links:[{label:`GitHub`,href:`https://github.com/anishdhandore/ST-Hacks-2021`},{label:`Demo`,href:`https://www.youtube.com/watch?v=HzcST4-HYKE`}]},{rank:`J`,slug:`safe-space`,name:`Safe Space`,year:`2020`,hook:`Paste any link and find out if it’s safe for kids.`,summary:`Scrapes a webpage, counts any profanity it finds and tells you whether it’s suitable for children, caching every verdict in MongoDB so repeat checks are instant.`,award:null,tech:[`Flask`,`Beautiful Soup`,`MongoDB`],screen:Sb,links:[{label:`GitHub`,href:`https://github.com/kylejava/CatHacks-Winter-Edition-2020`}]},{rank:`10`,slug:`our-artistic-space`,name:`Our Artistic Space`,year:`2020`,hook:`Every museum, gallery and art store near you, in one search.`,summary:`Finds local art museums, galleries, schools and supply stores for any city through the Yelp API, with directions one tap away. Deployed on Google App Engine.`,award:`Best Beginner Hack · Hacks and Crafts 2020`,tech:[`Flask`,`Yelp API`,`Google App Engine`],screen:Cb,links:[{label:`GitHub`,href:`https://github.com/anishdhandore/HacksAndCrafts2020`}]}],Tb=[.14,.72],Eb={stiffness:120,damping:26,restDelta:5e-4},Db=7/5,Ob=640,kb={width:1200,height:600},Ab=({width:e,height:t})=>{let n=e<Ob,r=n?(e-16)/2:e*.172,i=n?(t-32)/3/Db:t*.78/Db,a=Math.round(Math.max(120,Math.min(230,r,i)));return{cardWidth:a,cardHeight:Math.round(a*Db)}},jb=e=>{let[t,n]=(0,y.useState)(kb);return(0,y.useEffect)(()=>{let t=e.current;if(!t||typeof ResizeObserver>`u`)return;let r=new ResizeObserver(([e])=>{let{width:t,height:r}=e.contentRect;t>0&&r>0&&n({width:t,height:r})});return r.observe(t),()=>r.disconnect()},[e]),t},Mb=()=>{let e=(0,y.useRef)(null),t=(0,y.useRef)(null),n=!!Fh(),r=jb(t),{cardWidth:i,cardHeight:a}=Ab(r),o=eb({count:wb.length,stageWidth:r.width,cardWidth:i,cardHeight:a}),{scrollYProgress:s}=Dh({target:e,offset:[`start start`,`end end`]}),c=Mh(s,Eb),l=Oh(1),u=n?l:c,[d,f]=(0,y.useState)(n);Wm(u,`change`,e=>f(e>=Tb[1]));let[p,m]=(0,y.useState)(null);(0,y.useEffect)(()=>{d||m(null)},[d]);let h=Q(u,[0,Tb[0]*.6,Tb[0]],[1,1,0]);return(0,b.jsx)(Lb,{id:`projects`,ref:e,"aria-labelledby":`projects-heading`,"data-scroll-to":`end`,children:(0,b.jsxs)(Rb,{children:[(0,b.jsxs)(zb,{children:[(0,b.jsx)(Bb,{children:`More work`}),(0,b.jsx)(Vb,{id:`projects-heading`,children:`A winning hand`}),(0,b.jsx)(Hb,{children:`Hackathon wins and side projects, dealt face up.`})]}),(0,b.jsxs)(Ub,{ref:t,style:{"--card-width":`${i}px`,"--card-height":`${a}px`,"--card-radius":`${Math.round(i*.07)}px`},children:[wb.map((e,t)=>(0,b.jsx)(pb,{project:e,index:t,count:wb.length,progress:u,spot:o[t],dealRange:Tb,isDealt:d,pick:p===null?`none`:p===t?`picked`:`other`,side:p===null?0:Math.sign(t-p),onPick:m},e.name)),!n&&(0,b.jsx)(Wb,{style:{opacity:h},children:`Scroll to deal`})]})]})})},Nb=`(max-width: 899px)`,Pb=`clamp(8px, 1vw, 16px)`,Fb=`#f4f4f2`,Ib=`url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Cfilter%20id%3D%22f%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%221.1%22%20numOctaves%3D%222%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200.5%200%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23f)%22%2F%3E%3C%2Fsvg%3E")`,Lb=F.section`
+`,bb=`/assets/dance-ai-mobile-1-Ct6iWDqT.webp`,xb=`/assets/soccer-mobile-1-Dgq8TlOj.webp`,Sb=`/assets/paws-mobile-1-BO0uE_-X.webp`,Cb=`/assets/safe-space-mobile-1-DZ6KHBui.webp`,wb=`/assets/artistic-mobile-1-By4VPfPa.webp`,Tb=[{rank:`A`,slug:`dance-ai`,name:`Dance AI`,year:`2025`,hook:`Type how you feel. A 3D dancer moves to match it.`,summary:`Reads the emotion in any sentence with a fine-tuned RoBERTa model (86.6% accuracy) and an SVR intensity model, then animates a 3D character to dance it out in real time.`,award:`Winner · World’s Largest Hackathon`,tech:[`React`,`Three.js`,`RoBERTa`,`Flask`],screen:bb,links:[{label:`GitHub`,href:`https://github.com/anishdhandore/Dance_AI_Cleanup`}]},{rank:`K`,slug:`soccer-predictions`,name:`Soccer Match Predictions`,year:`2022`,hook:`Two decades of Premier League results, one question: who dominates next?`,summary:`Explores Premier League match data since 2000 and models which clubs are most likely to dominate upcoming seasons from their win/loss history.`,award:null,tech:[`Python`,`Pandas`,`scikit-learn`,`Seaborn`],screen:xb,links:[{label:`Notebook`,href:`https://colab.research.google.com/drive/1xT5S3eeZPcjfPexal9m9Z2PjLedSJ0wA?usp=sharing`}]},{rank:`Q`,slug:`preserving-paws`,name:`Preserving Paws`,year:`2021`,hook:`Look up any breed, find a shelter nearby, or report a dog in danger.`,summary:`A solo-built Django app: a breed encyclopedia scraped with Beautiful Soup and Wolfram Alpha, shelter search through the Petfinder API, and abuse reports routed to the nearest World Animal Protection office.`,award:`Best Community Project · ST Hacks 2021`,tech:[`Django`,`Petfinder API`,`Beautiful Soup`,`SQLite`],screen:Sb,links:[{label:`GitHub`,href:`https://github.com/anishdhandore/ST-Hacks-2021`},{label:`Demo`,href:`https://www.youtube.com/watch?v=HzcST4-HYKE`}]},{rank:`J`,slug:`safe-space`,name:`Safe Space`,year:`2020`,hook:`Paste any link and find out if it’s safe for kids.`,summary:`Scrapes a webpage, counts any profanity it finds and tells you whether it’s suitable for children, caching every verdict in MongoDB so repeat checks are instant.`,award:null,tech:[`Flask`,`Beautiful Soup`,`MongoDB`],screen:Cb,links:[{label:`GitHub`,href:`https://github.com/kylejava/CatHacks-Winter-Edition-2020`}]},{rank:`10`,slug:`our-artistic-space`,name:`Our Artistic Space`,year:`2020`,hook:`Every museum, gallery and art store near you, in one search.`,summary:`Finds local art museums, galleries, schools and supply stores for any city through the Yelp API, with directions one tap away. Deployed on Google App Engine.`,award:`Best Beginner Hack · Hacks and Crafts 2020`,tech:[`Flask`,`Yelp API`,`Google App Engine`],screen:wb,links:[{label:`GitHub`,href:`https://github.com/anishdhandore/HacksAndCrafts2020`}]}],Eb=[.14,.72],Db={stiffness:120,damping:26,restDelta:5e-4},Ob=7/5,kb=640,Ab={width:1200,height:600},jb=({width:e,height:t})=>{if(e<kb)return eb({count:Tb.length,width:e,height:t,ratio:Ob,maxWidth:230});let n=Math.round(Math.max(120,Math.min(230,e*.172,t*.78/Ob)));return{cardWidth:n,cardHeight:Math.round(n*Ob),columns:void 0}},Mb=e=>{let[t,n]=(0,y.useState)(Ab);return(0,y.useEffect)(()=>{let t=e.current;if(!t||typeof ResizeObserver>`u`)return;let r=new ResizeObserver(([e])=>{let{width:t,height:r}=e.contentRect;t>0&&r>0&&n({width:t,height:r})});return r.observe(t),()=>r.disconnect()},[e]),t},Nb=()=>{let e=(0,y.useRef)(null),t=(0,y.useRef)(null),n=!!Fh(),r=Mb(t),{cardWidth:i,cardHeight:a,columns:o}=jb(r),s=tb({count:Tb.length,stageWidth:r.width,cardWidth:i,cardHeight:a,columns:o}),{scrollYProgress:c}=Dh({target:e,offset:[`start start`,`end end`]}),l=Mh(c,Db),u=Oh(1),d=n?u:l,[f,p]=(0,y.useState)(n);Wm(d,`change`,e=>p(e>=Eb[1]));let[m,h]=(0,y.useState)(null);(0,y.useEffect)(()=>{f||h(null)},[f]);let g=Q(d,[0,Eb[0]*.6,Eb[0]],[1,1,0]);return(0,b.jsx)(Rb,{id:`projects`,ref:e,"aria-labelledby":`projects-heading`,"data-scroll-to":`end`,children:(0,b.jsxs)(zb,{children:[(0,b.jsxs)(Bb,{children:[(0,b.jsx)(Vb,{children:`More work`}),(0,b.jsx)(Hb,{id:`projects-heading`,children:`A winning hand`}),(0,b.jsx)(Ub,{children:`Hackathon wins and side projects, dealt face up.`})]}),(0,b.jsxs)(Wb,{ref:t,style:{"--card-width":`${i}px`,"--card-height":`${a}px`,"--card-radius":`${Math.round(i*.07)}px`},children:[Tb.map((e,t)=>(0,b.jsx)(mb,{project:e,index:t,count:Tb.length,progress:d,spot:s[t],dealRange:Eb,isDealt:f,pick:m===null?`none`:m===t?`picked`:`other`,side:m===null?0:Math.sign(t-m),onPick:h},e.name)),!n&&(0,b.jsx)(Gb,{style:{opacity:g},children:`Scroll to deal`})]})]})})},Pb=`(max-width: 899px)`,Fb=`clamp(8px, 1vw, 16px)`,Ib=`#f4f4f2`,Lb=`url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%3E%3Cfilter%20id%3D%22f%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%221.1%22%20numOctaves%3D%222%22%20stitchTiles%3D%22stitch%22%2F%3E%3CfeColorMatrix%20values%3D%220%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200%201%20%200%200%200%200.5%200%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url(%23f)%22%2F%3E%3C%2Fsvg%3E")`,Rb=F.section`
   position: relative;
   height: 260vh;
-  margin: 0 ${Pb};
+  margin: 0 ${Fb};
   border-radius: 40px;
   background: #0a0a0b;
-  color: ${Fb};
+  color: ${Ib};
   font-family: var(--font-body);
   overflow: clip;
   overflow-anchor: none;
 
-  @media ${Nb} {
+  @media ${Pb} {
     border-radius: 28px;
   }
-`,Rb=F.div`
+`,zb=F.div`
   position: sticky;
   top: 0;
   height: 100svh;
   display: flex;
   flex-direction: column;
   padding: calc(var(--nav-offset) + var(--nav-height) + clamp(1rem, 3vh, 2.5rem))
-    calc(max(var(--space-gutter), (100vw - var(--content-max)) / 2) - ${Pb})
+    calc(max(var(--space-gutter), (100vw - var(--content-max)) / 2) - ${Fb})
     clamp(1.5rem, 5vh, 3rem);
 
   /* overhead lamp on the table, plus felt grain */
@@ -956,7 +962,7 @@ Error generating stack: `+e.message+`
   }
 
   &::after {
-    background-image: ${Ib};
+    background-image: ${Lb};
     opacity: 0.06;
     mix-blend-mode: overlay;
   }
@@ -965,31 +971,31 @@ Error generating stack: `+e.message+`
     position: relative;
     z-index: 1;
   }
-`,zb=F.header`
+`,Bb=F.header`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-`,Bb=F.p`
+`,Vb=F.p`
   font-size: var(--text-sm);
   color: rgba(244, 244, 242, 0.55);
-`,Vb=F.h2`
+`,Hb=F.h2`
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 1.5rem + 2.6vw, 4rem);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.045em;
-`,Hb=F.p`
+`,Ub=F.p`
   color: rgba(244, 244, 242, 0.62);
 
-  @media ${Nb} {
+  @media ${Pb} {
     font-size: var(--text-sm);
   }
-`,Ub=F.div`
+`,Wb=F.div`
   position: relative;
   flex: 1;
   min-height: 0;
   margin-top: clamp(1rem, 3vh, 2rem);
-`,Wb=F($.p)`
+`,Gb=F($.p)`
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -997,7 +1003,7 @@ Error generating stack: `+e.message+`
   font-size: var(--text-sm);
   color: rgba(244, 244, 242, 0.55);
   pointer-events: none;
-`,Gb=({src:e,alt:t,label:n,className:r})=>(0,b.jsxs)(Jb,{className:r,children:[(0,b.jsxs)(Yb,{"aria-hidden":`true`,children:[(0,b.jsxs)(`span`,{className:`dots`,children:[(0,b.jsx)(`i`,{}),(0,b.jsx)(`i`,{}),(0,b.jsx)(`i`,{})]}),(0,b.jsx)(`span`,{className:`url`,children:n})]}),(0,b.jsx)(`img`,{src:e,alt:t,width:1400,height:875,loading:`lazy`,decoding:`async`})]}),Kb=({src:e,alt:t,className:n})=>(0,b.jsx)(Xb,{className:n,children:(0,b.jsx)(`img`,{src:e,alt:t,width:1400,height:875,loading:`lazy`,decoding:`async`})}),qb=({src:e,alt:t,className:n})=>(0,b.jsxs)(Zb,{className:n,children:[(0,b.jsx)(`img`,{src:e,alt:t,width:780,height:1688,loading:`lazy`,decoding:`async`}),(0,b.jsx)(Qb,{"aria-hidden":`true`})]}),Jb=F.figure`
+`,Kb=({src:e,alt:t,label:n,className:r})=>(0,b.jsxs)(Yb,{className:r,children:[(0,b.jsxs)(Xb,{"aria-hidden":`true`,children:[(0,b.jsxs)(`span`,{className:`dots`,children:[(0,b.jsx)(`i`,{}),(0,b.jsx)(`i`,{}),(0,b.jsx)(`i`,{})]}),(0,b.jsx)(`span`,{className:`url`,children:n})]}),(0,b.jsx)(`img`,{src:e,alt:t,width:1400,height:875,loading:`lazy`,decoding:`async`})]}),qb=({src:e,alt:t,className:n})=>(0,b.jsx)(Zb,{className:n,children:(0,b.jsx)(`img`,{src:e,alt:t,width:1400,height:875,loading:`lazy`,decoding:`async`})}),Jb=({src:e,alt:t,className:n})=>(0,b.jsxs)(Qb,{className:n,children:[(0,b.jsx)(`img`,{src:e,alt:t,width:780,height:1688,loading:`lazy`,decoding:`async`}),(0,b.jsx)($b,{"aria-hidden":`true`})]}),Yb=F.figure`
   overflow: hidden;
   border-radius: 14px;
   background: #1b1c1f;
@@ -1011,7 +1017,7 @@ Error generating stack: `+e.message+`
     height: auto;
   }
 `}
-`,Yb=F.div`
+`,Xb=F.div`
   display: flex;
   align-items: center;
   gap: 16px;
@@ -1046,7 +1052,7 @@ Error generating stack: `+e.message+`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-`,Xb=F.figure`
+`,Zb=F.figure`
   padding: 2.2%;
   border-radius: 6% / 9%;
   background: linear-gradient(145deg, #2e2e34, #0d0d10 40%, #060607);
@@ -1060,7 +1066,7 @@ Error generating stack: `+e.message+`
     height: auto;
     border-radius: 3.5% / 5.5%;
   }
-`,Zb=F.figure`
+`,Qb=F.figure`
   position: relative;
   padding: 3.5%;
   border-radius: 16% / 7.5%;
@@ -1075,7 +1081,7 @@ Error generating stack: `+e.message+`
     height: auto;
     border-radius: 12.5% / 5.8%;
   }
-`,Qb=F.span`
+`,$b=F.span`
   position: absolute;
   top: 5.2%;
   left: 50%;
@@ -1084,23 +1090,23 @@ Error generating stack: `+e.message+`
   border-radius: 999px;
   background: #050506;
   transform: translateX(-50%);
-`,$b=[.16,1,.3,1],ex=({children:e,delay:t=0,as:n=`div`,...r})=>{let i=Fh(),a=$[n];return(0,b.jsx)(a,{initial:!i&&{opacity:0,y:28},whileInView:{opacity:1,y:0},viewport:{once:!0,margin:`-12% 0px`},transition:{duration:.8,ease:$b,delay:t},...r,children:e})},tx=({text:e})=>(0,b.jsx)(lx,{"aria-labelledby":`cs-problem`,children:(0,b.jsxs)(ex,{children:[(0,b.jsx)(ux,{id:`cs-problem`,children:`The problem`}),(0,b.jsx)(dx,{children:e})]})}),nx=({items:e})=>(0,b.jsxs)(lx,{"aria-labelledby":`cs-built`,children:[(0,b.jsx)(ex,{children:(0,b.jsx)(ux,{id:`cs-built`,children:`What I built`})}),(0,b.jsx)(fx,{children:e.map(({title:e,body:t},n)=>(0,b.jsxs)(ex,{as:`li`,delay:n*.06,children:[(0,b.jsx)(`h3`,{children:e}),(0,b.jsx)(`p`,{children:t})]},e))})]}),rx=({steps:e,accent:t})=>(0,b.jsxs)(lx,{"aria-labelledby":`cs-flow`,$wide:!0,children:[(0,b.jsx)(ex,{children:(0,b.jsx)(ux,{id:`cs-flow`,children:`How it works`})}),(0,b.jsx)(px,{style:{"--accent":t},children:e.map(({label:e,detail:t},n)=>(0,b.jsxs)(ex,{as:`li`,delay:n*.08,children:[(0,b.jsx)(`span`,{className:`step`,children:String(n+1).padStart(2,`0`)}),(0,b.jsx)(`strong`,{children:e}),(0,b.jsx)(`span`,{className:`detail`,children:t})]},e))})]}),ix=({items:e})=>(0,b.jsxs)(lx,{"aria-labelledby":`cs-results`,$wide:!0,children:[(0,b.jsx)(ex,{children:(0,b.jsx)(ux,{id:`cs-results`,children:`Results`})}),(0,b.jsx)(mx,{children:e.map(({value:e,label:t},n)=>(0,b.jsxs)(ex,{as:`li`,delay:n*.06,children:[(0,b.jsx)(`b`,{children:e}),(0,b.jsx)(`span`,{children:t})]},t))})]}),ax=({name:e,screens:t,accent:n})=>(0,b.jsxs)(hx,{"aria-labelledby":`cs-screens`,style:{"--accent":n},children:[(0,b.jsx)(ex,{children:(0,b.jsx)(ux,{id:`cs-screens`,$onDark:!0,children:`On every screen`})}),(0,b.jsxs)(gx,{children:[(0,b.jsx)(ex,{children:(0,b.jsx)(qb,{src:t.phones[0],alt:`${e} on a phone, main screen`})}),(0,b.jsx)(ex,{delay:.12,children:(0,b.jsx)(qb,{src:t.phones[1],alt:`${e} on a phone, second screen`})})]}),(0,b.jsx)(ex,{children:(0,b.jsx)(Gb,{src:t.desktopAlt,alt:`${e} on desktop, second screen`,label:t.label})})]}),ox=({text:e})=>(0,b.jsx)(lx,{"aria-labelledby":`cs-learned`,children:(0,b.jsxs)(ex,{children:[(0,b.jsx)(ux,{id:`cs-learned`,children:`What I learned`}),(0,b.jsx)(dx,{children:e})]})}),sx=({study:e})=>(0,b.jsxs)(_x,{href:`/work/${e.slug}`,"aria-label":`Next project: ${e.name}`,children:[(0,b.jsx)(`span`,{className:`label`,children:`Next project`}),(0,b.jsxs)(`span`,{className:`name`,children:[e.name,` `,(0,b.jsx)(`span`,{"aria-hidden":`true`,children:`→`})]}),(0,b.jsx)(`span`,{className:`shot`,"aria-hidden":`true`,children:(0,b.jsx)(`img`,{src:e.screens.desktop,alt:``,width:1400,height:875,loading:`lazy`})})]}),cx=`44rem`,lx=F.section`
-  max-width: ${({$wide:e})=>e?`var(--content-max)`:cx};
+`,ex=[.16,1,.3,1],tx=({children:e,delay:t=0,as:n=`div`,...r})=>{let i=Fh(),a=$[n];return(0,b.jsx)(a,{initial:!i&&{opacity:0,y:28},whileInView:{opacity:1,y:0},viewport:{once:!0,margin:`-12% 0px`},transition:{duration:.8,ease:ex,delay:t},...r,children:e})},nx=({text:e})=>(0,b.jsx)(ux,{"aria-labelledby":`cs-problem`,children:(0,b.jsxs)(tx,{children:[(0,b.jsx)(dx,{id:`cs-problem`,children:`The problem`}),(0,b.jsx)(fx,{children:e})]})}),rx=({items:e})=>(0,b.jsxs)(ux,{"aria-labelledby":`cs-built`,children:[(0,b.jsx)(tx,{children:(0,b.jsx)(dx,{id:`cs-built`,children:`What I built`})}),(0,b.jsx)(px,{children:e.map(({title:e,body:t},n)=>(0,b.jsxs)(tx,{as:`li`,delay:n*.06,children:[(0,b.jsx)(`h3`,{children:e}),(0,b.jsx)(`p`,{children:t})]},e))})]}),ix=({steps:e,accent:t})=>(0,b.jsxs)(ux,{"aria-labelledby":`cs-flow`,$wide:!0,children:[(0,b.jsx)(tx,{children:(0,b.jsx)(dx,{id:`cs-flow`,children:`How it works`})}),(0,b.jsx)(mx,{style:{"--accent":t},children:e.map(({label:e,detail:t},n)=>(0,b.jsxs)(tx,{as:`li`,delay:n*.08,children:[(0,b.jsx)(`span`,{className:`step`,children:String(n+1).padStart(2,`0`)}),(0,b.jsx)(`strong`,{children:e}),(0,b.jsx)(`span`,{className:`detail`,children:t})]},e))})]}),ax=({items:e})=>(0,b.jsxs)(ux,{"aria-labelledby":`cs-results`,$wide:!0,children:[(0,b.jsx)(tx,{children:(0,b.jsx)(dx,{id:`cs-results`,children:`Results`})}),(0,b.jsx)(hx,{children:e.map(({value:e,label:t},n)=>(0,b.jsxs)(tx,{as:`li`,delay:n*.06,children:[(0,b.jsx)(`b`,{children:e}),(0,b.jsx)(`span`,{children:t})]},t))})]}),ox=({name:e,screens:t,accent:n})=>(0,b.jsxs)(gx,{"aria-labelledby":`cs-screens`,style:{"--accent":n},children:[(0,b.jsx)(tx,{children:(0,b.jsx)(dx,{id:`cs-screens`,$onDark:!0,children:`On every screen`})}),(0,b.jsxs)(_x,{children:[(0,b.jsx)(tx,{children:(0,b.jsx)(Jb,{src:t.phones[0],alt:`${e} on a phone, main screen`})}),(0,b.jsx)(tx,{delay:.12,children:(0,b.jsx)(Jb,{src:t.phones[1],alt:`${e} on a phone, second screen`})})]}),(0,b.jsx)(tx,{children:(0,b.jsx)(Kb,{src:t.desktopAlt,alt:`${e} on desktop, second screen`,label:t.label})})]}),sx=({text:e})=>(0,b.jsx)(ux,{"aria-labelledby":`cs-learned`,children:(0,b.jsxs)(tx,{children:[(0,b.jsx)(dx,{id:`cs-learned`,children:`What I learned`}),(0,b.jsx)(fx,{children:e})]})}),cx=({study:e})=>(0,b.jsxs)(vx,{href:`/work/${e.slug}`,"aria-label":`Next project: ${e.name}`,children:[(0,b.jsx)(`span`,{className:`label`,children:`Next project`}),(0,b.jsxs)(`span`,{className:`name`,children:[e.name,` `,(0,b.jsx)(`span`,{"aria-hidden":`true`,children:`→`})]}),(0,b.jsx)(`span`,{className:`shot`,"aria-hidden":`true`,children:(0,b.jsx)(`img`,{src:e.screens.desktop,alt:``,width:1400,height:875,loading:`lazy`})})]}),lx=`44rem`,ux=F.section`
+  max-width: ${({$wide:e})=>e?`var(--content-max)`:lx};
   margin: 0 auto;
   padding: clamp(3rem, 2rem + 4vw, 6rem) var(--space-gutter) 0;
-`,ux=F.h2`
+`,dx=F.h2`
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem);
   font-weight: 500;
   letter-spacing: -0.03em;
   color: ${({$onDark:e})=>e?`#f4f4f2`:`var(--color-ink)`};
   margin-bottom: 1.25rem;
-`,dx=F.p`
+`,fx=F.p`
   font-size: var(--text-lead);
   line-height: 1.55;
   color: #3d3d3d;
   max-width: 62ch;
-`,fx=F.ol`
+`,px=F.ol`
   list-style: none;
   display: grid;
   gap: 1.75rem;
@@ -1139,7 +1145,7 @@ Error generating stack: `+e.message+`
     color: #4a4a4a;
     line-height: 1.6;
   }
-`,px=F.ol`
+`,mx=F.ol`
   list-style: none;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1198,7 +1204,7 @@ Error generating stack: `+e.message+`
       transform: translateX(-50%) rotate(135deg);
     }
   }
-`,mx=F.ul`
+`,hx=F.ul`
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
@@ -1224,7 +1230,7 @@ Error generating stack: `+e.message+`
     color: var(--color-ink-soft);
     font-size: var(--text-sm);
   }
-`,hx=F.section`
+`,gx=F.section`
   margin: clamp(3rem, 2rem + 4vw, 6rem) clamp(8px, 1vw, 16px) 0;
   padding: clamp(3rem, 2rem + 4vw, 6rem) var(--space-gutter);
   border-radius: 40px;
@@ -1242,7 +1248,7 @@ Error generating stack: `+e.message+`
     margin: clamp(2.5rem, 2rem + 3vw, 4.5rem) auto 0;
     text-align: left;
   }
-`,gx=F.div`
+`,_x=F.div`
   display: flex;
   justify-content: center;
   gap: clamp(1rem, 0.5rem + 3vw, 3.5rem);
@@ -1254,7 +1260,7 @@ Error generating stack: `+e.message+`
   & > div:last-child {
     margin-top: clamp(2rem, 1rem + 4vw, 5rem);
   }
-`,_x=F.a`
+`,vx=F.a`
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
   align-items: center;
@@ -1325,15 +1331,15 @@ Error generating stack: `+e.message+`
       grid-row: auto;
     }
   }
-`,vx=`/assets/dance-ai-front-CwFtEi9J.webp`,yx=`/assets/dance-ai-back-CZtgzK32.webp`,bx=`/assets/dance-ai-mobile-2-BUO6b-g0.webp`,xx=`/assets/soccer-front-DSsStHoY.webp`,Sx=`/assets/soccer-back-Bx2h1xk7.webp`,Cx=`/assets/soccer-mobile-2-EiVoUNRE.webp`,wx=`/assets/paws-front-BovEnrXX.webp`,Tx=`/assets/paws-back-pRZDVZC4.webp`,Ex=`/assets/paws-mobile-2-rt5k6kNg.webp`,Dx=`/assets/safe-space-front-Dt7dlwvs.webp`,Ox=`/assets/safe-space-back-BWp1lKu9.webp`,kx=`/assets/safe-space-mobile-2-CZlIAIi8.webp`,Ax=`/assets/artistic-front-CEIw2yce.webp`,jx=[{slug:`dance-ai`,name:`Dance AI`,outcome:`Type how you feel, and a 3D character dances it out in real time.`,meta:[{label:`Role`,value:`ML engineer & full-stack developer`},{label:`Timeline`,value:`2025`},{label:`Award`,value:`Winner, World’s Largest Hackathon`},{label:`Stack`,value:`React, Three.js, Flask, RoBERTa, SVR`}],links:[{label:`GitHub`,href:`https://github.com/anishdhandore/Dance_AI_Cleanup`}],accent:`#7C5CFF`,screens:{label:`Dance AI`,desktop:vx,desktopAlt:yx,tablet:vx,phones:[yb,bx]},problem:`Most text tools stop at a label: “positive”, “negative”. I wanted emotion to become something you can see, so a sentence like “I just got the job!” turns into movement with the right energy, not just a tag.`,built:[{title:`Fine-tuned the emotion model`,body:`Trained a multi-label RoBERTa classifier (roberta-base, 125M parameters) on GoEmotions, grouped into 6 macro emotions. It reaches 86.6% accuracy with a Hamming loss of 0.134.`},{title:`Predicted how strongly you feel it`,body:`Added an SVR model that scores emotion intensity (MAE 0.155), so a mild “that’s nice” and an all-caps “I WON” move the dancer differently.`},{title:`Built the inference API`,body:`A Flask API loads both models straight from the Hugging Face Hub at startup, so nothing heavy ships with the code, and serves predictions to the front end.`},{title:`Made the 3D stage`,body:`React with React Three Fiber renders the character and maps each detected emotion to a dance, with every user getting their own isolated session.`}],flow:[{label:`Prompt`,detail:`React front end`},{label:`Flask API`,detail:`Hosted on Render`},{label:`RoBERTa + SVR`,detail:`Loaded from Hugging Face`},{label:`3D dance`,detail:`React Three Fiber`}],results:[{value:`86.6%`,label:`Emotion accuracy`},{value:`6`,label:`Emotions recognised`},{value:`~1.5 h`,label:`Total training time`},{value:`1st`,label:`World’s Largest Hackathon`}],learned:`Shipping a model is a different job from training one. Keeping the models on Hugging Face and loading them at runtime kept deploys small and let the front end and API live on separate hosts.`},{slug:`soccer-predictions`,name:`Soccer Match Predictions`,outcome:`Two decades of Premier League results, turned into a forecast of who dominates next.`,meta:[{label:`Role`,value:`Data scientist`},{label:`Timeline`,value:`2022`},{label:`Type`,value:`Data science project`},{label:`Stack`,value:`Python, Pandas, scikit-learn, Seaborn`}],links:[{label:`Notebook`,href:`https://colab.research.google.com/drive/1xT5S3eeZPcjfPexal9m9Z2PjLedSJ0wA?usp=sharing`}],accent:`#8DB516`,screens:{label:`Matchday`,desktop:xx,desktopAlt:Sx,tablet:xx,phones:[bb,Cx]},problem:`Pundits argue about which clubs are on the rise, but rarely with numbers. I set out to answer two questions from the data: which clubs have been the best and worst so far, and which will improve the most next.`,built:[{title:`Cleaned the match history`,body:`Loaded and inspected a Premier League dataset going back to the 2000/01 season, then encoded clubs and results so they could be modelled.`},{title:`Measured every club`,body:`Counted matches won and lost for every club, home and away, and derived a win ratio. Chelsea leads with 411 wins and a 1.53 ratio; Liverpool follows at 1.42.`},{title:`Modelled future form`,body:`Split each club’s history into a first and second half to measure improvement, then fit a linear regression (MAE 31.97, RMSE 39.72 on a held-out test set).`},{title:`Picked the model that held up`,body:`Tried logistic regression too, but it overfit the small dataset, so I kept the simpler linear model and explained the trade-off.`}],flow:[{label:`Match data`,detail:`Premier League since 2000`},{label:`Pandas`,detail:`Wins, losses, ratios`},{label:`scikit-learn`,detail:`Linear regression`},{label:`Forecast`,detail:`Seaborn charts`}],results:[{value:`1.53`,label:`Top win ratio (Chelsea)`},{value:`411`,label:`Most matches won`},{value:`31.97`,label:`Test MAE`},{value:`44`,label:`Clubs analysed`}],learned:`A more complex model isn’t automatically better. With 44 clubs, the honest answer came from a simple model, clear charts and a careful train/test split.`},{slug:`preserving-paws`,name:`Preserving Paws`,outcome:`Look up any breed, find a shelter nearby, or report a dog in danger.`,meta:[{label:`Role`,value:`Solo: design, back end, data and automation`},{label:`Timeline`,value:`Jan 2021, one weekend`},{label:`Award`,value:`Best Community Project, ST Hacks 2021`},{label:`Stack`,value:`Django, Petfinder API, Wolfram Alpha, SQLite`}],links:[{label:`GitHub`,href:`https://github.com/anishdhandore/ST-Hacks-2021`},{label:`Demo video`,href:`https://www.youtube.com/watch?v=HzcST4-HYKE`},{label:`Devpost`,href:`https://devpost.com/software/preserving-paws`}],accent:`#F5B800`,screens:{label:`Preserving Paws`,desktop:wx,desktopAlt:Tx,tablet:wx,phones:[xb,Ex]},problem:`People who want to help dogs hit three walls: they don’t know which breed fits them, they can’t find shelters nearby, and when they see abuse they don’t know who to tell. I wanted one place that handles all three.`,built:[{title:`Built a breed encyclopedia`,body:`Scraped breed details with Beautiful Soup and enriched them with the Wolfram Alpha API, so “Dogopedia” covers temperament, size and care for any breed.`},{title:`Connected real shelters`,body:`Used the Petfinder API to list adoption organisations and shelters near the user, with contact details and a link to each one.`},{title:`Automated emergency reports`,body:`Wrote the flow that takes an abuse report, stores it in SQLite and automatically emails the user their nearest World Animal Protection office through Gmail.`},{title:`Shipped it alone in a weekend`,body:`My first Django project and my first solo hackathon, including Django’s authentication system for user accounts.`}],flow:[{label:`Django app`,detail:`Auth, pages, forms`},{label:`Breed data`,detail:`Beautiful Soup + Wolfram Alpha`},{label:`Shelters`,detail:`Petfinder API`},{label:`Reports`,detail:`SQLite + automated Gmail`}],results:[{value:`1st`,label:`Best Community Project`},{value:`3`,label:`Tools in one app`},{value:`Solo`,label:`Designed and built alone`},{value:`Django`,label:`First project in it`}],learned:`Doing a hackathon solo forced me to prioritise ruthlessly. I learned Django’s auth system, how to model data in SQLite, and how to send automated, relevant emails to users.`},{slug:`safe-space`,name:`Safe Space`,outcome:`Paste any link and find out, in seconds, whether it’s safe for kids.`,meta:[{label:`Role`,value:`Front-end & back-end developer`},{label:`Team`,value:`With Kyle Java and Neala Mendoza`},{label:`Timeline`,value:`Dec 2020, CatHacks Winter`},{label:`Stack`,value:`Flask, Beautiful Soup, MongoDB`}],links:[{label:`GitHub`,href:`https://github.com/kylejava/CatHacks-Winter-Edition-2020`}],accent:`#12A9D6`,screens:{label:`SafeSpace`,desktop:Dx,desktopAlt:Ox,tablet:Dx,phones:[Sb,kx]},problem:`The internet is a great place for kids to learn, but plenty of pages are full of language they shouldn’t see. Parents and teachers needed a quick way to check a page before handing it over.`,built:[{title:`Wrote the page scanner`,body:`A Beautiful Soup scraper that reads every word on a page, counts any profanity it finds and returns a clear verdict.`},{title:`Made repeat checks instant`,body:`Scraping took a few seconds, so we store each verdict in MongoDB and check the database first. Pages we’ve seen before return immediately.`},{title:`Built the Flask app`,body:`Worked across the Flask back end and the Bootstrap front end: the scan form, the results page and the routes between them.`},{title:`Switched databases mid-hackathon`,body:`We started on Redis after a workshop, couldn’t get it working in time, and moved to MongoDB, learning it from the docs as we went.`}],flow:[{label:`URL`,detail:`Scan form`},{label:`Cache check`,detail:`MongoDB`},{label:`Scraper`,detail:`Beautiful Soup`},{label:`Verdict`,detail:`Saved for next time`}],results:[{value:`Instant`,label:`Repeat checks, cached`},{value:`3`,label:`Person team`},{value:`1`,label:`Database swap, on the clock`}],learned:`Caching changed the product more than any algorithm tweak. I also learned MongoDB from scratch and got much stronger with Flask and web scraping.`},{slug:`our-artistic-space`,name:`Our Artistic Space`,outcome:`Every museum, gallery, art school and supply store near you, in one search.`,meta:[{label:`Role`,value:`Full-stack developer`},{label:`Team`,value:`With Michael Larkin and Kyle Java`},{label:`Timeline`,value:`Nov 2020, Hacks and Crafts (MLH)`},{label:`Award`,value:`Best Beginner Hack`}],links:[{label:`GitHub`,href:`https://github.com/anishdhandore/HacksAndCrafts2020`},{label:`Devpost`,href:`https://devpost.com/software/our-artistic-space`}],accent:`#E9B872`,screens:{label:`Our Artistic Space`,desktop:Ax,desktopAlt:`/assets/artistic-back-DXMxeyLc.webp`,tablet:Ax,phones:[Cb,`/assets/artistic-mobile-2-DG69wVcl.webp`]},problem:`Local art scenes are easy to miss. Many people don’t know which museums, galleries, schools or supply stores are in their own city, and the businesses miss out on visitors.`,built:[{title:`Search by city and category`,body:`Pick a city or zip code and a category, and the Flask back end queries the Yelp API for up to ten matching places.`},{title:`Turned results into actions`,body:`Each result shows the name, address and phone number, with a button that opens directions in Google Maps.`},{title:`Deployed it for real`,body:`Shipped the app on Google App Engine and connected a custom domain, ourartistic.space, during the hackathon.`},{title:`Learned to work as a team`,body:`Our first collaborative GitHub project: branches, pull requests and sorting out merge conflicts under time pressure.`}],flow:[{label:`City + category`,detail:`Bootstrap UI`},{label:`Flask`,detail:`Python back end`},{label:`Yelp API`,detail:`Local businesses`},{label:`Google App Engine`,detail:`ourartistic.space`}],results:[{value:`1st`,label:`Best Beginner Hack`},{value:`4`,label:`Art categories`},{value:`Live`,label:`Custom domain, deployed`},{value:`3`,label:`Person team`}],learned:`Deploying is part of building. Getting the app onto Google Cloud and wiring up a custom domain took a whole day, and taught me more than the code did.`}],Mx=e=>jx.find(t=>t.slug===e)??null,Nx=e=>jx[(jx.findIndex(t=>t.slug===e)+1)%jx.length],Px=[.16,1,.3,1],Fx=`Anish Dhandore`,Ix=(e,t)=>({initial:!t&&{opacity:0,y:40},animate:{opacity:1,y:0},transition:{duration:1,ease:Px,delay:e}}),Lx=({slug:e})=>{let t=Mx(e),n=!!Fh();if((0,y.useEffect)(()=>(document.title=t?`${t.name} · ${Fx}`:Fx,()=>{document.title=Fx}),[t]),!t)return(0,b.jsx)(Rx,{children:(0,b.jsxs)(zx,{children:[(0,b.jsxs)(Bx,{href:`/#projects`,children:[(0,b.jsx)(r_,{"aria-hidden":`true`}),` All work`]}),(0,b.jsx)(Hx,{children:`Project not found`}),(0,b.jsx)(Ux,{children:`That page doesn’t exist. Pick a project from the deck instead.`})]})});let{name:r,outcome:i,meta:a,links:o,accent:s,screens:c}=t;return(0,b.jsxs)(Rx,{children:[(0,b.jsxs)(zx,{children:[(0,b.jsxs)(Bx,{href:`/#projects`,children:[(0,b.jsx)(r_,{"aria-hidden":`true`}),` All work`]}),(0,b.jsxs)(Vx,{children:[(0,b.jsx)($.div,{...Ix(0,n),children:(0,b.jsx)(Hx,{children:r})}),(0,b.jsxs)($.div,{...Ix(.08,n),children:[(0,b.jsx)(Ux,{children:i}),(0,b.jsx)(Wx,{children:a.map(({label:e,value:t})=>(0,b.jsxs)(`div`,{children:[(0,b.jsx)(`dt`,{children:e}),(0,b.jsx)(`dd`,{children:t})]},e))}),(0,b.jsx)(Gx,{children:o.map(({label:e,href:t})=>(0,b.jsxs)(`a`,{href:t,target:`_blank`,rel:`noopener noreferrer`,children:[e,` `,(0,b.jsx)(n_,{"aria-hidden":`true`})]},t))})]})]})]}),(0,b.jsxs)(Kx,{style:{"--accent":s},"aria-label":`${r} on desktop, tablet and phone`,children:[(0,b.jsx)($.div,{className:`desktop`,...Ix(.15,n),children:(0,b.jsx)(Gb,{src:c.desktop,alt:`${r} on desktop`,label:c.label})}),(0,b.jsx)($.div,{className:`tablet`,...Ix(.3,n),children:(0,b.jsx)(Kb,{src:c.tablet,alt:`${r} on a tablet`})}),(0,b.jsx)($.div,{className:`phone`,...Ix(.42,n),children:(0,b.jsx)(qb,{src:c.phones[0],alt:`${r} on a phone`})})]}),(0,b.jsx)(tx,{text:t.problem}),(0,b.jsx)(nx,{items:t.built}),(0,b.jsx)(rx,{steps:t.flow,accent:s}),(0,b.jsx)(ix,{items:t.results}),(0,b.jsx)(ax,{name:r,screens:c,accent:s}),(0,b.jsx)(ox,{text:t.learned}),(0,b.jsx)(sx,{study:Nx(e)}),(0,b.jsx)(qx,{})]})},Rx=F.main`
+`,yx=`/assets/dance-ai-front-CwFtEi9J.webp`,bx=`/assets/dance-ai-back-CZtgzK32.webp`,xx=`/assets/dance-ai-mobile-2-BUO6b-g0.webp`,Sx=`/assets/soccer-front-DSsStHoY.webp`,Cx=`/assets/soccer-back-Bx2h1xk7.webp`,wx=`/assets/soccer-mobile-2-EiVoUNRE.webp`,Tx=`/assets/paws-front-BovEnrXX.webp`,Ex=`/assets/paws-back-pRZDVZC4.webp`,Dx=`/assets/paws-mobile-2-rt5k6kNg.webp`,Ox=`/assets/safe-space-front-Dt7dlwvs.webp`,kx=`/assets/safe-space-back-BWp1lKu9.webp`,Ax=`/assets/safe-space-mobile-2-CZlIAIi8.webp`,jx=`/assets/artistic-front-CEIw2yce.webp`,Mx=[{slug:`dance-ai`,name:`Dance AI`,outcome:`Type how you feel, and a 3D character dances it out in real time.`,meta:[{label:`Role`,value:`ML engineer & full-stack developer`},{label:`Timeline`,value:`2025`},{label:`Award`,value:`Winner, World’s Largest Hackathon`},{label:`Stack`,value:`React, Three.js, Flask, RoBERTa, SVR`}],links:[{label:`GitHub`,href:`https://github.com/anishdhandore/Dance_AI_Cleanup`}],accent:`#7C5CFF`,screens:{label:`Dance AI`,desktop:yx,desktopAlt:bx,tablet:yx,phones:[bb,xx]},problem:`Most text tools stop at a label: “positive”, “negative”. I wanted emotion to become something you can see, so a sentence like “I just got the job!” turns into movement with the right energy, not just a tag.`,built:[{title:`Fine-tuned the emotion model`,body:`Trained a multi-label RoBERTa classifier (roberta-base, 125M parameters) on GoEmotions, grouped into 6 macro emotions. It reaches 86.6% accuracy with a Hamming loss of 0.134.`},{title:`Predicted how strongly you feel it`,body:`Added an SVR model that scores emotion intensity (MAE 0.155), so a mild “that’s nice” and an all-caps “I WON” move the dancer differently.`},{title:`Built the inference API`,body:`A Flask API loads both models straight from the Hugging Face Hub at startup, so nothing heavy ships with the code, and serves predictions to the front end.`},{title:`Made the 3D stage`,body:`React with React Three Fiber renders the character and maps each detected emotion to a dance, with every user getting their own isolated session.`}],flow:[{label:`Prompt`,detail:`React front end`},{label:`Flask API`,detail:`Hosted on Render`},{label:`RoBERTa + SVR`,detail:`Loaded from Hugging Face`},{label:`3D dance`,detail:`React Three Fiber`}],results:[{value:`86.6%`,label:`Emotion accuracy`},{value:`6`,label:`Emotions recognised`},{value:`~1.5 h`,label:`Total training time`},{value:`1st`,label:`World’s Largest Hackathon`}],learned:`Shipping a model is a different job from training one. Keeping the models on Hugging Face and loading them at runtime kept deploys small and let the front end and API live on separate hosts.`},{slug:`soccer-predictions`,name:`Soccer Match Predictions`,outcome:`Two decades of Premier League results, turned into a forecast of who dominates next.`,meta:[{label:`Role`,value:`Data scientist`},{label:`Timeline`,value:`2022`},{label:`Type`,value:`Data science project`},{label:`Stack`,value:`Python, Pandas, scikit-learn, Seaborn`}],links:[{label:`Notebook`,href:`https://colab.research.google.com/drive/1xT5S3eeZPcjfPexal9m9Z2PjLedSJ0wA?usp=sharing`}],accent:`#8DB516`,screens:{label:`Matchday`,desktop:Sx,desktopAlt:Cx,tablet:Sx,phones:[xb,wx]},problem:`Pundits argue about which clubs are on the rise, but rarely with numbers. I set out to answer two questions from the data: which clubs have been the best and worst so far, and which will improve the most next.`,built:[{title:`Cleaned the match history`,body:`Loaded and inspected a Premier League dataset going back to the 2000/01 season, then encoded clubs and results so they could be modelled.`},{title:`Measured every club`,body:`Counted matches won and lost for every club, home and away, and derived a win ratio. Chelsea leads with 411 wins and a 1.53 ratio; Liverpool follows at 1.42.`},{title:`Modelled future form`,body:`Split each club’s history into a first and second half to measure improvement, then fit a linear regression (MAE 31.97, RMSE 39.72 on a held-out test set).`},{title:`Picked the model that held up`,body:`Tried logistic regression too, but it overfit the small dataset, so I kept the simpler linear model and explained the trade-off.`}],flow:[{label:`Match data`,detail:`Premier League since 2000`},{label:`Pandas`,detail:`Wins, losses, ratios`},{label:`scikit-learn`,detail:`Linear regression`},{label:`Forecast`,detail:`Seaborn charts`}],results:[{value:`1.53`,label:`Top win ratio (Chelsea)`},{value:`411`,label:`Most matches won`},{value:`31.97`,label:`Test MAE`},{value:`44`,label:`Clubs analysed`}],learned:`A more complex model isn’t automatically better. With 44 clubs, the honest answer came from a simple model, clear charts and a careful train/test split.`},{slug:`preserving-paws`,name:`Preserving Paws`,outcome:`Look up any breed, find a shelter nearby, or report a dog in danger.`,meta:[{label:`Role`,value:`Solo: design, back end, data and automation`},{label:`Timeline`,value:`Jan 2021, one weekend`},{label:`Award`,value:`Best Community Project, ST Hacks 2021`},{label:`Stack`,value:`Django, Petfinder API, Wolfram Alpha, SQLite`}],links:[{label:`GitHub`,href:`https://github.com/anishdhandore/ST-Hacks-2021`},{label:`Demo video`,href:`https://www.youtube.com/watch?v=HzcST4-HYKE`},{label:`Devpost`,href:`https://devpost.com/software/preserving-paws`}],accent:`#F5B800`,screens:{label:`Preserving Paws`,desktop:Tx,desktopAlt:Ex,tablet:Tx,phones:[Sb,Dx]},problem:`People who want to help dogs hit three walls: they don’t know which breed fits them, they can’t find shelters nearby, and when they see abuse they don’t know who to tell. I wanted one place that handles all three.`,built:[{title:`Built a breed encyclopedia`,body:`Scraped breed details with Beautiful Soup and enriched them with the Wolfram Alpha API, so “Dogopedia” covers temperament, size and care for any breed.`},{title:`Connected real shelters`,body:`Used the Petfinder API to list adoption organisations and shelters near the user, with contact details and a link to each one.`},{title:`Automated emergency reports`,body:`Wrote the flow that takes an abuse report, stores it in SQLite and automatically emails the user their nearest World Animal Protection office through Gmail.`},{title:`Shipped it alone in a weekend`,body:`My first Django project and my first solo hackathon, including Django’s authentication system for user accounts.`}],flow:[{label:`Django app`,detail:`Auth, pages, forms`},{label:`Breed data`,detail:`Beautiful Soup + Wolfram Alpha`},{label:`Shelters`,detail:`Petfinder API`},{label:`Reports`,detail:`SQLite + automated Gmail`}],results:[{value:`1st`,label:`Best Community Project`},{value:`3`,label:`Tools in one app`},{value:`Solo`,label:`Designed and built alone`},{value:`Django`,label:`First project in it`}],learned:`Doing a hackathon solo forced me to prioritise ruthlessly. I learned Django’s auth system, how to model data in SQLite, and how to send automated, relevant emails to users.`},{slug:`safe-space`,name:`Safe Space`,outcome:`Paste any link and find out, in seconds, whether it’s safe for kids.`,meta:[{label:`Role`,value:`Front-end & back-end developer`},{label:`Team`,value:`With Kyle Java and Neala Mendoza`},{label:`Timeline`,value:`Dec 2020, CatHacks Winter`},{label:`Stack`,value:`Flask, Beautiful Soup, MongoDB`}],links:[{label:`GitHub`,href:`https://github.com/kylejava/CatHacks-Winter-Edition-2020`}],accent:`#12A9D6`,screens:{label:`SafeSpace`,desktop:Ox,desktopAlt:kx,tablet:Ox,phones:[Cb,Ax]},problem:`The internet is a great place for kids to learn, but plenty of pages are full of language they shouldn’t see. Parents and teachers needed a quick way to check a page before handing it over.`,built:[{title:`Wrote the page scanner`,body:`A Beautiful Soup scraper that reads every word on a page, counts any profanity it finds and returns a clear verdict.`},{title:`Made repeat checks instant`,body:`Scraping took a few seconds, so we store each verdict in MongoDB and check the database first. Pages we’ve seen before return immediately.`},{title:`Built the Flask app`,body:`Worked across the Flask back end and the Bootstrap front end: the scan form, the results page and the routes between them.`},{title:`Switched databases mid-hackathon`,body:`We started on Redis after a workshop, couldn’t get it working in time, and moved to MongoDB, learning it from the docs as we went.`}],flow:[{label:`URL`,detail:`Scan form`},{label:`Cache check`,detail:`MongoDB`},{label:`Scraper`,detail:`Beautiful Soup`},{label:`Verdict`,detail:`Saved for next time`}],results:[{value:`Instant`,label:`Repeat checks, cached`},{value:`3`,label:`Person team`},{value:`1`,label:`Database swap, on the clock`}],learned:`Caching changed the product more than any algorithm tweak. I also learned MongoDB from scratch and got much stronger with Flask and web scraping.`},{slug:`our-artistic-space`,name:`Our Artistic Space`,outcome:`Every museum, gallery, art school and supply store near you, in one search.`,meta:[{label:`Role`,value:`Full-stack developer`},{label:`Team`,value:`With Michael Larkin and Kyle Java`},{label:`Timeline`,value:`Nov 2020, Hacks and Crafts (MLH)`},{label:`Award`,value:`Best Beginner Hack`}],links:[{label:`GitHub`,href:`https://github.com/anishdhandore/HacksAndCrafts2020`},{label:`Devpost`,href:`https://devpost.com/software/our-artistic-space`}],accent:`#E9B872`,screens:{label:`Our Artistic Space`,desktop:jx,desktopAlt:`/assets/artistic-back-DXMxeyLc.webp`,tablet:jx,phones:[wb,`/assets/artistic-mobile-2-DG69wVcl.webp`]},problem:`Local art scenes are easy to miss. Many people don’t know which museums, galleries, schools or supply stores are in their own city, and the businesses miss out on visitors.`,built:[{title:`Search by city and category`,body:`Pick a city or zip code and a category, and the Flask back end queries the Yelp API for up to ten matching places.`},{title:`Turned results into actions`,body:`Each result shows the name, address and phone number, with a button that opens directions in Google Maps.`},{title:`Deployed it for real`,body:`Shipped the app on Google App Engine and connected a custom domain, ourartistic.space, during the hackathon.`},{title:`Learned to work as a team`,body:`Our first collaborative GitHub project: branches, pull requests and sorting out merge conflicts under time pressure.`}],flow:[{label:`City + category`,detail:`Bootstrap UI`},{label:`Flask`,detail:`Python back end`},{label:`Yelp API`,detail:`Local businesses`},{label:`Google App Engine`,detail:`ourartistic.space`}],results:[{value:`1st`,label:`Best Beginner Hack`},{value:`4`,label:`Art categories`},{value:`Live`,label:`Custom domain, deployed`},{value:`3`,label:`Person team`}],learned:`Deploying is part of building. Getting the app onto Google Cloud and wiring up a custom domain took a whole day, and taught me more than the code did.`}],Nx=e=>Mx.find(t=>t.slug===e)??null,Px=e=>Mx[(Mx.findIndex(t=>t.slug===e)+1)%Mx.length],Fx=[.16,1,.3,1],Ix=`Anish Dhandore`,Lx=(e,t)=>({initial:!t&&{opacity:0,y:40},animate:{opacity:1,y:0},transition:{duration:1,ease:Fx,delay:e}}),Rx=({slug:e})=>{let t=Nx(e),n=!!Fh();if((0,y.useEffect)(()=>(document.title=t?`${t.name} · ${Ix}`:Ix,()=>{document.title=Ix}),[t]),!t)return(0,b.jsx)(zx,{children:(0,b.jsxs)(Bx,{children:[(0,b.jsxs)(Vx,{href:`/#projects`,children:[(0,b.jsx)(r_,{"aria-hidden":`true`}),` All work`]}),(0,b.jsx)(Ux,{children:`Project not found`}),(0,b.jsx)(Wx,{children:`That page doesn’t exist. Pick a project from the deck instead.`})]})});let{name:r,outcome:i,meta:a,links:o,accent:s,screens:c}=t;return(0,b.jsxs)(zx,{children:[(0,b.jsxs)(Bx,{children:[(0,b.jsxs)(Vx,{href:`/#projects`,children:[(0,b.jsx)(r_,{"aria-hidden":`true`}),` All work`]}),(0,b.jsxs)(Hx,{children:[(0,b.jsx)($.div,{...Lx(0,n),children:(0,b.jsx)(Ux,{children:r})}),(0,b.jsxs)($.div,{...Lx(.08,n),children:[(0,b.jsx)(Wx,{children:i}),(0,b.jsx)(Gx,{children:a.map(({label:e,value:t})=>(0,b.jsxs)(`div`,{children:[(0,b.jsx)(`dt`,{children:e}),(0,b.jsx)(`dd`,{children:t})]},e))}),(0,b.jsx)(Kx,{children:o.map(({label:e,href:t})=>(0,b.jsxs)(`a`,{href:t,target:`_blank`,rel:`noopener noreferrer`,children:[e,` `,(0,b.jsx)(n_,{"aria-hidden":`true`})]},t))})]})]})]}),(0,b.jsxs)(qx,{style:{"--accent":s},"aria-label":`${r} on desktop, tablet and phone`,children:[(0,b.jsx)($.div,{className:`desktop`,...Lx(.15,n),children:(0,b.jsx)(Kb,{src:c.desktop,alt:`${r} on desktop`,label:c.label})}),(0,b.jsx)($.div,{className:`tablet`,...Lx(.3,n),children:(0,b.jsx)(qb,{src:c.tablet,alt:`${r} on a tablet`})}),(0,b.jsx)($.div,{className:`phone`,...Lx(.42,n),children:(0,b.jsx)(Jb,{src:c.phones[0],alt:`${r} on a phone`})})]}),(0,b.jsx)(nx,{text:t.problem}),(0,b.jsx)(rx,{items:t.built}),(0,b.jsx)(ix,{steps:t.flow,accent:s}),(0,b.jsx)(ax,{items:t.results}),(0,b.jsx)(ox,{name:r,screens:c,accent:s}),(0,b.jsx)(sx,{text:t.learned}),(0,b.jsx)(cx,{study:Px(e)}),(0,b.jsx)(Jx,{})]})},zx=F.main`
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
-`,zx=F.header`
+`,Bx=F.header`
   max-width: var(--content-max);
   margin: 0 auto;
   padding: calc(var(--nav-offset) + var(--nav-height) + clamp(1.5rem, 1rem + 2vw, 3rem)) var(--space-gutter) 0;
-`,Bx=F.a`
+`,Vx=F.a`
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -1351,7 +1357,7 @@ Error generating stack: `+e.message+`
     outline-offset: 3px;
     border-radius: 4px;
   }
-`,Vx=F.div`
+`,Hx=F.div`
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
   gap: clamp(1.5rem, 1rem + 3vw, 4rem);
@@ -1360,19 +1366,19 @@ Error generating stack: `+e.message+`
   @media (max-width: 899px) {
     grid-template-columns: minmax(0, 1fr);
   }
-`,Hx=F.h1`
+`,Ux=F.h1`
   font-family: var(--font-display);
   font-size: clamp(3rem, 1.5rem + 5vw, 6.5rem);
   font-weight: 500;
   line-height: 0.95;
   letter-spacing: -0.05em;
-`,Ux=F.p`
+`,Wx=F.p`
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem);
   line-height: 1.2;
   letter-spacing: -0.025em;
   max-width: 28ch;
-`,Wx=F.dl`
+`,Gx=F.dl`
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem 2rem;
@@ -1391,7 +1397,7 @@ Error generating stack: `+e.message+`
   @media (max-width: 479px) {
     grid-template-columns: minmax(0, 1fr);
   }
-`,Gx=F.div`
+`,Kx=F.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
@@ -1423,7 +1429,7 @@ Error generating stack: `+e.message+`
     outline: 2px solid var(--color-ink);
     outline-offset: 3px;
   }
-`,Kx=F.section`
+`,qx=F.section`
   position: relative;
   margin: clamp(2.5rem, 2rem + 3vw, 4.5rem) clamp(8px, 1vw, 16px) 0;
   padding: clamp(2.5rem, 2rem + 4vw, 6rem) var(--space-gutter) clamp(3rem, 2rem + 5vw, 7rem);
@@ -1474,9 +1480,9 @@ Error generating stack: `+e.message+`
       margin-bottom: -18%;
     }
   }
-`,qx=F.div`
+`,Jx=F.div`
   height: clamp(3rem, 2rem + 4vw, 6rem);
-`,Jx=`app:navigate`,Yx=/^\/work\/([a-z0-9-]+)\/?$/,Xx=30,Zx=e=>e.match(Yx)?.[1]??null,Qx=e=>{if(!e)return!1;let t=document.getElementById(e.slice(1));if(!t)return!1;if(t.dataset.scrollTo===`end`){let e=t.getBoundingClientRect().top+window.scrollY;return window.scrollTo({top:e+t.offsetHeight-window.innerHeight*1.05,behavior:`instant`}),!0}return t.scrollIntoView({behavior:`smooth`,block:`start`}),!0},$x=e=>{let t=new URL(e,window.location.href),n=t.pathname===window.location.pathname;if(n&&t.hash&&Qx(t.hash)){window.history.replaceState(null,``,t.pathname+t.hash);return}if(n||(window.history.pushState(null,``,t.pathname+t.hash),window.dispatchEvent(new Event(Jx))),!t.hash){requestAnimationFrame(()=>window.scrollTo({top:0,behavior:`instant`}));return}let r=Xx,i=()=>{Qx(t.hash)||--r>0&&requestAnimationFrame(i)};window.scrollTo({top:0,behavior:`instant`}),requestAnimationFrame(i)},eS=()=>{let[e,t]=(0,y.useState)(()=>window.location.pathname);return(0,y.useEffect)(()=>{let e=()=>t(window.location.pathname);return window.addEventListener(`popstate`,e),window.addEventListener(Jx,e),()=>{window.removeEventListener(`popstate`,e),window.removeEventListener(Jx,e)}},[]),{pathname:e}},tS=()=>{(0,y.useEffect)(()=>{let e=e=>{if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=e.target instanceof Element?e.target.closest(`a[href]`):null;if(!t||t.target===`_blank`||t.hasAttribute(`download`))return;let n=t.getAttribute(`href`);n.startsWith(`/`)&&!n.startsWith(`//`)&&(e.preventDefault(),$x(n))};return document.addEventListener(`click`,e),()=>document.removeEventListener(`click`,e)},[])},nS=2.4,rS=4,iS={month:6,quarter:10,year:16},aS=9,oS=[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`],sS=e=>e*Math.PI/180,cS=(e,t)=>({x:e*Math.cos(sS(t)),y:e*Math.sin(sS(t))}),lS=(e,t,n)=>{let r=cS(e,t),i=cS(e,n),a=+(Math.abs(n-t)>180),o=+(n>t);return`M ${r.x.toFixed(2)} ${r.y.toFixed(2)} A ${e} ${e} 0 ${a} ${o} ${i.x.toFixed(2)} ${i.y.toFixed(2)}`},uS=({scale:e,month:t,radius:n})=>{let{ticks:r,totalMonths:i}=e,a=Q(t,e=>e*nS),o=Q(t,e=>i?Math.min(1,Math.max(0,e/i)):0),s=-i*nS,c=n-rS,l=c-iS.year-aS;return(0,b.jsxs)(dS,{style:{"--r":`${n}px`},children:[(0,b.jsxs)($.svg,{viewBox:`${-n} ${-n} ${n*2} ${n*2}`,width:n*2,height:n*2,"aria-hidden":`true`,style:{rotate:a},children:[(0,b.jsx)(`circle`,{r:n,fill:`none`,stroke:`var(--wheel-line)`,strokeWidth:`1`}),(0,b.jsx)($.path,{d:lS(n,0,s),fill:`none`,stroke:`var(--color-ink)`,strokeWidth:`2`,strokeLinecap:`round`,style:{pathLength:o}}),r.map(({m:e,year:t,month:n})=>{let r=-e*nS,a=t?`year`:n%3==0?`quarter`:`month`,o=cS(c,r),s=cS(c-iS[a],r),u=cS(l,r);return(0,b.jsxs)(`g`,{children:[(0,b.jsx)(`line`,{x1:o.x,y1:o.y,x2:s.x,y2:s.y,className:`tick ${a}`}),(0,b.jsx)(`text`,{x:u.x,y:u.y,transform:`rotate(${r} ${u.x} ${u.y})`,textAnchor:`end`,dominantBaseline:`middle`,className:e===i?`now`:t?`year`:`month`,children:e===i?`NOW`:t??oS[n]})]},e)})]}),(0,b.jsx)(fS,{"aria-hidden":`true`})]})},dS=F.div`
+`,Yx=`app:navigate`,Xx=/^\/work\/([a-z0-9-]+)\/?$/,Zx=30,Qx=e=>e.match(Xx)?.[1]??null,$x=e=>{if(!e)return!1;let t=document.getElementById(e.slice(1));if(!t)return!1;if(t.dataset.scrollTo===`end`){let e=t.getBoundingClientRect().top+window.scrollY;return window.scrollTo({top:e+t.offsetHeight-window.innerHeight*1.05,behavior:`instant`}),!0}return t.scrollIntoView({behavior:`smooth`,block:`start`}),!0},eS=e=>{let t=new URL(e,window.location.href),n=t.pathname===window.location.pathname;if(n&&t.hash&&$x(t.hash)){window.history.replaceState(null,``,t.pathname+t.hash);return}if(n||(window.history.pushState(null,``,t.pathname+t.hash),window.dispatchEvent(new Event(Yx))),!t.hash){requestAnimationFrame(()=>window.scrollTo({top:0,behavior:`instant`}));return}let r=Zx,i=()=>{$x(t.hash)||--r>0&&requestAnimationFrame(i)};window.scrollTo({top:0,behavior:`instant`}),requestAnimationFrame(i)},tS=()=>{let[e,t]=(0,y.useState)(()=>window.location.pathname);return(0,y.useEffect)(()=>{let e=()=>t(window.location.pathname);return window.addEventListener(`popstate`,e),window.addEventListener(Yx,e),()=>{window.removeEventListener(`popstate`,e),window.removeEventListener(Yx,e)}},[]),{pathname:e}},nS=()=>{(0,y.useEffect)(()=>{let e=e=>{if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;let t=e.target instanceof Element?e.target.closest(`a[href]`):null;if(!t||t.target===`_blank`||t.hasAttribute(`download`))return;let n=t.getAttribute(`href`);n.startsWith(`/`)&&!n.startsWith(`//`)&&(e.preventDefault(),eS(n))};return document.addEventListener(`click`,e),()=>document.removeEventListener(`click`,e)},[])},rS=2.4,iS=4,aS={month:6,quarter:10,year:16},oS=9,sS=[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`],cS=e=>e*Math.PI/180,lS=(e,t)=>({x:e*Math.cos(cS(t)),y:e*Math.sin(cS(t))}),uS=(e,t,n)=>{let r=lS(e,t),i=lS(e,n),a=+(Math.abs(n-t)>180),o=+(n>t);return`M ${r.x.toFixed(2)} ${r.y.toFixed(2)} A ${e} ${e} 0 ${a} ${o} ${i.x.toFixed(2)} ${i.y.toFixed(2)}`},dS=({scale:e,month:t,radius:n})=>{let{ticks:r,totalMonths:i}=e,a=Q(t,e=>e*rS),o=Q(t,e=>i?Math.min(1,Math.max(0,e/i)):0),s=-i*rS,c=n-iS,l=c-aS.year-oS;return(0,b.jsxs)(fS,{style:{"--r":`${n}px`},children:[(0,b.jsxs)($.svg,{viewBox:`${-n} ${-n} ${n*2} ${n*2}`,width:n*2,height:n*2,"aria-hidden":`true`,style:{rotate:a},children:[(0,b.jsx)(`circle`,{r:n,fill:`none`,stroke:`var(--wheel-line)`,strokeWidth:`1`}),(0,b.jsx)($.path,{d:uS(n,0,s),fill:`none`,stroke:`var(--color-ink)`,strokeWidth:`2`,strokeLinecap:`round`,style:{pathLength:o}}),r.map(({m:e,year:t,month:n})=>{let r=-e*rS,a=t?`year`:n%3==0?`quarter`:`month`,o=lS(c,r),s=lS(c-aS[a],r),u=lS(l,r);return(0,b.jsxs)(`g`,{children:[(0,b.jsx)(`line`,{x1:o.x,y1:o.y,x2:s.x,y2:s.y,className:`tick ${a}`}),(0,b.jsx)(`text`,{x:u.x,y:u.y,transform:`rotate(${r} ${u.x} ${u.y})`,textAnchor:`end`,dominantBaseline:`middle`,className:e===i?`now`:t?`year`:`month`,children:e===i?`NOW`:t??sS[n]})]},e)})]}),(0,b.jsx)(pS,{"aria-hidden":`true`})]})},fS=F.div`
   position: absolute;
   /* the wheel's centre sits off-screen left; its rim passes through --rim-x */
   left: calc(var(--rim-x) - var(--r) * 2);
@@ -1539,7 +1545,7 @@ Error generating stack: `+e.message+`
     fill: var(--color-live);
     font-weight: 600;
   }
-`,fS=F.span`
+`,pS=F.span`
   position: absolute;
   left: 100%;
   top: 50%;
@@ -1558,7 +1564,7 @@ Error generating stack: `+e.message+`
     border-right: 6px solid var(--color-ink);
     transform: translate(-50%, -50%);
   }
-`,pS=/^(\d{4})-(\d{2})$/,mS=e=>{let t=pS.exec(e);if(!t)throw RangeError(`Expected a YYYY-MM date, got "${e}"`);return{year:Number(t[1]),month:Number(t[2])-1}},hS=e=>`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}`,gS=(e,t)=>{let n=mS(t),r=mS(e);return(r.year-n.year)*12+(r.month-n.month)},_S=(e,t)=>{let n=e[0].start,r=gS(hS(t),n),{year:i,month:a}=mS(n);return{origin:n,totalMonths:r,ticks:Array.from({length:r+1},(e,t)=>{let n=(a+t)%12,r=i+Math.floor((a+t)/12);return{m:t,month:n,year:n===0?r:null}}),nodes:e.map(e=>gS(e.start,n))}},vS=(e,[t,n])=>{let r=(n-t)/e.length,i=[0],a=[e[0]];return e.forEach((e,n)=>{let o=t+n*r,s=n===0?o:o+r*.5800000000000001;i.push(s,o+r),a.push(e,e)}),i.push(1),a.push(e[e.length-1]),i[1]===0?{input:i.slice(1),output:a.slice(1)}:{input:i,output:a}},yS=(e,t,[n,r])=>{let i=Math.min(1,Math.max(0,(e-n)/(r-n)));return Math.min(t-1,Math.floor(i*t))},bS=(e,t,n)=>{let r=gS(t??hS(n),e)+1,i=Math.floor(r/12),a=r%12,o=(e,t)=>e?`${e} ${t}${e===1?``:`s`}`:``;return[o(i,`yr`),o(a,`mo`)].filter(Boolean).join(` `)||`1 mo`},xS=[{start:`2021-08`,end:`2022-12`,role:`Computer Engineering Tutor`,company:`CSUSM STEM Success Center`,location:`San Marcos, CA`,summary:`Taught the fundamentals of programming and software design to undergraduate engineers.`,highlights:[`Tutored students in C++ programming, object-oriented design, data structures and algorithmic problem-solving.`,`Wrote structured reference materials and worked example solutions for core software design and architecture concepts.`],impact:`Gave students reusable study material that reinforced design concepts beyond one-on-one sessions.`,metric:null,tags:[`C++`,`OOP`,`Data structures`,`Algorithms`]},{start:`2022-01`,end:`2024-08`,role:`President`,company:`Google Developer Student Clubs`,location:`CSUSM`,summary:`Led the campus developer community, running technical workshops and student project teams.`,highlights:[`Led technical workshops on Python, C++ and software engineering fundamentals, with a focus on system design and performance.`,`Coordinated student teams for hackathons and projects, facilitating design discussions, code reviews and collaboration.`],impact:`Gave students practical grounding in software engineering, and helped hackathon teams turn ideas into working projects.`,metric:{value:`1,000+`,label:`students reached through workshops`},tags:[`Leadership`,`Python`,`C++`,`System design`]},{start:`2023-03`,end:`2023-05`,role:`Software Developer`,company:`Swift Technologies`,location:`Remote`,summary:`Shipped front-end features for data-driven internal tools.`,highlights:[`Developed and shipped features in React and TypeScript, integrating REST APIs for workflows used by internal stakeholders.`,`Designed reusable UI components and service layers with object-oriented patterns (Factory, Strategy).`,`Added analytics instrumentation and input validation with an observer-style pattern to track feature usage.`],impact:`Made the codebase easier to maintain and gave the team usage data to guide product improvements.`,metric:{value:`~25%`,label:`less duplicate code`},tags:[`React`,`TypeScript`,`REST APIs`,`Design patterns`]},{start:`2025-02`,end:null,role:`Software Engineer`,company:`SGS North America`,location:`San Diego, CA`,summary:`Building backend automation for production test pipelines at a global testing, inspection and certification company.`,highlights:[`Designed and implemented backend automation services in Python that orchestrate distributed validation workflows.`,`Built modular, reusable service components and data parsers that standardize measurement ingestion across device configurations and projects.`,`Applied abstraction, modular design, structured logging and robust error handling throughout.`],impact:`Improved the reliability, maintainability and observability of test systems in a regulated environment, supporting scalable execution of production test pipelines.`,metric:null,tags:[`Python`,`Automation`,`Distributed workflows`,`Observability`]}],SS=[.06,.94],CS={stiffness:55,damping:20,mass:.9,restDelta:5e-4},wS=`(max-width: 899px)`,TS=[.16,1,.3,1],ES=[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`],DS=e=>{let[t,n]=e.split(`-`);return`${ES[Number(n)-1]} ${t}`},OS=({now:e=new Date})=>{let t=(0,y.useRef)(null),n=!!Fh(),r=$h(wS),i=_S(xS,e),{scrollYProgress:a}=Dh({target:t,offset:[`start start`,`end end`]}),o=Mh(a,CS),s=n?a:o,{input:c,output:l}=vS(i.nodes,SS),u=Q(s,c,l),[d,f]=(0,y.useState)(0);Wm(s,`change`,e=>f(yS(e,xS.length,SS)));let p=xS[d],m=p.end===null;return(0,b.jsx)(kS,{id:`experience`,ref:t,"aria-labelledby":`experience-heading`,$count:xS.length,"data-hide-trail":!0,children:(0,b.jsxs)(AS,{children:[(0,b.jsx)(uS,{scale:i,month:u,radius:r?380:560}),(0,b.jsxs)(jS,{children:[(0,b.jsx)(NS,{children:(0,b.jsx)(`h2`,{id:`experience-heading`,children:`Experience`})}),(0,b.jsx)(MS,{children:(0,b.jsx)(jp,{mode:`wait`,initial:!1,children:(0,b.jsxs)($.article,{initial:!n&&{opacity:0,y:24},animate:{opacity:1,y:0},exit:n?{opacity:0}:{opacity:0,y:-18},transition:{duration:.45,ease:TS},"aria-live":`polite`,children:[(0,b.jsxs)(PS,{children:[m&&(0,b.jsx)(FS,{"aria-hidden":`true`}),DS(p.start),` — `,m?`Present`:DS(p.end),(0,b.jsxs)(`span`,{children:[` · `,bS(p.start,p.end,e)]})]}),(0,b.jsx)(IS,{children:p.role}),(0,b.jsxs)(LS,{children:[p.company,(0,b.jsxs)(`span`,{children:[` · `,p.location]})]}),(0,b.jsx)(RS,{children:p.summary}),p.highlights.length>0&&(0,b.jsx)(BS,{children:p.highlights.map(e=>(0,b.jsx)(`li`,{children:e},e))}),(0,b.jsxs)(VS,{children:[p.metric&&(0,b.jsxs)(US,{children:[(0,b.jsx)(`b`,{children:p.metric.value}),(0,b.jsx)(`span`,{children:p.metric.label})]}),(0,b.jsxs)(`div`,{children:[(0,b.jsx)(HS,{children:`Impact`}),(0,b.jsx)(`p`,{children:p.impact})]})]}),(0,b.jsx)(WS,{children:p.tags.map(e=>(0,b.jsx)(`li`,{children:e},e))})]},p.company)})})]}),(0,b.jsx)(GS,{as:`ol`,children:xS.map(e=>(0,b.jsxs)(`li`,{children:[e.role,`, `,e.company,`, `,DS(e.start),` to `,e.end?DS(e.end):`present`]},e.company))})]})})},kS=F.section`
+`,mS=/^(\d{4})-(\d{2})$/,hS=e=>{let t=mS.exec(e);if(!t)throw RangeError(`Expected a YYYY-MM date, got "${e}"`);return{year:Number(t[1]),month:Number(t[2])-1}},gS=e=>`${e.getFullYear()}-${String(e.getMonth()+1).padStart(2,`0`)}`,_S=(e,t)=>{let n=hS(t),r=hS(e);return(r.year-n.year)*12+(r.month-n.month)},vS=(e,t)=>{let n=e[0].start,r=_S(gS(t),n),{year:i,month:a}=hS(n);return{origin:n,totalMonths:r,ticks:Array.from({length:r+1},(e,t)=>{let n=(a+t)%12,r=i+Math.floor((a+t)/12);return{m:t,month:n,year:n===0?r:null}}),nodes:e.map(e=>_S(e.start,n))}},yS=(e,[t,n])=>{let r=(n-t)/e.length,i=[0],a=[e[0]];return e.forEach((e,n)=>{let o=t+n*r,s=n===0?o:o+r*.5800000000000001;i.push(s,o+r),a.push(e,e)}),i.push(1),a.push(e[e.length-1]),i[1]===0?{input:i.slice(1),output:a.slice(1)}:{input:i,output:a}},bS=(e,t,[n,r])=>{let i=Math.min(1,Math.max(0,(e-n)/(r-n)));return Math.min(t-1,Math.floor(i*t))},xS=(e,t,n)=>{let r=_S(t??gS(n),e)+1,i=Math.floor(r/12),a=r%12,o=(e,t)=>e?`${e} ${t}${e===1?``:`s`}`:``;return[o(i,`yr`),o(a,`mo`)].filter(Boolean).join(` `)||`1 mo`},SS=[{start:`2021-08`,end:`2022-12`,role:`Computer Engineering Tutor`,company:`CSUSM STEM Success Center`,location:`San Marcos, CA`,summary:`Taught the fundamentals of programming and software design to undergraduate engineers.`,highlights:[`Tutored students in C++ programming, object-oriented design, data structures and algorithmic problem-solving.`,`Wrote structured reference materials and worked example solutions for core software design and architecture concepts.`],impact:`Gave students reusable study material that reinforced design concepts beyond one-on-one sessions.`,metric:null,tags:[`C++`,`OOP`,`Data structures`,`Algorithms`]},{start:`2022-01`,end:`2024-08`,role:`President`,company:`Google Developer Student Clubs`,location:`CSUSM`,summary:`Led the campus developer community, running technical workshops and student project teams.`,highlights:[`Led technical workshops on Python, C++ and software engineering fundamentals, with a focus on system design and performance.`,`Coordinated student teams for hackathons and projects, facilitating design discussions, code reviews and collaboration.`],impact:`Gave students practical grounding in software engineering, and helped hackathon teams turn ideas into working projects.`,metric:{value:`1,000+`,label:`students reached through workshops`},tags:[`Leadership`,`Python`,`C++`,`System design`]},{start:`2023-03`,end:`2023-05`,role:`Software Developer`,company:`Swift Technologies`,location:`Remote`,summary:`Shipped front-end features for data-driven internal tools.`,highlights:[`Developed and shipped features in React and TypeScript, integrating REST APIs for workflows used by internal stakeholders.`,`Designed reusable UI components and service layers with object-oriented patterns (Factory, Strategy).`,`Added analytics instrumentation and input validation with an observer-style pattern to track feature usage.`],impact:`Made the codebase easier to maintain and gave the team usage data to guide product improvements.`,metric:{value:`~25%`,label:`less duplicate code`},tags:[`React`,`TypeScript`,`REST APIs`,`Design patterns`]},{start:`2025-02`,end:null,role:`Software Engineer`,company:`SGS North America`,location:`San Diego, CA`,summary:`Building backend automation for production test pipelines at a global testing, inspection and certification company.`,highlights:[`Designed and implemented backend automation services in Python that orchestrate distributed validation workflows.`,`Built modular, reusable service components and data parsers that standardize measurement ingestion across device configurations and projects.`,`Applied abstraction, modular design, structured logging and robust error handling throughout.`],impact:`Improved the reliability, maintainability and observability of test systems in a regulated environment, supporting scalable execution of production test pipelines.`,metric:null,tags:[`Python`,`Automation`,`Distributed workflows`,`Observability`]}],CS=[.06,.94],wS={stiffness:55,damping:20,mass:.9,restDelta:5e-4},TS=`(max-width: 899px)`,ES=[.16,1,.3,1],DS=[`Jan`,`Feb`,`Mar`,`Apr`,`May`,`Jun`,`Jul`,`Aug`,`Sep`,`Oct`,`Nov`,`Dec`],OS=e=>{let[t,n]=e.split(`-`);return`${DS[Number(n)-1]} ${t}`},kS=({now:e=new Date})=>{let t=(0,y.useRef)(null),n=!!Fh(),r=$h(TS),i=vS(SS,e),{scrollYProgress:a}=Dh({target:t,offset:[`start start`,`end end`]}),o=Mh(a,wS),s=n?a:o,{input:c,output:l}=yS(i.nodes,CS),u=Q(s,c,l),[d,f]=(0,y.useState)(0);Wm(s,`change`,e=>f(bS(e,SS.length,CS)));let p=SS[d],m=p.end===null;return(0,b.jsx)(AS,{id:`experience`,ref:t,"aria-labelledby":`experience-heading`,$count:SS.length,"data-hide-trail":!0,children:(0,b.jsxs)(jS,{children:[(0,b.jsx)(dS,{scale:i,month:u,radius:r?380:560}),(0,b.jsxs)(MS,{children:[(0,b.jsx)(PS,{children:(0,b.jsx)(`h2`,{id:`experience-heading`,children:`Experience`})}),(0,b.jsx)(NS,{children:(0,b.jsx)(jp,{mode:`wait`,initial:!1,children:(0,b.jsxs)($.article,{initial:!n&&{opacity:0,y:24},animate:{opacity:1,y:0},exit:n?{opacity:0}:{opacity:0,y:-18},transition:{duration:.45,ease:ES},"aria-live":`polite`,children:[(0,b.jsxs)(FS,{children:[m&&(0,b.jsx)(IS,{"aria-hidden":`true`}),OS(p.start),` — `,m?`Present`:OS(p.end),(0,b.jsxs)(`span`,{children:[` · `,xS(p.start,p.end,e)]})]}),(0,b.jsx)(LS,{children:p.role}),(0,b.jsxs)(RS,{children:[p.company,(0,b.jsxs)(`span`,{children:[` · `,p.location]})]}),(0,b.jsx)(zS,{children:p.summary}),p.highlights.length>0&&(0,b.jsx)(VS,{children:p.highlights.map(e=>(0,b.jsx)(`li`,{children:e},e))}),(0,b.jsxs)(HS,{children:[p.metric&&(0,b.jsxs)(WS,{children:[(0,b.jsx)(`b`,{children:p.metric.value}),(0,b.jsx)(`span`,{children:p.metric.label})]}),(0,b.jsxs)(`div`,{children:[(0,b.jsx)(US,{children:`Impact`}),(0,b.jsx)(`p`,{children:p.impact})]})]}),(0,b.jsx)(GS,{children:p.tags.map(e=>(0,b.jsx)(`li`,{children:e},e))})]},p.company)})})]}),(0,b.jsx)(KS,{as:`ol`,children:SS.map(e=>(0,b.jsxs)(`li`,{children:[e.role,`, `,e.company,`, `,OS(e.start),` to `,e.end?OS(e.end):`present`]},e.company))})]})})},AS=F.section`
   position: relative;
   height: ${({$count:e})=>e*80+40}vh;
   background: var(--color-paper);
@@ -1566,17 +1572,17 @@ Error generating stack: `+e.message+`
   font-family: var(--font-body);
   overflow: clip;
   overflow-anchor: none;
-`,AS=F.div`
+`,jS=F.div`
   position: sticky;
   top: 0;
   height: 100svh;
   overflow: hidden;
   --rim-x: clamp(150px, 24vw, 360px);
 
-  @media ${wS} {
+  @media ${TS} {
     --rim-x: 64px;
   }
-`,jS=F.div`
+`,MS=F.div`
   position: absolute;
   z-index: 1;
   left: ${`calc(var(--rim-x) + clamp(5.5rem, 3.5rem + 5vw, 9rem))`};
@@ -1588,13 +1594,13 @@ Error generating stack: `+e.message+`
   gap: clamp(1.5rem, 5vh, 3.5rem);
   max-width: 40rem;
 
-  @media ${wS} {
+  @media ${TS} {
     left: calc(var(--rim-x) + 2.75rem);
   }
-`,MS=F.div`
+`,NS=F.div`
   flex: 1;
   min-height: 0;
-`,NS=F.header`
+`,PS=F.header`
   flex-shrink: 0;
 
   h2 {
@@ -1603,7 +1609,7 @@ Error generating stack: `+e.message+`
     font-weight: 500;
     letter-spacing: -0.04em;
   }
-`,PS=F.p`
+`,FS=F.p`
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1615,7 +1621,7 @@ Error generating stack: `+e.message+`
     color: var(--color-ink-soft);
     font-weight: 400;
   }
-`,FS=F.i`
+`,IS=F.i`
   position: relative;
   width: 8px;
   height: 8px;
@@ -1639,7 +1645,7 @@ Error generating stack: `+e.message+`
   @media (prefers-reduced-motion: reduce) {
     &::after { animation: none; }
   }
-`,IS=F.h3`
+`,LS=F.h3`
   margin-top: 0.9rem;
   font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem);
@@ -1652,10 +1658,10 @@ Error generating stack: `+e.message+`
     font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem);
   }
 
-  @media ${wS} {
+  @media ${TS} {
     font-size: 1.6rem;
   }
-`,LS=F.p`
+`,RS=F.p`
   margin-top: 0.6rem;
   font-size: 1.125rem;
   font-weight: 500;
@@ -1666,19 +1672,19 @@ Error generating stack: `+e.message+`
     font-weight: 400;
   }
 
-  @media ${wS} {
+  @media ${TS} {
     font-size: 1rem;
   }
-`,RS=F.p`
+`,zS=F.p`
   margin-top: 1rem;
   max-width: 52ch;
   line-height: 1.55;
   color: var(--color-ink);
 
-  @media ${wS} {
+  @media ${TS} {
     font-size: var(--text-sm);
   }
-`,zS=`(max-height: 780px)`,BS=F.ul`
+`,BS=`(max-height: 780px)`,VS=F.ul`
   list-style: none;
   margin-top: 1.1rem;
   display: grid;
@@ -1694,7 +1700,7 @@ Error generating stack: `+e.message+`
   }
 
   /* hairline dash instead of a bullet */
-  @media ${zS} {
+  @media ${BS} {
     margin-top: 0.8rem;
     gap: 0.35rem;
     line-height: 1.45;
@@ -1711,10 +1717,10 @@ Error generating stack: `+e.message+`
   }
 
   /* too long for a narrow column: phones get the summary and impact instead */
-  @media ${wS} {
+  @media ${TS} {
     display: none;
   }
-`,VS=F.div`
+`,HS=F.div`
   display: flex;
   align-items: stretch;
   gap: 1.25rem;
@@ -1723,7 +1729,7 @@ Error generating stack: `+e.message+`
   border-top: 1px solid #e6e6e6;
   max-width: 60ch;
 
-  @media ${zS} {
+  @media ${BS} {
     margin-top: 1rem;
     padding-top: 0.8rem;
   }
@@ -1734,17 +1740,17 @@ Error generating stack: `+e.message+`
     line-height: 1.55;
   }
 
-  @media ${wS} {
+  @media ${TS} {
     flex-direction: column;
     gap: 0.75rem;
   }
-`,HS=F.span`
+`,US=F.span`
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-ink-soft);
-`,US=F.div`
+`,WS=F.div`
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -1766,11 +1772,11 @@ Error generating stack: `+e.message+`
     color: var(--color-ink-soft);
   }
 
-  @media ${wS} {
+  @media ${TS} {
     padding-right: 0;
     border-right: 0;
   }
-`,WS=F.ul`
+`,GS=F.ul`
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -1789,28 +1795,28 @@ Error generating stack: `+e.message+`
   @media (max-height: 680px) {
     display: none;
   }
-`,GS=F.div`
+`,KS=F.div`
   position: absolute;
   width: 1px;
   height: 1px;
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
-`,KS=[.16,1,.3,1],qS=.05,JS=[{text:`Let’s build`,strong:!0},{text:`something`,strong:!1},{text:`people`,strong:!1},{text:`actually use.`,strong:!0}].flatMap(e=>e.text.split(` `).map(t=>({word:t,strong:e.strong}))),YS=[{label:`Email`,handle:wg,href:`mailto:${wg}`},{label:`LinkedIn`,handle:`in/anish-dhandore`,href:`https://www.linkedin.com/in/anish-dhandore/`,external:!0},{label:`GitHub`,handle:`anishdhandore`,href:`https://github.com/anishdhandore`,external:!0}],XS={once:!0,margin:`-15% 0px`},ZS=()=>{let e=!!Fh(),t=Mg(Eg),n=new Date().getFullYear(),r=!e&&`hidden`;return(0,b.jsxs)(aC,{id:`contact`,"aria-labelledby":`contact-heading`,children:[(0,b.jsx)(oC,{"aria-hidden":`true`}),(0,b.jsxs)(sC,{initial:r,whileInView:`shown`,viewport:XS,children:[(0,b.jsxs)(cC,{children:[(0,b.jsxs)(lC,{variants:QS(0),children:[(0,b.jsx)(uC,{"aria-hidden":`true`}),Dg]}),(0,b.jsx)(dC,{id:`contact-heading`,children:JS.map(({word:e,strong:t},n)=>(0,b.jsxs)(y.Fragment,{children:[(0,b.jsx)(fC,{children:(0,b.jsx)(pC,{variants:$S(.1+n*qS),$strong:t,children:e})}),` `]},`${e}-${n}`))}),(0,b.jsx)(mC,{variants:QS(.1+JS.length*qS),children:(0,b.jsx)(hC,{email:wg})})]}),(0,b.jsxs)(gC,{variants:QS(.2),"aria-hidden":`true`,children:[(0,b.jsx)(Zh,{eyeSize:96,gap:14,eyeWhite:`#f4f4f2`,pupil:`#0b0b0d`,wakeUp:!1}),(0,b.jsx)(_C,{children:`I’ll be watching your inbox.`})]})]}),(0,b.jsx)(vC,{initial:r,whileInView:`shown`,viewport:XS,children:YS.map(({label:e,handle:t,href:n,external:r},i)=>(0,b.jsx)($.li,{variants:QS(i*.08),children:(0,b.jsxs)(yC,{href:n,...r?{target:`_blank`,rel:`noopener noreferrer`}:{},"aria-label":`${e}: ${t}`,children:[(0,b.jsx)(`span`,{className:`label`,children:e}),(0,b.jsx)(`span`,{className:`handle`,children:t}),(0,b.jsx)(`span`,{className:`arrow`,"aria-hidden":`true`,children:(0,b.jsx)(n_,{})})]})},e))}),(0,b.jsxs)(bC,{children:[(0,b.jsxs)(`span`,{children:[`© `,n,` Anish Dhandore`]}),(0,b.jsxs)(`span`,{className:`time`,children:[`San Diego · `,(0,b.jsx)(`time`,{children:t})]}),(0,b.jsxs)(xC,{href:`/#home`,children:[`Back to top `,(0,b.jsx)(t_,{"aria-hidden":`true`})]})]})]})},QS=e=>({hidden:{opacity:0,y:20},shown:{opacity:1,y:0,transition:{delay:e,duration:.8,ease:KS}}}),$S=e=>({hidden:{y:`110%`},shown:{y:`0%`,transition:{delay:e,duration:.9,ease:KS}}}),eC=`clamp(8px, 1vw, 16px)`,tC=`#f4f4f2`,nC=`rgba(244, 244, 242, 0.42)`,rC=`rgba(244, 244, 242, 0.12)`,iC=`(max-width: 899px)`,aC=F.section`
+`,qS=[.16,1,.3,1],JS=.05,YS=[{text:`Let’s build`,strong:!0},{text:`something`,strong:!1},{text:`people`,strong:!1},{text:`actually use.`,strong:!0}].flatMap(e=>e.text.split(` `).map(t=>({word:t,strong:e.strong}))),XS=[{label:`Email`,handle:wg,href:`mailto:${wg}`},{label:`LinkedIn`,handle:`in/anish-dhandore`,href:`https://www.linkedin.com/in/anish-dhandore/`,external:!0},{label:`GitHub`,handle:`anishdhandore`,href:`https://github.com/anishdhandore`,external:!0}],ZS={once:!0,margin:`-15% 0px`},QS=()=>{let e=!!Fh(),t=Mg(Eg),n=new Date().getFullYear(),r=!e&&`hidden`;return(0,b.jsxs)(oC,{id:`contact`,"aria-labelledby":`contact-heading`,children:[(0,b.jsx)(sC,{"aria-hidden":`true`}),(0,b.jsxs)(cC,{initial:r,whileInView:`shown`,viewport:ZS,children:[(0,b.jsxs)(lC,{children:[(0,b.jsxs)(uC,{variants:$S(0),children:[(0,b.jsx)(dC,{"aria-hidden":`true`}),Dg]}),(0,b.jsx)(fC,{id:`contact-heading`,children:YS.map(({word:e,strong:t},n)=>(0,b.jsxs)(y.Fragment,{children:[(0,b.jsx)(pC,{children:(0,b.jsx)(mC,{variants:eC(.1+n*JS),$strong:t,children:e})}),` `]},`${e}-${n}`))}),(0,b.jsx)(hC,{variants:$S(.1+YS.length*JS),children:(0,b.jsx)(gC,{email:wg})})]}),(0,b.jsxs)(_C,{variants:$S(.2),"aria-hidden":`true`,children:[(0,b.jsx)(Zh,{eyeSize:96,gap:14,eyeWhite:`#f4f4f2`,pupil:`#0b0b0d`,wakeUp:!1}),(0,b.jsx)(vC,{children:`I’ll be watching your inbox.`})]})]}),(0,b.jsx)(yC,{initial:r,whileInView:`shown`,viewport:ZS,children:XS.map(({label:e,handle:t,href:n,external:r},i)=>(0,b.jsx)($.li,{variants:$S(i*.08),children:(0,b.jsxs)(bC,{href:n,...r?{target:`_blank`,rel:`noopener noreferrer`}:{},"aria-label":`${e}: ${t}`,children:[(0,b.jsx)(`span`,{className:`label`,children:e}),(0,b.jsx)(`span`,{className:`handle`,children:t}),(0,b.jsx)(`span`,{className:`arrow`,"aria-hidden":`true`,children:(0,b.jsx)(n_,{})})]})},e))}),(0,b.jsxs)(xC,{children:[(0,b.jsxs)(`span`,{children:[`© `,n,` Anish Dhandore`]}),(0,b.jsxs)(`span`,{className:`time`,children:[`San Diego · `,(0,b.jsx)(`time`,{children:t})]}),(0,b.jsxs)(SC,{href:`/#home`,children:[`Back to top `,(0,b.jsx)(t_,{"aria-hidden":`true`})]})]})]})},$S=e=>({hidden:{opacity:0,y:20},shown:{opacity:1,y:0,transition:{delay:e,duration:.8,ease:qS}}}),eC=e=>({hidden:{y:`110%`},shown:{y:`0%`,transition:{delay:e,duration:.9,ease:qS}}}),tC=`clamp(8px, 1vw, 16px)`,nC=`#f4f4f2`,rC=`rgba(244, 244, 242, 0.42)`,iC=`rgba(244, 244, 242, 0.12)`,aC=`(max-width: 899px)`,oC=F.section`
   position: relative;
   overflow: hidden;
-  margin: 0 ${eC} ${eC};
-  padding: clamp(4rem, 3rem + 6vw, 9rem) calc(max(var(--space-gutter), (100vw - var(--content-max)) / 2) - ${eC})
+  margin: 0 ${tC} ${tC};
+  padding: clamp(4rem, 3rem + 6vw, 9rem) calc(max(var(--space-gutter), (100vw - var(--content-max)) / 2) - ${tC})
     0;
   border-radius: 40px;
   background: #0a0a0b;
-  color: ${tC};
+  color: ${nC};
   font-family: var(--font-body);
 
-  @media ${iC} {
+  @media ${aC} {
     border-radius: 28px;
   }
-`,oC=F.div`
+`,sC=F.div`
   position: absolute;
   inset: -30% 20% auto -10%;
   height: 80%;
@@ -1826,27 +1832,27 @@ Error generating stack: `+e.message+`
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
-`,sC=F($.div)`
+`,cC=F($.div)`
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: clamp(2rem, 1rem + 4vw, 5rem);
 
-  @media ${iC} {
+  @media ${aC} {
     grid-template-columns: minmax(0, 1fr);
   }
-`,cC=F.div`
+`,lC=F.div`
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 1rem + 1vw, 2rem);
-`,lC=F($.p)`
+`,uC=F($.p)`
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
   font-size: var(--text-sm);
-  color: ${nC};
-`,uC=F.i`
+  color: ${rC};
+`,dC=F.i`
   position: relative;
   width: 8px;
   height: 8px;
@@ -1870,29 +1876,29 @@ Error generating stack: `+e.message+`
   @media (prefers-reduced-motion: reduce) {
     &::after { animation: none; }
   }
-`,dC=F.h2`
+`,fC=F.h2`
   font-family: var(--font-display);
   font-size: clamp(2.75rem, 1.3rem + 5vw, 6.25rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.045em;
   max-width: 14ch;
-`,fC=F.span`
+`,pC=F.span`
   display: inline-block;
   overflow: hidden;
   padding-bottom: 0.08em;
   margin-bottom: -0.08em;
   vertical-align: top;
-`,pC=F($.span)`
+`,mC=F($.span)`
   display: inline-block;
-  color: ${({$strong:e})=>e?tC:nC};
-`,mC=F($.div)`
+  color: ${({$strong:e})=>e?nC:rC};
+`,hC=F($.div)`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem;
-`,hC=F(d_)`
-  background: ${tC};
+`,gC=F(d_)`
+  background: ${nC};
   color: #0e0e10;
 
   &:hover {
@@ -1900,35 +1906,35 @@ Error generating stack: `+e.message+`
   }
 
   &:focus-visible {
-    outline-color: ${tC};
+    outline-color: ${nC};
   }
-`,gC=F($.div)`
+`,_C=F($.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   padding-bottom: 0.5rem;
 
-  @media ${iC} {
+  @media ${aC} {
     display: none;
   }
-`,_C=F.p`
+`,vC=F.p`
   font-size: 0.8125rem;
-  color: ${nC};
-`,vC=F($.ul)`
+  color: ${rC};
+`,yC=F($.ul)`
   position: relative;
   list-style: none;
   margin-top: clamp(3.5rem, 2rem + 5vw, 7rem);
-  border-top: 1px solid ${rC};
-`,yC=F.a`
+  border-top: 1px solid ${iC};
+`,bC=F.a`
   position: relative;
   display: grid;
   grid-template-columns: minmax(7rem, 1fr) minmax(0, 2fr) auto;
   align-items: center;
   gap: 1rem;
   padding: clamp(1.1rem, 0.9rem + 0.8vw, 1.6rem) 0;
-  border-bottom: 1px solid ${rC};
-  color: ${tC};
+  border-bottom: 1px solid ${iC};
+  color: ${nC};
   text-decoration: none;
   isolation: isolate;
 
@@ -1954,7 +1960,7 @@ Error generating stack: `+e.message+`
   }
 
   .handle {
-    color: ${nC};
+    color: ${rC};
     font-size: var(--text-sm);
     transition: color var(--duration-normal) ease;
     overflow: hidden;
@@ -1968,7 +1974,7 @@ Error generating stack: `+e.message+`
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    border: 1px solid ${rC};
+    border: 1px solid ${iC};
     transition: transform 0.6s var(--ease-out-expo), background-color var(--duration-normal) ease,
       color var(--duration-normal) ease, border-color var(--duration-normal) ease;
   }
@@ -1985,13 +1991,13 @@ Error generating stack: `+e.message+`
 
   &:hover .handle,
   &:focus-visible .handle {
-    color: ${tC};
+    color: ${nC};
   }
 
   &:hover .arrow,
   &:focus-visible .arrow {
-    background: ${tC};
-    border-color: ${tC};
+    background: ${nC};
+    border-color: ${nC};
     color: #0e0e10;
     transform: rotate(45deg);
   }
@@ -2000,7 +2006,7 @@ Error generating stack: `+e.message+`
     outline: none;
   }
 
-  @media ${iC} {
+  @media ${aC} {
     grid-template-columns: minmax(0, 1fr) auto;
 
     .handle {
@@ -2013,7 +2019,7 @@ Error generating stack: `+e.message+`
       grid-column: 2;
     }
   }
-`,bC=F.footer`
+`,xC=F.footer`
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -2022,16 +2028,16 @@ Error generating stack: `+e.message+`
   gap: 1rem;
   padding: clamp(1.5rem, 1rem + 2vw, 2.5rem) 0;
   font-size: 0.8125rem;
-  color: ${nC};
+  color: ${rC};
 
   .time {
     font-variant-numeric: tabular-nums;
   }
-`,xC=F.a`
+`,SC=F.a`
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  color: ${tC};
+  color: ${nC};
   text-decoration: none;
 
   svg {
@@ -2043,11 +2049,11 @@ Error generating stack: `+e.message+`
   }
 
   &:focus-visible {
-    outline: 2px solid ${tC};
+    outline: 2px solid ${nC};
     outline-offset: 3px;
     border-radius: 4px;
   }
-`,SC=qn`
+`,CC=qn`
   *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -2088,4 +2094,4 @@ Error generating stack: `+e.message+`
     border-radius: 6px;
   }
   ::-webkit-scrollbar-thumb:hover { background: rgba(139,92,246,0.7); }
-`,CC=()=>(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(ev,{}),(0,b.jsx)(x_,{}),(0,b.jsx)(cy,{}),(0,b.jsx)(Mb,{}),(0,b.jsx)(OS,{}),(0,b.jsx)(ZS,{})]});(0,v.createRoot)(document.getElementById(`root`)).render((0,b.jsx)(y.StrictMode,{children:(0,b.jsx)(()=>{let{pathname:e}=eS(),t=Zx(e);return tS(),(0,y.useEffect)(()=>{document.querySelectorAll(`a[href^="#"]`).forEach(e=>{e.addEventListener(`click`,function(e){e.preventDefault();let t=document.querySelector(this.getAttribute(`href`));t&&t.scrollIntoView({behavior:`smooth`,block:`start`})})})},[]),(0,b.jsxs)(S,{children:[(0,b.jsx)(SC,{}),(0,b.jsx)(sg,{}),t?(0,b.jsx)(Lx,{slug:t},t):(0,b.jsx)(CC,{})]})},{})}));
+`,wC=()=>(0,b.jsxs)(b.Fragment,{children:[(0,b.jsx)(ev,{}),(0,b.jsx)(x_,{}),(0,b.jsx)(cy,{}),(0,b.jsx)(Nb,{}),(0,b.jsx)(kS,{}),(0,b.jsx)(QS,{})]});(0,v.createRoot)(document.getElementById(`root`)).render((0,b.jsx)(y.StrictMode,{children:(0,b.jsx)(()=>{let{pathname:e}=tS(),t=Qx(e);return nS(),(0,y.useEffect)(()=>{document.querySelectorAll(`a[href^="#"]`).forEach(e=>{e.addEventListener(`click`,function(e){e.preventDefault();let t=document.querySelector(this.getAttribute(`href`));t&&t.scrollIntoView({behavior:`smooth`,block:`start`})})})},[]),(0,b.jsxs)(S,{children:[(0,b.jsx)(CC,{}),(0,b.jsx)(sg,{}),t?(0,b.jsx)(Rx,{slug:t},t):(0,b.jsx)(wC,{})]})},{})}));
