@@ -1,4 +1,4 @@
-import { dealLayout, dealWindow, deckPose } from './dealLayout';
+import { dealLayout, dealWindow, deckPose, gridCardSize } from './dealLayout';
 
 describe('dealLayout', () => {
   test('fans cards in a symmetric arc on wide stages', () => {
@@ -28,6 +28,35 @@ describe('dealLayout', () => {
     expect(spots[2].y).toBeGreaterThan(spots[0].y);
     // a lone last card is centred
     expect(spots[4].x).toBe(0);
+  });
+});
+
+describe('gridCardSize', () => {
+  const RATIO = 7 / 5;
+
+  test('fits the whole grid inside the stage, whatever its height', () => {
+    // iPhone 16 Pro with Safari toolbars showing leaves a short stage
+    [[370, 420], [370, 300], [360, 640]].forEach(([width, height]) => {
+      const { columns, cardWidth, cardHeight } = gridCardSize({ count: 5, width, height, ratio: RATIO });
+      const rows = Math.ceil(5 / columns);
+      expect(columns * cardWidth + (columns - 1) * 16).toBeLessThanOrEqual(width);
+      expect(rows * cardHeight + (rows - 1) * 16).toBeLessThanOrEqual(height);
+    });
+  });
+
+  test('switches to 3 columns when height is the constraint', () => {
+    expect(gridCardSize({ count: 5, width: 370, height: 300, ratio: RATIO }).columns).toBe(3);
+    expect(gridCardSize({ count: 5, width: 360, height: 900, ratio: RATIO }).columns).toBe(2);
+  });
+});
+
+describe('dealLayout with columns', () => {
+  test('lays out a 3-column grid and centres the short last row', () => {
+    const spots = dealLayout({ count: 5, stageWidth: 370, cardWidth: 100, cardHeight: 140, columns: 3 });
+
+    expect(spots.slice(0, 3).map((s) => s.x)).toEqual([-116, 0, 116]);
+    expect(spots.slice(3).map((s) => s.x)).toEqual([-58, 58]);
+    expect(spots[3].y).toBeGreaterThan(spots[0].y);
   });
 });
 

@@ -184,14 +184,14 @@ const Index = styled.div`
 
 const Rank = styled.span`
   font-family: ${SERIF};
-  font-size: calc(var(--card-width) * 0.085);
+  font-size: max(calc(var(--card-width) * 0.085), 12px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.04em;
 `;
 
 const Pip = styled.span`
-  font-size: calc(var(--card-width) * 0.065);
+  font-size: max(calc(var(--card-width) * 0.065), 10px);
   line-height: 1;
 `;
 
@@ -204,7 +204,7 @@ const Award = styled.span`
   border-radius: 999px;
   background: ${CARD_RED};
   color: #ffffff;
-  font-size: calc(var(--card-width) * 0.042);
+  font-size: max(calc(var(--card-width) * 0.042), 8px);
   font-weight: 600;
   letter-spacing: 0.01em;
   box-shadow: 0 4px 12px rgba(179, 19, 43, 0.45);
@@ -227,7 +227,8 @@ const Glass = styled.div`
   background: linear-gradient(180deg, rgba(40, 40, 46, 0.96), rgba(16, 16, 18, 0.97));
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 10px 24px rgba(0, 0, 0, 0.35);
-  font-size: calc(var(--card-width) * 0.048);
+  /* floor keeps names readable on small phone cards */
+  font-size: max(calc(var(--card-width) * 0.048), 9.5px);
   transition: background-color 0.5s ease;
 
 
@@ -247,6 +248,11 @@ const Year = styled.p`
   color: rgba(244, 244, 242, 0.6);
   font-size: 0.9em;
   font-variant-numeric: tabular-nums;
+
+  /* phone cards are small; the name gets the room (the year is on the case study) */
+  @media (max-width: 639px) {
+    display: none;
+  }
 `;
 
 /* collapsed to zero height until the card is picked, then unfolds */

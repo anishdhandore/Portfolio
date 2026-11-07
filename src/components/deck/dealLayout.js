@@ -5,14 +5,32 @@ const GRID_GAP = 16;
 const FLIGHT_SHARE = 0.45; // each card's flight spans this share of the deal range
 
 /**
- * Final resting spot for each card, relative to the stage centre.
- * Wide stages get a fanned arc (a hand of cards); narrow ones a 2-column grid.
+ * Biggest card that fits a narrow stage as a grid, trying 2 and 3 columns.
+ * Never returns a card larger than the stage allows, so the hand can't spill
+ * out of its box (e.g. on phones with Safari's toolbars showing).
  */
-export const dealLayout = ({ count, stageWidth, cardWidth, cardHeight }) => {
+export const gridCardSize = ({ count, width, height, ratio, maxWidth = Infinity }) => {
+  const best = [2, 3]
+    .map((columns) => {
+      const rows = Math.ceil(count / columns);
+      const byWidth = (width - (columns - 1) * GRID_GAP) / columns;
+      const byHeight = (height - (rows - 1) * GRID_GAP) / rows / ratio;
+      return { columns, cardWidth: Math.floor(Math.min(byWidth, byHeight, maxWidth)) };
+    })
+    .reduce((a, b) => (b.cardWidth > a.cardWidth ? b : a));
+  return { ...best, cardHeight: Math.floor(best.cardWidth * ratio) };
+};
+
+/**
+ * Final resting spot for each card, relative to the stage centre.
+ * With `columns` the hand is laid out as a grid (last row centred); otherwise
+ * it's fanned as an arc when it fits, falling back to a 2-column grid.
+ */
+export const dealLayout = ({ count, stageWidth, cardWidth, cardHeight, columns }) => {
   const step = cardWidth * (1 + FAN_GAP);
   const fanWidth = step * (count - 1) + cardWidth;
 
-  if (fanWidth <= stageWidth) {
+  if (!columns && fanWidth <= stageWidth) {
     const mid = (count - 1) / 2;
     return Array.from({ length: count }, (_, i) => {
       const t = mid === 0 ? 0 : (i - mid) / mid; // -1 … 1
@@ -24,14 +42,16 @@ export const dealLayout = ({ count, stageWidth, cardWidth, cardHeight }) => {
     });
   }
 
-  const rows = Math.ceil(count / 2);
+  const cols = columns ?? 2;
+  const rows = Math.ceil(count / cols);
   const gridHeight = rows * cardHeight + (rows - 1) * GRID_GAP;
+  const pitch = cardWidth + GRID_GAP;
   return Array.from({ length: count }, (_, i) => {
-    const row = Math.floor(i / 2);
-    const isLoneLast = i === count - 1 && count % 2 === 1;
-    const column = i % 2 === 0 ? -1 : 1;
+    const row = Math.floor(i / cols);
+    const inRow = row === rows - 1 ? count - row * cols : cols; // last row may be short
+    const col = i % cols;
     return {
-      x: isLoneLast ? 0 : column * (cardWidth / 2 + GRID_GAP / 2),
+      x: (col - (inRow - 1) / 2) * pitch,
       y: row * (cardHeight + GRID_GAP) - gridHeight / 2 + cardHeight / 2,
       rotate: 0,
     };

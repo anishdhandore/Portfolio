@@ -10,7 +10,7 @@ import {
   useTransform,
 } from 'motion/react';
 import DeckCard from './DeckCard';
-import { dealLayout } from './dealLayout';
+import { dealLayout, gridCardSize } from './dealLayout';
 import { PROJECTS } from './projects';
 
 const DEAL_RANGE = [0.14, 0.72];
@@ -19,13 +19,13 @@ const CARD_RATIO = 7 / 5; // playing card
 const NARROW_STAGE_PX = 640;
 const FALLBACK_STAGE = { width: 1200, height: 600 };
 
-/** Card size that fits the stage: ~15% of a wide stage, two columns on a narrow one. */
-const cardSizeFor = ({ width, height }) => {
-  const isNarrow = width < NARROW_STAGE_PX;
-  const byWidth = isNarrow ? (width - 16) / 2 : width * 0.172;
-  const byHeight = isNarrow ? (height - 32) / 3 / CARD_RATIO : (height * 0.78) / CARD_RATIO;
-  const cardWidth = Math.round(Math.max(120, Math.min(230, byWidth, byHeight)));
-  return { cardWidth, cardHeight: Math.round(cardWidth * CARD_RATIO) };
+/** Card size and layout: ~17% of a wide stage, or the biggest grid that fits a narrow one. */
+const cardLayoutFor = ({ width, height }) => {
+  if (width < NARROW_STAGE_PX) {
+    return gridCardSize({ count: PROJECTS.length, width, height, ratio: CARD_RATIO, maxWidth: 230 });
+  }
+  const cardWidth = Math.round(Math.max(120, Math.min(230, width * 0.172, (height * 0.78) / CARD_RATIO)));
+  return { cardWidth, cardHeight: Math.round(cardWidth * CARD_RATIO), columns: undefined };
 };
 
 const useStageSize = (ref) => {
@@ -48,8 +48,8 @@ const ProjectDeck = () => {
   const stageRef = useRef(null);
   const isReducedMotion = Boolean(useReducedMotion());
   const stage = useStageSize(stageRef);
-  const { cardWidth, cardHeight } = cardSizeFor(stage);
-  const spots = dealLayout({ count: PROJECTS.length, stageWidth: stage.width, cardWidth, cardHeight });
+  const { cardWidth, cardHeight, columns } = cardLayoutFor(stage);
+  const spots = dealLayout({ count: PROJECTS.length, stageWidth: stage.width, cardWidth, cardHeight, columns });
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] });
   const smooth = useSpring(scrollYProgress, SCROLL_SPRING);
