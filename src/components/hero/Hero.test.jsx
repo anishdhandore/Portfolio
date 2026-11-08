@@ -50,4 +50,17 @@ describe('Hero', () => {
     expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute('href', expect.stringContaining('github.com'));
     expect(screen.getByRole('link', { name: /cv/i })).toHaveAttribute('href', expect.stringMatching(/\.pdf$/));
   });
+
+});
+
+describe('Hero with a frame sequence', () => {
+  test('shows the starting pose while the intro plays on a canvas', () => {
+    const { container } = render(
+      <Hero imageSrc="/rest.jpg" imageAlt="Anish thinking" endImageSrc="/point.jpg" imageFrames={['/f0.webp', '/f1.webp']} />
+    );
+
+    expect(container.querySelector('figure')).toHaveAttribute('data-pose', 'intro');
+    expect(screen.getByRole('img', { name: 'Anish thinking' })).toHaveAttribute('src', '/rest.jpg');
+    expect(container.querySelector('canvas')).toHaveAttribute('aria-hidden', 'true');
+  });
 });

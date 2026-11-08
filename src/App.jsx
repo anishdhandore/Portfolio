@@ -3,6 +3,15 @@ import React, { useEffect } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/navbar/Navbar';
 import Hero from './components/hero/Hero';
+import portrait from './images/portrait.webp';
+import portraitPointing from './images/portrait-pointing.webp';
+
+// frames of the portrait turning to point at the visitor, played once on load
+const PORTRAIT_FRAMES = Object.entries(
+  import.meta.glob('./images/portrait-seq/*.webp', { eager: true, query: '?url', import: 'default' })
+)
+  .sort(([a], [b]) => a.localeCompare(b)) // 00.webp, 01.webp, …
+  .map(([, url]) => url);
 import ScrollTrail from './components/scroll-trail/ScrollTrail';
 import BridgedShowcase from './components/bridged/BridgedShowcase';
 import ProjectDeck from './components/deck/ProjectDeck';
@@ -58,7 +67,13 @@ const GlobalStyle = createGlobalStyle`
 const HomePage = () => (
   <>
     <ScrollTrail />
-    <Hero />
+    <Hero
+      imageSrc={portrait}
+      imageAlt="Anish Dhandore, sitting in an armchair"
+      endImageSrc={portraitPointing}
+      endImageAlt="Anish Dhandore, looking at you and pointing"
+      imageFrames={PORTRAIT_FRAMES}
+    />
     <BridgedShowcase />
     <ProjectDeck />
     <Experience />

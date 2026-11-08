@@ -36,7 +36,7 @@ const imageReveal = {
   },
 };
 
-const Hero = ({ imageSrc, imageAlt = '' }) => {
+const Hero = ({ imageSrc, imageAlt = '', endImageSrc, endImageAlt, imageFrames }) => {
   const shouldReduceMotion = useReducedMotion();
   const initial = shouldReduceMotion ? false : 'hidden';
 
@@ -101,7 +101,7 @@ const Hero = ({ imageSrc, imageAlt = '' }) => {
           </Copy>
 
           <ImageSlot variants={imageReveal}>
-            <HeroImage src={imageSrc} alt={imageAlt} />
+            <HeroImage src={imageSrc} alt={imageAlt} endSrc={endImageSrc} endAlt={endImageAlt} frames={imageFrames} />
           </ImageSlot>
         </Grid>
       </Inner>
